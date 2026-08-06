@@ -77,6 +77,10 @@ const OnlineHubView: React.FC = () => {
     const [isResetting, setIsResetting] = useState(false);
 
     const handleConfirmReset = async () => {
+        if (resetPasswordInput.trim() !== 'AFLOP') {
+            setResetErrorMsg('❌ Incorrect master password. Global server wipe denied.');
+            return;
+        }
         setIsResetting(true);
         setResetErrorMsg('');
         try {
@@ -1124,9 +1128,26 @@ const OnlineHubView: React.FC = () => {
                             ⚠️ Warning: This operation will permanently wipe all online player accounts, global music releases, contract offers, media posts, and chat messages across the entire shared cloud server. Everyone will start fresh!
                         </p>
 
-                        {resetErrorMsg && (
-                            <p className="text-xs font-semibold text-red-400 mt-1.5">{resetErrorMsg}</p>
-                        )}
+                        <div>
+                            <label className="text-xs text-zinc-400 font-bold block mb-1">Enter Master Password</label>
+                            <input 
+                                type="password" 
+                                value={resetPasswordInput} 
+                                onChange={e => {
+                                    setResetPasswordInput(e.target.value);
+                                    setResetErrorMsg('');
+                                }}
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter') handleConfirmReset();
+                                }}
+                                placeholder="Enter security password..."
+                                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-red-500"
+                                autoFocus
+                            />
+                            {resetErrorMsg && (
+                                <p className="text-xs font-semibold text-red-400 mt-1.5">{resetErrorMsg}</p>
+                            )}
+                        </div>
 
                         <div className="flex gap-2 pt-2">
                             <button 

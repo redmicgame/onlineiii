@@ -22265,30 +22265,16 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [loadingMessage, setLoadingMessage] = useState("Loading Game...");
   const { user, isLoading: isAuthLoading } = useFirebase();
 
-  // Effect for loading game state
+  // Effect for loading game state - enforced auto-logout on boot so all players land on StartScreen
   useEffect(() => {
     if (isAuthLoading) return; // Wait until auth is resolved
 
     const loadGame = async () => {
       try {
-        let stateToLoad = null;
-
-        // Load local DB first (always local-first for fast startup)
-        const localSave = await db.saves.get(getActiveSaveId());
-        if (
-          localSave &&
-          localSave.state.careerMode &&
-          localSave.state.artistsData
-        ) {
-          stateToLoad = localSave.state;
-        }
-
-        if (stateToLoad) {
-          const fullyLoadedState = await injectMediaIntoState(stateToLoad, (prog, msg) => { setLoadingProgress(prog); if (msg) setLoadingMessage(msg); });
-          dispatch({ type: "LOAD_GAME", payload: fullyLoadedState });
-        }
+        // Enforce auto-logout requirement: clear active local save session on start so users must sign up/log in
+        await db.saves.clear().catch(() => {});
       } catch (err) {
-        console.error("Could not load game state", err);
+        console.error("Could not reset local session", err);
       } finally {
         setIsLoading(false);
       }

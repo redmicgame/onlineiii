@@ -75,9 +75,9 @@ export const StartScreen: React.FC = () => {
                 }
                 const loggedUser = await loginWithEmail(email, password);
                 if (loggedUser) {
-                    const name = loggedUser.displayName || email.split('@')[0];
+                    const name = loggedUser.displayName || email.split('@')[0] || 'Online Player';
                     const newArtist: Artist = {
-                        id: loggedUser.uid,
+                        id: loggedUser.uid || 'player_' + Date.now(),
                         name,
                         age: 20,
                         country: 'US',
@@ -85,12 +85,13 @@ export const StartScreen: React.FC = () => {
                         pronouns: 'they/them',
                         fandomName: `${name}'s Fanbase`
                     };
-                    await registerOnlinePlayer(loggedUser.uid, {
+                    registerOnlinePlayer(newArtist.id, {
                         name,
                         roles: selectedRoles,
                         country: 'US',
                         email: loggedUser.email || email
-                    });
+                    }).catch(() => {});
+
                     const currentClock = getGlobalGameTime();
                     dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: currentClock.year, startWeek: currentClock.week, difficultyMode: 'normal' } });
                 }
@@ -114,9 +115,10 @@ export const StartScreen: React.FC = () => {
 
                 const registeredUser = await registerWithEmail(email, password, soloName.trim());
                 const defaultImg = soloImage || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80';
+                const userId = registeredUser?.uid || 'player_' + Date.now();
 
                 const newArtist: Artist = {
-                    id: registeredUser.uid,
+                    id: userId,
                     name: soloName.trim(),
                     age: soloAge,
                     country: soloCountry,
@@ -125,14 +127,14 @@ export const StartScreen: React.FC = () => {
                     fandomName: soloFandomName.trim() || `${soloName.trim()} Stans`
                 };
 
-                await registerOnlinePlayer(registeredUser.uid, {
+                registerOnlinePlayer(userId, {
                     name: soloName.trim(),
                     roles: selectedRoles,
                     country: soloCountry,
                     fandomName: soloFandomName.trim(),
                     avatar: defaultImg,
                     email
-                });
+                }).catch(() => {});
 
                 const currentClock = getGlobalGameTime();
                 dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: currentClock.year, startWeek: currentClock.week, difficultyMode: 'normal' } });

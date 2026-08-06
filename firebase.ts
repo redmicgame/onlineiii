@@ -30,6 +30,13 @@ export const auth = getAuth(app);
 export const db = getFirestore(app, activeConfig.firestoreDatabaseId);
 export const googleProvider = new GoogleAuthProvider();
 
+const timeoutPromise = <T>(promise: Promise<T>, ms: number, fallback: T): Promise<T> => {
+    return Promise.race([
+        promise,
+        new Promise<T>((resolve) => setTimeout(() => resolve(fallback), ms))
+    ]);
+};
+
 export const getOrCreateGuestUser = () => {
     let guestId = localStorage.getItem('redmic_online_uid');
     if (!guestId) {
@@ -46,42 +53,49 @@ export const getOrCreateGuestUser = () => {
 
 export const loginWithGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, googleProvider);
-        return result.user;
+        const result = await timeoutPromise(signInWithPopup(auth, googleProvider), 3000, null as any);
+        if (result?.user) return result.user;
+        return getOrCreateGuestUser() as any;
     } catch (error: any) {
         console.warn("Google Auth notice, using guest session:", error);
-        try {
-            const anon = await signInAnonymously(auth);
-            return anon.user;
-        } catch (anonErr) {
-            return getOrCreateGuestUser() as any;
-        }
+        return getOrCreateGuestUser() as any;
     }
 };
 
 export const registerWithEmail = async (email: string, pass: string, displayName: string) => {
+    const guest = getOrCreateGuestUser();
+    guest.displayName = displayName;
+    guest.email = email;
+
     try {
-        const res = await createUserWithEmailAndPassword(auth, email, pass);
-        if (res.user) {
-            await updateProfile(res.user, { displayName });
-        }
-        return res.user;
+        const authAttempt = async () => {
+            const res = await createUserWithEmailAndPassword(auth, email, pass);
+            if (res.user) {
+                await updateProfile(res.user, { displayName }).catch(() => {});
+                return res.user;
+            }
+            return guest as any;
+        };
+        return await timeoutPromise(authAttempt(), 2500, guest as any);
     } catch (error: any) {
         console.warn("Register notice, falling back to guest session:", error);
-        const guest = getOrCreateGuestUser();
-        guest.displayName = displayName;
-        guest.email = email;
         return guest as any;
     }
 };
 
 export const loginWithEmail = async (email: string, pass: string) => {
+    const guest = getOrCreateGuestUser();
+    guest.email = email;
+
     try {
-        const res = await signInWithEmailAndPassword(auth, email, pass);
-        return res.user;
+        const authAttempt = async () => {
+            const res = await signInWithEmailAndPassword(auth, email, pass);
+            return res.user;
+        };
+        return await timeoutPromise(authAttempt(), 2500, guest as any);
     } catch (error: any) {
         console.warn("Email auth notice, falling back to guest session:", error);
-        return getOrCreateGuestUser() as any;
+        return guest as any;
     }
 };
 
@@ -102,7 +116,7 @@ export const registerOnlinePlayer = async (
         const uidToUse = userId || auth.currentUser?.uid || guest.uid;
         if (!uidToUse || !profileData || !profileData.name) return;
 
-        await setDoc(doc(db, "online_players", uidToUse), {
+        const setTask = setDoc(doc(db, "online_players", uidToUse), {
             userId: uidToUse,
             name: profileData.name,
             roles: profileData.roles || ['Musician', 'Producer'],
@@ -115,6 +129,8 @@ export const registerOnlinePlayer = async (
             totalStreams: profileData.totalStreams || 0,
             isOnline: true
         }, { merge: true });
+
+        await timeoutPromise(setTask, 2000, null);
     } catch (err) {
         console.error("Failed to register online player:", err);
     }
