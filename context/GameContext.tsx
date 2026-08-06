@@ -1317,16 +1317,30 @@ const gameReducerInternal = (
     case "SYNC_SERVER_DATE": {
       const { year, week, day } = action.payload;
       const targetDay = day || state.date.day || 1;
-      if (
-        state.date.year === year &&
-        state.date.week === week &&
-        state.date.day === targetDay
-      ) {
-        return state;
+      const targetTotalWeeks = (year - 2026) * 52 + week;
+      const currentTotalWeeks = (state.date.year - 2026) * 52 + state.date.week;
+      const weeksDelta = targetTotalWeeks - currentTotalWeeks;
+
+      if (weeksDelta <= 0) {
+        if (state.date.day === targetDay) return state;
+        return {
+          ...state,
+          date: { ...state.date, day: targetDay },
+        };
       }
+
+      let currentState = state;
+      const weeksToAdvance = Math.min(weeksDelta, 10);
+      for (let i = 0; i < weeksToAdvance; i++) {
+        currentState = gameReducer(currentState, { type: "PROGRESS_WEEK" });
+      }
+
       return {
-        ...state,
-        date: { year, week, day: targetDay },
+        ...currentState,
+        date: {
+          ...currentState.date,
+          day: targetDay,
+        },
       };
     }
     case "START_SOLO_GAME": {
