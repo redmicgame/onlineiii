@@ -1825,6 +1825,38 @@ export interface GameState {
   spotifyPlaylists: SpotifyPlaylist[];
   podcasts?: Podcast[];
 
+  globalSongs?: {
+    id: string;
+    songId?: string;
+    title: string;
+    artistName: string;
+    artistId: string;
+    producerName?: string;
+    coverUrl?: string;
+    genre: string;
+    streams: number;
+    weeklyStreams: number;
+    releaseYear: number;
+    releaseWeek: number;
+    isOnlinePlayer?: boolean;
+    type?: string;
+    albumTitle?: string;
+  }[];
+  globalPosts?: {
+    id: string;
+    authorId: string;
+    authorName: string;
+    authorHandle: string;
+    authorAvatar?: string;
+    platform?: 'X' | 'Instagram' | 'PopBase' | 'TMZ';
+    content: string;
+    likesCount?: number;
+    repostsCount?: number;
+    mediaUrl?: string;
+    isOnlinePlayer?: boolean;
+    createdAt?: any;
+  }[];
+
   date: GameDate;
   currentView: GameView;
   activeTab: Tab;
@@ -2032,6 +2064,8 @@ export interface ActiveEncounter {
 }
 
 export type GameAction =
+  | { type: "SET_GLOBAL_SONGS"; payload: any[] }
+  | { type: "SET_GLOBAL_POSTS"; payload: any[] }
   | { type: "SYNC_SERVER_DATE"; payload: { year: number; week: number; day?: number } }
   | { type: "UPDATE_ARTIST_FUNDS"; payload: number }
   | { type: "UPDATE_VIDEO"; payload: { id: string; updates: Partial<Video> } }

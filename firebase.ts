@@ -135,6 +135,8 @@ export const logout = async () => {
 
 
 export const publishGlobalSong = async (songData: {
+    id?: string;
+    songId?: string;
     title: string;
     artistName: string;
     artistId: string;
@@ -145,16 +147,21 @@ export const publishGlobalSong = async (songData: {
     weeklyStreams: number;
     releaseYear: number;
     releaseWeek: number;
+    isOnlinePlayer?: boolean;
+    type?: string;
+    albumTitle?: string;
 }) => {
     try {
-        const songRef = doc(collection(db, "global_songs"));
+        const idToUse = songData.songId || songData.id || `${songData.artistId}_${songData.title.replace(/[^a-zA-Z0-9]/g, '_')}`;
+        const songRef = doc(db, "global_songs", idToUse);
         await setDoc(songRef, {
-            id: songRef.id,
+            id: idToUse,
+            songId: idToUse,
             ...songData,
-            createdAt: serverTimestamp(),
+            isOnlinePlayer: songData.isOnlinePlayer ?? true,
             updatedAt: serverTimestamp()
-        });
-        return songRef.id;
+        }, { merge: true });
+        return idToUse;
     } catch (err) {
         console.error("Error publishing global song:", err);
     }
@@ -171,27 +178,47 @@ export const getGlobalSongs = async (limitCount = 100) => {
     }
 };
 
+export const subscribeToGlobalSongs = (callback: (songs: any[]) => void) => {
+    try {
+        const q = query(collection(db, "global_songs"), orderBy("weeklyStreams", "desc"), limit(200));
+        return onSnapshot(q, (snap) => {
+            const songs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            callback(songs);
+        }, (err) => {
+            console.error("Error subscribing to global songs:", err);
+        });
+    } catch (err) {
+        console.error("Error setting listener for global songs:", err);
+        return () => {};
+    }
+};
+
 export const publishGlobalPost = async (postData: {
+    id?: string;
     authorId: string;
     authorName: string;
     authorHandle: string;
     authorAvatar?: string;
-    platform: 'X' | 'Instagram' | 'PopBase' | 'TMZ';
+    platform?: 'X' | 'Instagram' | 'PopBase' | 'TMZ';
     content: string;
     likesCount?: number;
     repostsCount?: number;
     mediaUrl?: string;
+    isOnlinePlayer?: boolean;
 }) => {
     try {
-        const postRef = doc(collection(db, "global_posts"));
+        const docId = postData.id || crypto.randomUUID();
+        const postRef = doc(db, "global_posts", docId);
         await setDoc(postRef, {
-            id: postRef.id,
+            id: docId,
             ...postData,
+            platform: postData.platform || 'X',
             likesCount: postData.likesCount || 0,
             repostsCount: postData.repostsCount || 0,
+            isOnlinePlayer: postData.isOnlinePlayer ?? true,
             createdAt: serverTimestamp()
-        });
-        return postRef.id;
+        }, { merge: true });
+        return docId;
     } catch (err) {
         console.error("Error publishing global post:", err);
     }
@@ -205,6 +232,21 @@ export const getGlobalPosts = async (limitCount = 50) => {
     } catch (err) {
         console.error("Error fetching global posts:", err);
         return [];
+    }
+};
+
+export const subscribeToGlobalPosts = (callback: (posts: any[]) => void) => {
+    try {
+        const q = query(collection(db, "global_posts"), orderBy("createdAt", "desc"), limit(100));
+        return onSnapshot(q, (snap) => {
+            const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            callback(posts);
+        }, (err) => {
+            console.error("Error subscribing to global posts:", err);
+        });
+    } catch (err) {
+        console.error("Error setting listener for global posts:", err);
+        return () => {};
     }
 };
 

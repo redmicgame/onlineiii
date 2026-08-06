@@ -900,14 +900,20 @@ const FeedView: React.FC<{
   const { gameState, activeArtistData, activeArtist } = useGame();
 
   const [fetchedGlobalPosts, setFetchedGlobalPosts] = useState<any[]>([]);
+  const [feedFilter, setFeedFilter] = useState<"all" | "online" | "regular">("all");
 
   useEffect(() => {
-    getGlobalPosts(40).then((posts) => {
+    const unsub = subscribeToGlobalPosts((posts) => {
       if (posts && posts.length > 0) {
         setFetchedGlobalPosts(posts);
       }
-    }).catch((err) => console.error(err));
+    });
+    return () => unsub();
   }, []);
+
+  // Track which post IDs are online player posts
+  const onlinePostIds = new Set<string>();
+  fetchedGlobalPosts.forEach((gp) => onlinePostIds.add(gp.id));
 
   // If playing as a member of a group, combine group and member posts
   let xPosts = [...(activeArtistData?.xPosts || [])];
@@ -918,7 +924,7 @@ const FeedView: React.FC<{
     fetchedGlobalPosts.forEach((gp) => {
       if (!existingIds.has(gp.id)) {
         const authorId = gp.authorId || gp.id;
-        const authorHandle = gp.authorHandle ? gp.authorHandle.replace("@", "") : gp.authorName.toLowerCase().replace(/\s/g, "");
+        const authorHandle = gp.authorHandle ? gp.authorHandle.replace("@", "") : (gp.authorName || "player").toLowerCase().replace(/\s/g, "");
         const userObj: XUser = {
           id: authorId,
           name: gp.authorName || "Online Player",
@@ -934,7 +940,8 @@ const FeedView: React.FC<{
           date: { year: gameState.date.year, week: gameState.date.week },
           likes: gp.likesCount || 42,
           retweets: gp.repostsCount || 12,
-          views: 500
+          views: 500,
+          isOnlinePlayer: true,
         };
         xUsers.push(userObj);
         xPosts.unshift(postObj);
@@ -1027,7 +1034,14 @@ const FeedView: React.FC<{
     return dateB - dateA;
   });
 
-  const displayedPosts = sortedPosts.slice(0, postsToShow);
+  const filteredPosts = sortedPosts.filter((post) => {
+    const isOnline = post.isOnlinePlayer || onlinePostIds.has(post.id);
+    if (feedFilter === "online") return isOnline;
+    if (feedFilter === "regular") return !isOnline;
+    return true;
+  });
+
+  const displayedPosts = filteredPosts.slice(0, postsToShow);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     // Kept for backward compatibility if ever needed
@@ -1070,17 +1084,59 @@ const FeedView: React.FC<{
           </div>
         ))}
       </div>
-      {displayedPosts.map((post) => (
-        <Post
-          key={post.id}
-          post={post}
-          author={findUser(post.authorId)}
-          onQuote={onQuote}
-          onQuoteHold={onQuoteHold}
-        />
-      ))}
+
+      {/* Feed Toggle Filter Bar */}
+      <div className="flex gap-2 p-3 bg-zinc-950 border-b border-zinc-800 sticky top-0 z-10 overflow-x-auto no-scrollbar">
+        <button
+          onClick={() => setFeedFilter("all")}
+          className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all whitespace-nowrap ${
+            feedFilter === "all"
+              ? "bg-white text-black shadow-md"
+              : "bg-zinc-800/80 text-zinc-400 hover:text-white"
+          }`}
+        >
+          🌐 All Tweets
+        </button>
+        <button
+          onClick={() => setFeedFilter("online")}
+          className={`px-3.5 py-1.5 text-xs font-bold rounded-full flex items-center gap-1.5 transition-all whitespace-nowrap ${
+            feedFilter === "online"
+              ? "bg-sky-500 text-white shadow-md shadow-sky-500/20"
+              : "bg-zinc-800/80 text-zinc-400 hover:text-white"
+          }`}
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          🎮 Online Players Tweets ({fetchedGlobalPosts.length})
+        </button>
+        <button
+          onClick={() => setFeedFilter("regular")}
+          className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all whitespace-nowrap ${
+            feedFilter === "regular"
+              ? "bg-white text-black shadow-md"
+              : "bg-zinc-800/80 text-zinc-400 hover:text-white"
+          }`}
+        >
+          📰 Regular Feed
+        </button>
+      </div>
+
+      {displayedPosts.length === 0 ? (
+        <div className="text-center py-12 text-zinc-500 text-sm">
+          No tweets found for this filter.
+        </div>
+      ) : (
+        displayedPosts.map((post) => (
+          <Post
+            key={post.id}
+            post={post}
+            author={findUser(post.authorId)}
+            onQuote={onQuote}
+            onQuoteHold={onQuoteHold}
+          />
+        ))
+      )}
       
-      {postsToShow < sortedPosts.length && (
+      {postsToShow < filteredPosts.length && (
         <div className="p-4 flex justify-center border-t border-zinc-700/70">
            <button 
              onClick={() => setPostsToShow(p => p + 10)}

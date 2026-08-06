@@ -6,6 +6,7 @@ import {
     registerOnlinePlayer, 
     publishGlobalSong, 
     getGlobalSongs, 
+    subscribeToGlobalSongs,
     publishGlobalPost, 
     getGlobalPosts, 
     createContractOffer, 
@@ -18,7 +19,7 @@ import {
 import ChevronLeftIcon from './icons/ChevronLeftIcon';
 import GlobeAltIcon from './icons/GlobeAltIcon';
 
-type SubTab = 'players' | 'marketplace' | 'media';
+type SubTab = 'players' | 'releases' | 'marketplace' | 'media';
 
 const OnlineHubView: React.FC = () => {
     const { gameState, activeArtist, activeArtistData, dispatch } = useGame();
@@ -31,6 +32,18 @@ const OnlineHubView: React.FC = () => {
     const [onlinePlayers, setOnlinePlayers] = useState<any[]>([]);
     const [roleFilter, setRoleFilter] = useState('All');
     const [selectedPlayer, setSelectedPlayer] = useState<any | null>(null);
+
+    // 1b. Global Releases
+    const [globalReleases, setGlobalReleases] = useState<any[]>([]);
+
+    useEffect(() => {
+        const unsub = subscribeToGlobalSongs((songs) => {
+            if (songs) {
+                setGlobalReleases(songs);
+            }
+        });
+        return () => unsub();
+    }, []);
 
     // 2. Contracts & Offers
     const [receivedContracts, setReceivedContracts] = useState<any[]>([]);
@@ -222,6 +235,7 @@ const OnlineHubView: React.FC = () => {
             <div className="flex border-b border-zinc-800 bg-zinc-900/60 overflow-x-auto no-scrollbar">
                 {[
                     { id: 'players', label: '🌐 Directory', desc: 'Online Players' },
+                    { id: 'releases', label: '🎵 Global Releases', desc: 'Online Music Drops' },
                     { id: 'marketplace', label: '📜 Marketplace', desc: 'Contracts & Deals' },
                     { id: 'media', label: '📰 Media Press', desc: 'Reviews & News' },
                 ].map(tab => (
@@ -314,6 +328,88 @@ const OnlineHubView: React.FC = () => {
                                                 >
                                                     Send Offer
                                                 </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* TAB 1b: GLOBAL ONLINE RELEASES */}
+                        {activeSubTab === 'releases' && (
+                            <div className="space-y-4">
+                                <div className="bg-gradient-to-r from-red-950/60 to-zinc-900 border border-red-800/40 p-4 rounded-2xl flex justify-between items-center">
+                                    <div>
+                                        <h2 className="font-extrabold text-white text-base">🌐 Real-time Online Releases</h2>
+                                        <p className="text-xs text-zinc-400 mt-0.5">Every song released by online players is synchronized live across all servers.</p>
+                                    </div>
+                                    <button 
+                                        onClick={() => {
+                                            if (!activeArtistData?.songs) return;
+                                            const released = activeArtistData.songs.filter(s => s.isReleased);
+                                            released.forEach(s => {
+                                                publishGlobalSong({
+                                                    id: s.id,
+                                                    songId: s.id,
+                                                    title: s.title,
+                                                    artistName: activeArtist?.name || 'Online Player',
+                                                    artistId: gameState.activeArtistId || 'player',
+                                                    coverUrl: s.coverArt || activeArtistData.paparazziPhotos?.[0]?.url,
+                                                    genre: s.genre || 'Pop',
+                                                    streams: s.streams || 0,
+                                                    weeklyStreams: s.lastWeekStreams || s.weeklyStreams || 10000,
+                                                    releaseYear: gameState.date.year,
+                                                    releaseWeek: gameState.date.week,
+                                                    isOnlinePlayer: true
+                                                });
+                                            });
+                                            alert(`Synced ${released.length} released songs to the global servers!`);
+                                        }}
+                                        className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-lg shrink-0 flex items-center gap-1.5"
+                                    >
+                                        <span>⚡</span> Sync My Songs
+                                    </button>
+                                </div>
+
+                                {globalReleases.length === 0 ? (
+                                    <div className="text-center py-12 bg-zinc-900/50 rounded-2xl border border-zinc-800/80 p-6">
+                                        <p className="text-zinc-400 text-sm font-medium">No online player releases synced yet.</p>
+                                        <p className="text-zinc-500 text-xs mt-1">Release a song or click "Sync My Songs" above to publish your music!</p>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-2.5">
+                                        {globalReleases.map((song, idx) => (
+                                            <div key={song.id || song.songId || idx} className="bg-zinc-900 border border-zinc-800/90 rounded-2xl p-3.5 flex items-center justify-between hover:border-zinc-700 transition-all shadow-md">
+                                                <div className="flex items-center gap-3 min-w-0">
+                                                    <span className="text-xs font-black text-zinc-500 w-5 text-center">#{idx + 1}</span>
+                                                    <img 
+                                                        src={song.coverUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(song.artistName || 'Song')}&background=random&color=fff&size=150`} 
+                                                        alt="" 
+                                                        className="w-12 h-12 rounded-xl object-cover border border-zinc-700 shrink-0 shadow"
+                                                    />
+                                                    <div className="min-w-0">
+                                                        <h3 className="font-extrabold text-white text-sm truncate flex items-center gap-2">
+                                                            {song.title}
+                                                            <span className="bg-red-500/20 text-red-400 text-[10px] px-1.5 py-0.5 rounded-md font-bold border border-red-500/30">
+                                                                🎮 Online
+                                                            </span>
+                                                        </h3>
+                                                        <p className="text-xs text-zinc-400 font-medium truncate">{song.artistName}</p>
+                                                        <div className="flex items-center gap-3 text-[11px] text-zinc-500 mt-0.5">
+                                                            <span>Genre: <strong className="text-zinc-300">{song.genre || 'Pop'}</strong></span>
+                                                            {song.releaseYear && <span>Released: <strong className="text-zinc-300">W{song.releaseWeek}, {song.releaseYear}</strong></span>}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="text-right shrink-0">
+                                                    <div className="text-sm font-black text-emerald-400">
+                                                        {formatNumber(song.weeklyStreams || song.streams || 0)}
+                                                    </div>
+                                                    <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">
+                                                        Weekly Streams
+                                                    </div>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

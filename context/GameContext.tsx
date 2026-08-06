@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { db, getActiveSaveId, separateMediaFromState, injectMediaIntoState } from "../db/db";
 import { useFirebase } from "./FirebaseContext";
-import { subscribeToGlobalServerStatus, advanceGlobalServerTick } from "../firebase";
+import { subscribeToGlobalServerStatus, advanceGlobalServerTick, subscribeToGlobalSongs, subscribeToGlobalPosts, publishGlobalSong, publishGlobalPost } from "../firebase";
 
 import type {
   GameState,
@@ -1314,6 +1314,18 @@ const gameReducerInternal = (
   };
 
   switch (action.type) {
+    case "SET_GLOBAL_SONGS": {
+      return {
+        ...state,
+        globalSongs: action.payload,
+      };
+    }
+    case "SET_GLOBAL_POSTS": {
+      return {
+        ...state,
+        globalPosts: action.payload,
+      };
+    }
     case "SYNC_SERVER_DATE": {
       const { year, week, day } = action.payload;
       const targetDay = day || state.date.day || 1;
@@ -12626,6 +12638,40 @@ Keep up the great work!
             ? "her"
             : "their";
 
+      publishGlobalPost({
+        id: crypto.randomUUID(),
+        authorId: state.activeArtistId,
+        authorName: artistName,
+        authorHandle: `@${artistName.toLowerCase().replace(/\s/g, '')}`,
+        authorAvatar: activeData.paparazziPhotos?.[0]?.url,
+        content: `🚨 OUT NOW: ${artistName} released ${pronounPossessive} new ${releaseWithLabel.type} "${releaseWithLabel.title}"! Stream it now on all platforms! 🎵🔥`,
+        likesCount: Math.floor(Math.random() * 500) + 100,
+        repostsCount: Math.floor(Math.random() * 100) + 20,
+        isOnlinePlayer: true,
+      });
+
+      releaseWithLabel.songIds.forEach((sid: string) => {
+        const s = activeData.songs.find((x: any) => x.id === sid);
+        if (s) {
+          publishGlobalSong({
+            id: s.id,
+            songId: s.id,
+            title: s.title,
+            artistName: artistName,
+            artistId: state.activeArtistId!,
+            coverUrl: releaseWithLabel.coverArt || s.coverArt,
+            genre: s.genre || "Pop",
+            streams: s.streams || 0,
+            weeklyStreams: s.lastWeekStreams || s.weeklyStreams || 10000,
+            releaseYear: state.date.year,
+            releaseWeek: state.date.week,
+            isOnlinePlayer: true,
+            type: releaseWithLabel.type,
+            albumTitle: releaseWithLabel.title,
+          });
+        }
+      });
+
       const popBasePost: XPost = {
         id: crypto.randomUUID(),
         authorId: "popbase",
@@ -15390,6 +15436,19 @@ Watch: youtu.be/sIdlL8V83Cc`;
         date: state.date,
         quoteOf: quoteOf,
       };
+
+      publishGlobalPost({
+        id: newPost.id,
+        authorId: playerUser.id,
+        authorName: playerUser.name || "Online Player",
+        authorHandle: `@${playerUser.username || "player"}`,
+        authorAvatar: playerUser.avatar,
+        content: postContent,
+        likesCount: likes,
+        repostsCount: retweets,
+        mediaUrl: image,
+        isOnlinePlayer: true,
+      });
 
       const updatedPosts = [newPost, ...activeData.xPosts];
 
@@ -22182,6 +22241,60 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
       clearInterval(interval);
     };
   }, []);
+
+  // Real-time Global Songs & Posts listeners
+  useEffect(() => {
+    const unsubSongs = subscribeToGlobalSongs((songs) => {
+      if (songs) {
+        dispatch({ type: "SET_GLOBAL_SONGS", payload: songs });
+      }
+    });
+    const unsubPosts = subscribeToGlobalPosts((posts) => {
+      if (posts) {
+        dispatch({ type: "SET_GLOBAL_POSTS", payload: posts });
+      }
+    });
+    return () => {
+      unsubSongs();
+      unsubPosts();
+    };
+  }, []);
+
+  // Sync active player's released songs to Firestore global_songs so other online players can see them
+  useEffect(() => {
+    if (!gameState.activeArtistId || !gameState.artistsData) return;
+    const activeData = gameState.artistsData[gameState.activeArtistId];
+    if (!activeData || !activeData.songs) return;
+
+    const artistProfile = [
+      gameState.soloArtist,
+      ...(gameState.group?.members || []),
+      gameState.group,
+      ...(gameState.extraPlayableArtists || []),
+    ].find((a) => a?.id === gameState.activeArtistId);
+
+    const artistName = artistProfile?.name || "Online Player";
+
+    const releasedSongs = activeData.songs.filter((s) => s.isReleased);
+    if (releasedSongs.length > 0) {
+      releasedSongs.forEach((song) => {
+        publishGlobalSong({
+          id: song.id,
+          songId: song.id,
+          title: song.title,
+          artistName: artistName,
+          artistId: gameState.activeArtistId!,
+          coverUrl: song.coverArt || activeData.paparazziPhotos?.[0]?.url,
+          genre: song.genre || "Pop",
+          streams: song.streams || 0,
+          weeklyStreams: song.lastWeekStreams || song.weeklyStreams || 10000,
+          releaseYear: gameState.date.year,
+          releaseWeek: gameState.date.week,
+          isOnlinePlayer: true,
+        });
+      });
+    }
+  }, [gameState.date.week, gameState.date.year, gameState.activeArtistId]);
 
   // Effect for saving game state to IndexedDB on change
   useEffect(() => {
