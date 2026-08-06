@@ -120,45 +120,19 @@ export const registerOnlinePlayer = async (
     }
 };
 
-export const DEFAULT_GLOBAL_SERVER_PLAYERS = [
-    { id: 'player_drake', name: 'ChampagnePapi (Drake)', roles: ['Musician', 'Rapper'], country: 'CA', fandomName: 'OVO Sound', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80', totalStreams: 84000000000, isOnline: true },
-    { id: 'player_travis', name: 'La Flame (Travis Scott)', roles: ['Musician', 'Producer'], country: 'US', fandomName: 'Cactus Jack', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80', totalStreams: 62000000000, isOnline: true },
-    { id: 'player_taylor', name: 'TSwift (Taylor Swift)', roles: ['Musician', 'Songwriter'], country: 'US', fandomName: 'Swifties', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', totalStreams: 98000000000, isOnline: true },
-    { id: 'player_weeknd', name: 'Abel (The Weeknd)', roles: ['Musician', 'Vocalist'], country: 'CA', fandomName: 'XO', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80', totalStreams: 71000000000, isOnline: true },
-    { id: 'player_sza', name: 'SZA (Solána)', roles: ['Musician', 'Singer'], country: 'US', fandomName: 'SOS Club', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80', totalStreams: 34000000000, isOnline: true },
-    { id: 'player_metro', name: 'Metro Boomin', roles: ['Producer', 'Executive'], country: 'US', fandomName: 'Boominatti', avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=200&q=80', totalStreams: 45000000000, isOnline: true },
-    { id: 'player_central', name: 'Central Cee', roles: ['Musician', 'Rapper'], country: 'UK', fandomName: 'Wild West', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80', totalStreams: 18000000000, isOnline: true },
-    { id: 'player_yeat', name: 'Yeat (Twizzy)', roles: ['Musician', 'Producer'], country: 'US', fandomName: 'Lyfestyle', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=200&q=80', totalStreams: 12000000000, isOnline: true },
-    { id: 'player_billie', name: 'Billie Eilish', roles: ['Musician', 'Vocalist'], country: 'US', fandomName: 'Avocados', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80', totalStreams: 52000000000, isOnline: true },
-    { id: 'player_harlow', name: 'Jack Harlow', roles: ['Musician', 'Rapper'], country: 'US', fandomName: 'Private Garden', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80', totalStreams: 19000000000, isOnline: true },
-    { id: 'player_icespice', name: 'Ice Spice (Princess)', roles: ['Musician', 'Rapper'], country: 'US', fandomName: 'Munchkins', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80', totalStreams: 9500000000, isOnline: true },
-    { id: 'player_kendrick', name: 'Kendrick Lamar (K.Dot)', roles: ['Musician', 'Lyricist'], country: 'US', fandomName: 'pgLang', avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=200&q=80', totalStreams: 48000000000, isOnline: true },
-    { id: 'player_dua', name: 'Dua Lipa', roles: ['Musician', 'Popstar'], country: 'UK', fandomName: 'Loves', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80', totalStreams: 41000000000, isOnline: true },
-    { id: 'player_playboi', name: 'Playboi Carti (King Vamp)', roles: ['Musician', 'Executive'], country: 'US', fandomName: 'Opium', avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=200&q=80', totalStreams: 28000000000, isOnline: true },
-    { id: 'player_badbunny', name: 'Bad Bunny (Benito)', roles: ['Musician', 'Superstar'], country: 'PR', fandomName: 'Un Verano', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80', totalStreams: 79000000000, isOnline: true }
-];
-
 export const subscribeToOnlinePlayers = (callback: (players: any[]) => void) => {
     try {
         const q = query(collection(db, "online_players"), limit(100));
         return onSnapshot(q, (snap) => {
             const dbPlayers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            // Merge Firestore players with default global server players into ONE single server list
-            const combinedMap = new Map<string, any>();
-            DEFAULT_GLOBAL_SERVER_PLAYERS.forEach(p => combinedMap.set(p.id, p));
-            dbPlayers.forEach(p => {
-                if (p.id) combinedMap.set(p.id, p);
-                if (p.name) combinedMap.set(p.name, p);
-            });
-            const mergedList = Array.from(combinedMap.values());
-            callback(mergedList);
+            callback(dbPlayers);
         }, (err) => {
             console.error("Error subscribing to online players:", err);
-            callback(DEFAULT_GLOBAL_SERVER_PLAYERS);
+            callback([]);
         });
     } catch (err) {
         console.error("Error setting listener for online players:", err);
-        callback(DEFAULT_GLOBAL_SERVER_PLAYERS);
+        callback([]);
         return () => {};
     }
 };
@@ -167,17 +141,10 @@ export const getOnlinePlayers = async () => {
     try {
         const q = query(collection(db, "online_players"), limit(100));
         const snap = await getDocs(q);
-        const dbPlayers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        const combinedMap = new Map<string, any>();
-        DEFAULT_GLOBAL_SERVER_PLAYERS.forEach(p => combinedMap.set(p.id, p));
-        dbPlayers.forEach(p => {
-            if (p.id) combinedMap.set(p.id, p);
-            if (p.name) combinedMap.set(p.name, p);
-        });
-        return Array.from(combinedMap.values());
+        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
     } catch (err) {
         console.error("Error fetching online players:", err);
-        return DEFAULT_GLOBAL_SERVER_PLAYERS;
+        return [];
     }
 };
 

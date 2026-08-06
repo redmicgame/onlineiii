@@ -41,7 +41,7 @@ const OnlineHubView: React.FC = () => {
     // Real-time online players subscription
     useEffect(() => {
         const unsub = subscribeToOnlinePlayers((players) => {
-            if (players && players.length > 0) {
+            if (players) {
                 setOnlinePlayers(players);
             }
         });
@@ -77,19 +77,14 @@ const OnlineHubView: React.FC = () => {
     const [isResetting, setIsResetting] = useState(false);
 
     const handleConfirmReset = async () => {
-        const validPasswords = ['redmic2026', 'admin123', 'admin', 'redmic'];
-        if (!validPasswords.includes(resetPasswordInput.trim())) {
-            setResetErrorMsg('❌ Incorrect admin password! Server data reset denied.');
-            return;
-        }
         setIsResetting(true);
         setResetErrorMsg('');
         try {
             await resetAllGameAccountsAndData();
-            alert('Server data and online accounts reset successfully!');
+            alert('Server online players, releases, and contracts have been completely wiped!');
             window.location.reload();
         } catch (err: any) {
-            setResetErrorMsg(`Error: ${err?.message || 'Failed to reset'}`);
+            setResetErrorMsg(`Error: ${err?.message || 'Failed to reset server data'}`);
             setIsResetting(false);
         }
     };
@@ -1126,29 +1121,12 @@ const OnlineHubView: React.FC = () => {
                         </div>
 
                         <p className="text-xs text-zinc-300 bg-zinc-950 p-3 rounded-xl border border-zinc-800 leading-relaxed">
-                            Warning: This operation will wipe all online player accounts, global releases, media posts, and server clock state across the entire network.
+                            ⚠️ Warning: This operation will permanently wipe all online player accounts, global music releases, contract offers, media posts, and chat messages across the entire shared cloud server. Everyone will start fresh!
                         </p>
 
-                        <div>
-                            <label className="text-xs text-zinc-400 font-bold block mb-1">Enter Admin Password</label>
-                            <input 
-                                type="password" 
-                                value={resetPasswordInput} 
-                                onChange={e => {
-                                    setResetPasswordInput(e.target.value);
-                                    setResetErrorMsg('');
-                                }}
-                                onKeyDown={e => {
-                                    if (e.key === 'Enter') handleConfirmReset();
-                                }}
-                                placeholder="Enter admin password (e.g. redmic2026)"
-                                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-red-500"
-                                autoFocus
-                            />
-                            {resetErrorMsg && (
-                                <p className="text-xs font-semibold text-red-400 mt-1.5">{resetErrorMsg}</p>
-                            )}
-                        </div>
+                        {resetErrorMsg && (
+                            <p className="text-xs font-semibold text-red-400 mt-1.5">{resetErrorMsg}</p>
+                        )}
 
                         <div className="flex gap-2 pt-2">
                             <button 
@@ -1156,7 +1134,7 @@ const OnlineHubView: React.FC = () => {
                                 disabled={isResetting}
                                 className="flex-1 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-lg"
                             >
-                                {isResetting ? 'Resetting Data...' : 'Confirm Reset Server Data'}
+                                {isResetting ? 'Wiping Server Data...' : '🔥 Confirm Complete Server Wipe'}
                             </button>
                             <button 
                                 onClick={() => {
