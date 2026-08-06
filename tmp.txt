@@ -1,0 +1,409 @@
+components/CreateGeniusInterviewView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' })} className="text-red-500 mt-2">Back to Inbox</button>
+components/CreateGeniusInterviewView.tsx:            type: 'Genius Verified',
+components/CreateGeniusInterviewView.tsx:        dispatch({ type: 'CREATE_GENIUS_INTERVIEW', payload: { video: newVideo } });
+components/CreateGeniusInterviewView.tsx:        dispatch({ type: 'CANCEL_GENIUS_OFFER' });
+components/EncounterModalView.tsx:        dispatch({ type: 'RESOLVE_ENCOUNTER', payload: { choice, imageUrl } });
+components/SpotifyChartView.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-1 -ml-1 rounded-full hover:bg-white/10" aria-label="Go back">
+components/SpotifyChartView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'spotifyTopSongs'})} className="w-full bg-[#a03fec] p-4 rounded-lg text-left">
+components/SpotifyChartView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'spotifyTopAlbums'})} className="w-full bg-emerald-800 p-4 rounded-lg text-left">
+components/GigsView.tsx:        dispatch({ type: 'PERFORM_GIG', payload: { cash: cashEarned, hype: gig.hype } });
+components/GigsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/HomeTab.tsx:        dispatch({ type: 'GO_TO_LABEL_PLAN', payload: { submissionId: submission.id } });
+components/HomeTab.tsx:                                <button key={artist.id} onClick={() => { dispatch({ type: 'CHANGE_ACTIVE_ARTIST', payload: artist.id }); setIsSwitcherOpen(false); }}
+components/HomeTab.tsx:                        <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'releaseHub'})} className="flex items-center gap-1 text-red-500 hover:text-red-400 font-semibold">
+components/SpotifyReleaseDetailView.tsx:                                dispatch({ type: 'UPDATE_ABOUT_SONG_TEXT', payload: { songId: releaseSongs[0].id, text: editAboutSongText } });
+components/CreateTrshdPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' })} className="text-red-500 mt-2">Back to Inbox</button>
+components/CreateTrshdPerformanceView.tsx:            type: 'Live Performance',
+components/CreateTrshdPerformanceView.tsx:        dispatch({ type: 'CREATE_TRSHD_PERFORMANCE', payload: { video: newVideo } });
+components/CreateTrshdPerformanceView.tsx:        dispatch({ type: 'CANCEL_TRSHD_OFFER' });
+components/CreateVideoView.tsx:            type: videoType,
+components/CreateVideoView.tsx:        dispatch({ type: 'CREATE_VIDEO', payload: { video: newVideo, cost } });
+components/CreateVideoView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'youtube' });
+components/CreateVideoView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'youtube'})} className="p-2 rounded-full hover:bg-white/10">
+components/PromoteView.tsx:    const [selectedSingleItem, setSelectedSingleItem] = useState<{ item: Video | Song; type: 'video' | 'song' } | null>(null);
+components/PromoteView.tsx:                dispatch({ type: 'START_PROMOTION', payload: { promotion: newPromotion } });
+components/PromoteView.tsx:        dispatch({ type: 'START_PROMOTION', payload: { promotion: newPromotion } });
+components/PromoteView.tsx:            dispatch({ type: 'CANCEL_PROMOTION', payload: { promotionId: confirmCancel } });
+components/PromoteView.tsx:                            <button key={item.id} onClick={() => setSelectedSingleItem({item, type: 'video'})} className="w-full flex items-center gap-4 p-2 rounded-lg hover:bg-zinc-800">
+components/PromoteView.tsx:                            <button key={item.id} onClick={() => setSelectedSingleItem({item, type: 'song'})} className="w-full flex items-center gap-4 p-2 rounded-lg hover:bg-zinc-800">
+components/PromoteView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/VMAsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-4 left-4 p-2 rounded-full hover:bg-white/10 z-10">
+components/StartScreen.tsx:            dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear, difficultyMode: difficulty } });
+components/StartScreen.tsx:            dispatch({ type: 'START_GROUP_GAME', payload: { group: newGroup, startYear, difficultyMode: difficulty } });
+components/StartScreen.tsx:                    dispatch({ type: 'LOAD_GAME', payload: loadedState });
+components/StartScreen.tsx:            dispatch({ type: 'SET_CLOUD_SAVE_ID', payload: save.id });
+components/StartScreen.tsx:            dispatch({ type: 'LOAD_GAME', payload: save.gameState });
+components/SecurityView.tsx:        dispatch({ type: 'HIRE_SECURITY', payload: { teamId: team.id } });
+components/SecurityView.tsx:        dispatch({ type: 'FIRE_SECURITY' });
+components/SecurityView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/YouTubeStoreView.tsx:            type: merchType,
+components/YouTubeStoreView.tsx:        dispatch({ type: 'ADD_MERCH', payload: { item: newItem } });
+components/YouTubeStoreView.tsx:                dispatch({ type: 'UPDATE_MERCH_BANNER', payload: reader.result as string });
+components/YouTubeStoreView.tsx:                 <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="mt-6 bg-red-600 text-white font-bold py-2 px-6 rounded-lg">
+components/YouTubeStoreView.tsx:                                    <button onClick={() => dispatch({type: 'REMOVE_MERCH', payload: {id: item.id}})} className="absolute top-2 right-2 p-1.5 bg-white/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+components/YouTubeStoreView.tsx:                 <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="fixed bottom-4 left-4 bg-zinc-800 text-white p-3 rounded-full shadow-lg hover:bg-zinc-700 transition-colors z-30">
+components/SpotifySoundtrackDetailView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotify' })} className="absolute top-4 left-4">Back</button>
+components/SpotifySoundtrackDetailView.tsx:                onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotify' })}
+components/CreateOnTheRadarPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' })} className="text-red-500 mt-2">Back to Inbox</button>
+components/CreateOnTheRadarPerformanceView.tsx:            type: 'Live Performance',
+components/CreateOnTheRadarPerformanceView.tsx:        dispatch({ type: 'CREATE_ONTHERADAR_PERFORMANCE', payload: { video: newVideo } });
+components/CreateOnTheRadarPerformanceView.tsx:        dispatch({ type: 'CANCEL_ONTHERADAR_OFFER' });
+components/InstagramView.tsx:        dispatch({ type: 'CREATE_INSTAGRAM_POST', payload: { caption: createCaption, imageUrl: createImageUrl } });
+components/InstagramView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="text-white hover:text-zinc-300 transition-colors">
+components/AmaRedCarpetView.tsx:            dispatch({ type: 'ACCEPT_AMA_RED_CARPET', payload: { emailId: activeAmaRedCarpetOffer.emailId, lookUrl }});
+components/AmaRedCarpetView.tsx:                <button onClick={() => dispatch({type: 'DECLINE_AMA_RED_CARPET', payload: {emailId: activeAmaRedCarpetOffer.emailId}})} className="p-2 rounded-full hover:bg-white/10">
+components/XProfileView.tsx:            dispatch({ type: 'UNFOLLOW_X_USER', payload: user.id });
+components/XProfileView.tsx:            dispatch({ type: 'FOLLOW_X_USER', payload: user.id });
+components/XProfileView.tsx:            dispatch({ type: 'VIEW_X_CHAT', payload: chat.id });
+components/XProfileView.tsx:        return <div className="p-4">User not found. <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'x' })}>Back</button></div>;
+components/XProfileView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'x' })} className="p-2 rounded-full hover:bg-zinc-800">
+components/XProfileView.tsx:                        dispatch({ type: 'POST_ON_X', payload });
+components/GrammyRedCarpetView.tsx:            dispatch({ type: 'ACCEPT_GRAMMY_RED_CARPET', payload: { emailId: activeGrammyRedCarpetOffer.emailId, lookUrl }});
+components/GrammyRedCarpetView.tsx:                <button onClick={() => dispatch({type: 'DECLINE_GRAMMY_RED_CARPET', payload: {emailId: activeGrammyRedCarpetOffer.emailId}})} className="p-2 rounded-full hover:bg-white/10">
+components/AppleMusicForArtistsView.tsx:            dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/AppleMusicForArtistsView.tsx:                type: 'EDIT_SUBMISSION_DATE',
+components/AppleMusicForArtistsView.tsx:                                            onChange={(e) => dispatch({ type: 'TOGGLE_APPLE_MUSIC_EXPANDED_COVER', payload: { releaseId: album.id, enabled: e.target.checked } })}
+components/AppleMusicForArtistsView.tsx:                                                    dispatch({ type: 'MARK_APPLE_MUSIC_ESSENTIAL', payload: { releaseId: album.id, reviewText } });
+components/AppleMusicForArtistsView.tsx:                                                    dispatch({ type: 'MARK_APPLE_MUSIC_ESSENTIAL', payload: { releaseId: album.id, reviewText: '' } });
+components/AppleMusicForArtistsView.tsx:                                                onChange={(e) => dispatch({ type: 'MARK_APPLE_MUSIC_ESSENTIAL', payload: { releaseId: album.id, reviewText: e.target.value } })}
+components/TmzArticleView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'x' });
+components/TmzArticleView.tsx:        dispatch({ type: 'SET_ACTIVE_TMZ_POST', payload: null });
+components/LabelsView.tsx:        dispatch({ type: 'GO_TO_LABEL_PLAN', payload: { submissionId: submission.id } });
+components/LabelsView.tsx:                 <button onClick={() => dispatch({type: 'END_CONTRACT'})} className="w-full text-center text-sm text-zinc-500 hover:text-red-500">
+components/LabelsView.tsx:                    <button onClick={() => dispatch({type: 'END_CONTRACT'})} className="mt-4 bg-red-900/50 text-red-400 font-bold px-4 py-2 rounded-md text-sm hover:bg-red-900">
+components/LabelsView.tsx:                                                onClick={() => dispatch({ type: 'VIEW_PAST_LABEL_CHANNEL', payload: pastLabel.id })}
+components/LabelsView.tsx:        type: 'petty' | 'small';
+components/LabelsView.tsx:                setNameChangeReq({ label, type: 'petty', options: randomNames });
+components/LabelsView.tsx:                setNameChangeReq({ label, type: 'small', fee: Math.floor(Math.random() * (30000 - 20000 + 1)) + 20000 });
+components/LabelsView.tsx:        dispatch({ type: 'SIGN_CONTRACT', payload: { contract } });
+components/LabelsView.tsx:        dispatch({ type: 'SIGN_CONTRACT', payload: { contract: newContract } });
+components/LabelsView.tsx:            dispatch({ type: 'CHANGE_STAGE_NAME', payload: { newName: activeArtist.name, cost: nameChangeReq.fee, contractId: 'TEMP' } });
+components/LabelsView.tsx:            dispatch({ type: 'CHANGE_STAGE_NAME', payload: { newName: nameChangeInput.trim(), contractId: 'TEMP' } });
+components/LabelsView.tsx:                        onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'createLabel' })}
+components/LabelsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/OscarRedCarpetView.tsx:            dispatch({ type: 'ACCEPT_OSCAR_RED_CARPET', payload: { emailId: activeOscarRedCarpetOffer.emailId, lookUrl }});
+components/OscarRedCarpetView.tsx:                <button onClick={() => dispatch({type: 'DECLINE_OSCAR_RED_CARPET', payload: {emailId: activeOscarRedCarpetOffer.emailId}})} className="p-2 rounded-full hover:bg-white/10">
+components/StudioView.tsx:    const [samples, setSamples] = useState<{ songTitle: string; artistName: string; type: 'Sample' | 'Interpolation'; coverArt: string }[]>([]);
+components/StudioView.tsx:    const toggleRemixType = (type: string) => {
+components/StudioView.tsx:        dispatch({ type: 'RECORD_SONG', payload: { song: newSong, cost: totalCost } });
+components/StudioView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/StudioView.tsx:        dispatch({ type: 'CREATE_REMIX_PACK', payload: { songs: newSongs, cost: packTotalCost } });
+components/StudioView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/StudioView.tsx:    const handleAddSample = (artistName: string, type: 'Sample' | 'Interpolation') => {
+components/StudioView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/OscarsView.tsx:                dispatch({ type: 'UPDATE_OSCAR_BANNER', payload: reader.result as string });
+components/OscarsView.tsx:                <button onClick={(e) => { e.stopPropagation(); dispatch({type: 'CHANGE_VIEW', payload: 'game'}); }} className="absolute top-4 left-4 p-2 rounded-full hover:bg-white/10 z-10">
+components/ReleaseView.tsx:            type: finalReleaseType,
+components/ReleaseView.tsx:                dispatch({ type: 'SUBMIT_TO_LABEL', payload: { submission } });
+components/ReleaseView.tsx:                dispatch({ type: 'GO_TO_LABEL_PLAN', payload: { submissionId: submission.id } });
+components/ReleaseView.tsx:            dispatch({ type: 'SUBMIT_TO_LABEL', payload: { submission }});
+components/ReleaseView.tsx:            dispatch({ type: 'RELEASE_PROJECT', payload: { release: newRelease } });
+components/ReleaseView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/ReleaseView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/InboxView.tsx:                 dispatch({ type: 'ACCEPT_GENIUS_OFFER', payload: { songId: email.offer.songId, emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_ONTHERADAR_OFFER', payload: { songId: email.offer.songId, emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_TRSHD_OFFER', payload: { songId: email.offer.songId, emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_FALLON_OFFER', payload: { releaseId: email.offer.releaseId, offerType: email.offer.offerType, emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'GO_TO_GRAMMY_SUBMISSIONS', payload: { emailId: email.id } });
+components/InboxView.tsx:                    dispatch({ type: 'ACCEPT_GRAMMY_PERFORMANCE', payload: { emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_VMA_RED_CARPET', payload: { emailId: email.id, lookUrl: '' } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_OSCAR_RED_CARPET', payload: { emailId: email.id, lookUrl: '' } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_GRAMMY_RED_CARPET', payload: { emailId: email.id, lookUrl: '' } }); // Will be handled by the view
+components/InboxView.tsx:                dispatch({ type: 'GO_TO_AMA_SUBMISSIONS', payload: { emailId: email.id } });
+components/InboxView.tsx:                    dispatch({ type: 'ACCEPT_AMA_PERFORMANCE', payload: { emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_AMA_RED_CARPET', payload: { emailId: email.id, lookUrl: '' } }); 
+components/InboxView.tsx:                dispatch({ type: 'GO_TO_OSCAR_SUBMISSIONS', payload: { emailId: email.id } });
+components/InboxView.tsx:                    dispatch({ type: 'ACCEPT_OSCAR_PERFORMANCE', payload: { emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_ONLYFANS_REQUEST', payload: { emailId: email.id, payout: email.offer.payout } });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_VOGUE_OFFER', payload: { magazine: email.offer.magazine, emailId: email.id }});
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_FEATURE_OFFER', payload: email.offer });
+components/InboxView.tsx:                dispatch({ type: 'ACCEPT_FEATURE_VIDEO_OFFER', payload: { ...email.offer, emailId: email.id } });
+components/InboxView.tsx:                dispatch({ type: 'SUBMIT_COACHELLA', payload: { emailId: email.id } });
+components/InboxView.tsx:            dispatch({ type: 'ANSWER_POPBASE_QUESTION', payload: { emailId: email.id, answer: reply.trim() } });
+components/InboxView.tsx:                                    dispatch({ type: 'GIVE_BIRTH', payload: { childName: reply.trim() } });
+components/InboxView.tsx:                                    dispatch({ type: 'MARK_EMAIL_OFFER_ANSWERED', payload: { emailId: email.id } });
+components/InboxView.tsx:                                dispatch({ type: 'RESPOND_TO_CHEATING', payload: { response: 'break_up', relationshipId: offer.relationshipId } });
+components/InboxView.tsx:                                dispatch({ type: 'MARK_EMAIL_OFFER_ANSWERED', payload: { emailId: email.id } });
+components/InboxView.tsx:                                dispatch({ type: 'RESPOND_TO_CHEATING', payload: { response: 'forgive', relationshipId: offer.relationshipId } });
+components/InboxView.tsx:                                dispatch({ type: 'MARK_EMAIL_OFFER_ANSWERED', payload: { emailId: email.id } });
+components/InboxView.tsx:                                dispatch({ type: 'RESPOND_TO_CHEATING', payload: { response: 'ignore', relationshipId: offer.relationshipId } });
+components/InboxView.tsx:                                dispatch({ type: 'MARK_EMAIL_OFFER_ANSWERED', payload: { emailId: email.id } });
+components/InboxView.tsx:                            dispatch({ type: 'ACCEPT_SOUNDTRACK_OFFER', payload: { albumTitle: email.offer.albumTitle, emailId: email.id } });
+components/InboxView.tsx:            dispatch({ type: 'MARK_INBOX_READ' });
+components/InboxView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/ITunesView.tsx:const getPrice = (id: string, type: 'song' | 'album', trackCount = 0, itunesPrice?: string) => {
+components/ITunesView.tsx:                                         (window as any)._dispatch({ type: 'UPDATE_ITUNES_PRICE', payload: { songId: song.songId || song.uniqueId, newPriceStr: opts[nextIdx] } });
+components/ITunesView.tsx:                        dispatch({ type: 'UPDATE_ITUNES_PRICE', payload: { songId: song.songId || song.uniqueId, newPriceStr: opts[nextIdx] } });
+components/ITunesView.tsx:                                (window as any)._dispatch({ type: 'UPDATE_ITUNES_PRICE', payload: { songId: song.songId || song.uniqueId, newPriceStr: opts[nextIdx] } });
+components/ITunesView.tsx:            type: 'UPDATE_ITUNES_PRICE',
+components/ITunesView.tsx:            dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/DatingView.tsx:                dispatch({ type: 'START_DATING', payload: { partnerName: npc.artist, partnerType: 'npc' } });
+components/DatingView.tsx:                dispatch({ type: 'START_DATING', payload: { partnerName: customName.trim(), partnerType: 'custom' } });
+components/DatingView.tsx:            dispatch({ type: 'REVEAL_RELATIONSHIP', payload: { relationshipId: relationshipToReveal, outlet } });
+components/DatingView.tsx:                dispatch({ type: 'UPDATE_RELATIONSHIP_IMAGE', payload: { relationshipId, image: newImage } });
+components/DatingView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'misc' })} className="p-2 rounded-full hover:bg-zinc-800">
+components/DatingView.tsx:                                        onClick={() => dispatch({ type: 'ADVANCE_RELATIONSHIP', payload: { relationshipId: activeRelationship.id, newStatus: 'engaged' } })}
+components/DatingView.tsx:                                        onClick={() => dispatch({ type: 'ADVANCE_RELATIONSHIP', payload: { relationshipId: activeRelationship.id, newStatus: 'married' } })}
+components/DatingView.tsx:                                        onClick={() => dispatch({ type: 'START_PREGNANCY', payload: { partnerName: activeRelationship.partnerName } })}
+components/DatingView.tsx:                                        onClick={() => dispatch({ type: 'REVEAL_PREGNANCY' })}
+components/DatingView.tsx:                                    onClick={() => dispatch({ type: 'BREAK_UP', payload: { relationshipId: activeRelationship.id } })}
+components/DatingView.tsx:                                                onClick={() => dispatch({ type: 'GET_BACK_WITH_EX', payload: { relationshipId: rel.id } })}
+components/DatingView.tsx:                                                    onClick={() => dispatch({ type: 'START_KID_CAREER', payload: { kidId: kid.id } })}
+components/SpotifyTopAlbumsView.tsx:            <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyChart' })} className="px-4 text-sm font-semibold text-zinc-400 flex items-center gap-1">
+components/LabelReleasePlanView.tsx:            type: 'PLAN_LABEL_RELEASE',
+components/LabelReleasePlanView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-2 rounded-full hover:bg-white/10">
+components/HotRapRnbView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-black/10">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'billboard' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'billboardAlbums' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyChart' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'hotPopSongs' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'hotRapRnb' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'electronicChart' })} className="text-sm text-red-400 flex items-center gap-1">
+components/ChartsTab.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'countryChart' })} className="text-sm text-red-400 flex items-center gap-1">
+components/TourDetailView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'tours' });
+components/TourDetailView.tsx:            dispatch({ type: 'START_TOUR', payload: { tourId: tour.id }});
+components/TourDetailView.tsx:                dispatch({ type: 'UPLOAD_TOUR_PHOTO', payload: reader.result as string });
+components/TourDetailView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'tours'})} className="absolute top-4 left-4 p-2 bg-black/50 rounded-full hover:bg-black/70">
+components/SubmitForVMAsView.tsx:            dispatch({ type: 'SUBMIT_FOR_VMAS', payload: { submissions, emailId } });
+components/SubmitForVMAsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'inbox'})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateLabelView.tsx:        dispatch({ type: 'CREATE_CUSTOM_LABEL', payload: { label: newLabel, cost: totalCost, membersToSign: Array.from(membersToSign) } });
+components/CreateLabelView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/ToursView.tsx:        dispatch({ type: 'SELECT_TOUR', payload: tourId });
+components/ToursView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'tourDetail' });
+components/ToursView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/ToursView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'createTour'})} className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-6 text-left flex justify-between items-center">
+components/YouTubeView.tsx:        dispatch({ type: 'SELECT_VIDEO', payload: video.id });
+components/YouTubeView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'youtubeVideoDetail' });
+components/YouTubeView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: isViewingPastLabel ? 'labels' : 'game' });
+components/YouTubeView.tsx:                dispatch({ type: 'UPDATE_ARTIST_IMAGE', payload: { artistId: activeArtist.id, newImage } });
+components/YouTubeView.tsx:        dispatch({ type: 'SELECT_VIDEO', payload: videoId });
+components/YouTubeView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'youtubeVideoDetail' });
+components/YouTubeView.tsx:            dispatch({ type: 'CHANGE_VIEW', payload: 'merchStore' });
+components/YouTubeView.tsx:                        <button onClick={() => dispatch({type: 'SWITCH_YOUTUBE_CHANNEL', payload: 'artist'})} className={`flex-1 py-1.5 rounded-full text-sm font-semibold ${!isLabelView ? 'bg-zinc-600' : 'hover:bg-zinc-700'}`}>Personal</button>
+components/YouTubeView.tsx:                        <button onClick={() => dispatch({type: 'SWITCH_YOUTUBE_CHANNEL', payload: 'label'})} className={`flex-1 py-1.5 rounded-full text-sm font-semibold ${isLabelView ? 'bg-zinc-600' : 'hover:bg-zinc-700'}`}>Label</button>
+components/YouTubeView.tsx:                         <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'youtubeStudio' })} className="w-full font-semibold py-2 rounded-full bg-zinc-800 hover:bg-zinc-700">
+components/YouTubeView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'createVideo'})} className="bg-red-600 text-white text-sm font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
+components/XView.tsx:            dispatch({ type: 'VIEW_X_PROFILE', payload: author.id });
+components/XView.tsx:                        onClick={() => dispatch({ type: 'SET_ACTIVE_TMZ_POST', payload: post })} 
+components/XView.tsx:                                <div key={u.id} className="flex gap-3 p-3 hover:bg-zinc-900 cursor-pointer" onClick={() => dispatch({ type: 'VIEW_X_PROFILE', payload: u.id })}>
+components/XView.tsx:                    <button key={chat.id} onClick={() => dispatch({ type: 'VIEW_X_CHAT', payload: chat.id })} className="w-full flex gap-3 p-3 hover:bg-zinc-800/50 cursor-pointer">
+components/XView.tsx:        dispatch({ type: 'CREATE_X_ACCOUNT', payload: { name: newName, username: newUsername, avatar: newAvatar, bio: newBio } });
+components/XView.tsx:                    type: 'UPDATE_NPC_AVATAR', 
+components/XView.tsx:                        <div className="flex items-center gap-3 w-full" onClick={() => dispatch({ type: 'SELECT_X_ACCOUNT', payload: { accountId: account.id } })} style={{cursor: 'pointer'}}>
+components/XView.tsx:                                            dispatch({ type: 'DELETE_X_ACCOUNT', payload: { accountId: account.id } });
+components/XView.tsx:                                <button onClick={(e) => { e.stopPropagation(); dispatch({ type: 'SELECT_X_ACCOUNT', payload: { accountId: account.id } }); }} className="bg-zinc-700 hover:bg-zinc-600 px-3 py-1 rounded text-sm font-semibold">
+components/XView.tsx:        const items: { type: 'project' | 'single', id: string, name: string, submissionId: string, songId?: string }[] = [];
+components/XView.tsx:                items.push({ type: 'project', id: `proj-${sub.id}`, name: sub.release.title, submissionId: sub.id });
+components/XView.tsx:                    if (song) items.push({ type: 'single', id: `single-${single.songId}`, name: song.title, submissionId: sub.id, songId: song.id });
+components/XView.tsx:                    announceItemData = { type: item.type, submissionId: item.submissionId, songId: item.songId };
+components/XView.tsx:        dispatch({ type: 'APPEAL_X_SUSPENSION' });
+components/XView.tsx:                        dispatch({ type: 'POST_ON_X', payload });
+components/XView.tsx:                        onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })}
+components/SubmitForAmasView.tsx:            dispatch({ type: 'SUBMIT_FOR_AMAS', payload: { submissions, emailId } });
+components/SubmitForAmasView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'inbox'})} className="p-2 rounded-full hover:bg-white/10">
+components/AlbumPromoView.tsx:                    dispatch({ type: 'LAUNCH_COUNTDOWN_PAGE', payload: { submissionId: submission.id, cost: 100000 } });
+components/AlbumPromoView.tsx:                    dispatch({ type: 'REQUEST_GENIUS_PROMO', payload: { submissionId: submission.id, songId: selectedSongId, cost: 150000 } });
+components/AlbumPromoView.tsx:                    dispatch({ type: 'REQUEST_FALLON_PROMO', payload: { submissionId: submission.id, songId: selectedSongId, cost: 500000 } });
+components/AlbumPromoView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateSoundtrackView.tsx:            type: 'CREATE_SOUNDTRACK_CONTRIBUTION',
+components/CreateSoundtrackView.tsx:        dispatch({ type: 'CANCEL_SOUNDTRACK_OFFER' });
+components/ChartHistoryView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="absolute top-4 left-4 p-2 bg-black/30 rounded-full hover:bg-black/50 z-10">
+components/ContractRenewalView.tsx:        dispatch({ type: 'GO_INDEPENDENT' });
+components/ContractRenewalView.tsx:        dispatch({ type: 'RENEW_CONTRACT' });
+components/ContractRenewalView.tsx:        dispatch({ type: 'GO_INDEPENDENT' });
+components/SpotifyTopSongsView.tsx:            <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyChart' })} className="px-4 text-sm font-semibold text-zinc-400 flex items-center gap-1">
+components/CreateFeatureVideoView.tsx:        dispatch({ type: 'CREATE_FEATURE_VIDEO', payload: { thumbnail } });
+components/CreateFeatureVideoView.tsx:                        onClick={() => dispatch({ type: 'CANCEL_FEATURE_VIDEO_OFFER' })}
+components/CreateFallonPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' })} className="text-red-500 mt-2">Back to Inbox</button>
+components/CreateFallonPerformanceView.tsx:            type: 'Live Performance',
+components/CreateFallonPerformanceView.tsx:        dispatch({ type: 'CREATE_FALLON_VIDEO', payload: { video: newVideo, songId } });
+components/CreateFallonPerformanceView.tsx:        dispatch({ type: 'CANCEL_FALLON_OFFER' });
+components/YouTubeVideoDetailView.tsx:                             <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'merchStore' })} className="w-full bg-zinc-700 hover:bg-zinc-600 rounded-full py-2.5 font-semibold text-sm mt-2 flex items-center justify-center gap-2">
+components/YouTubeVideoDetailView.tsx:        dispatch({ type: 'SELECT_VIDEO', payload: null });
+components/YouTubeVideoDetailView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'youtube' });
+components/MiscTab.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' });
+components/MiscTab.tsx:        dispatch({ type: 'RESET_GAME' });
+components/MiscTab.tsx:            const blob = new Blob([fileContent], { type: mimeType });
+components/MiscTab.tsx:                    dispatch({ type: 'ADD_ARTIST_IMAGE', payload: base64String });
+components/MiscTab.tsx:                    dispatch({ type: 'ADD_ARTIST_VIDEO', payload: thumbnailUrl });
+components/MiscTab.tsx:            dispatch({ type: 'ADD_PAPARAZZI_PHOTO', payload: { photo: newPhoto } });
+components/MiscTab.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'achievements' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'grammys' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'amas' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'redCarpetHistory' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                 <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'dating' })} className="w-full bg-red-900/20 p-4 rounded-lg text-left hover:bg-red-900/30 transition-colors flex justify-between items-center border border-red-900/50">
+components/MiscTab.tsx:                 <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'chartHistory' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'gameGuide' })} className="w-full bg-zinc-800 p-4 rounded-lg text-left hover:bg-zinc-700 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                        onClick={() => dispatch({ type: 'TOGGLE_ENCOUNTERS' })}
+components/MiscTab.tsx:                            <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'redMicProDashboard' })} className="w-full bg-yellow-500/20 text-yellow-300 p-3 rounded-lg text-left hover:bg-yellow-500/30 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                            <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'redMicProUnlock' })} className="w-full bg-red-900/50 p-3 rounded-lg text-left text-red-300 hover:bg-red-900 transition-colors flex justify-between items-center">
+components/MiscTab.tsx:                            onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'switchSave' })}
+components/MiscTab.tsx:                                    dispatch({ type: 'CHANGE_VIEW', payload: 'redMicProUnlock' });
+components/MiscTab.tsx:                                    dispatch({ type: 'TOGGLE_OFFLINE_MODE' });
+components/AchievementsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/SpotifyForArtistsView.tsx:            dispatch({ type: 'LAUNCH_COUNTDOWN_PAGE', payload: { submissionId: submission.id, cost: cost } });
+components/SpotifyForArtistsView.tsx:        dispatch({ type: 'COMBINE_REMIXES', payload: { originalSongId: song.id } });
+components/SpotifyForArtistsView.tsx:        dispatch({ type: 'UPLOAD_CANVAS', payload: { songId: song.id, videoUrl: canvasVideoUrl, hashtags } });
+components/SpotifyForArtistsView.tsx:                            onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyWrapped' })}
+components/SpotifyForArtistsView.tsx:            type: Release['type'];
+components/SpotifyForArtistsView.tsx:                        type: sub.release.type,
+components/SpotifyForArtistsView.tsx:                                    type: 'Single',
+components/SpotifyForArtistsView.tsx:            dispatch({ type: 'CHANGE_STAGE_NAME', payload: { newName: newNameInput.trim() } });
+components/SpotifyForArtistsView.tsx:        dispatch({ type: 'SET_ARTIST_PICK', payload: { itemId, itemType, message: "Check this out!" } });
+components/SpotifyForArtistsView.tsx:        dispatch({ type: 'PITCH_TO_PLAYLIST', payload: { songId } });
+components/SpotifyForArtistsView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="font-bold text-lg text-red-400">
+components/ManagementView.tsx:        dispatch({ type: 'HIRE_MANAGER', payload: { managerId: managerToHire.id } });
+components/ManagementView.tsx:        dispatch({ type: 'FIRE_MANAGER' });
+components/ManagementView.tsx:                    <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/GoogleView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-2 mr-2 hover:bg-gray-100 rounded-full">
+components/GoogleView.tsx:                                    type: 'news'
+components/GoogleView.tsx:                                    <h3 className="text-lg font-medium text-blue-600 hover:underline cursor-pointer mb-1" onClick={() => setReadingArticle({title: `What's Next For ${activeQuery}?`, url: 'https://news.example.com/speculation', content: `Rumors are swirling about upcoming announcements. Several insiders hint at a massive new project.`, type: 'news'})}>What's Next For {activeQuery}?</h3>
+components/GoogleView.tsx:                                        <h3 className="text-lg font-black text-red-600 hover:underline cursor-pointer mb-1" onClick={() => setReadingArticle({title: `EXCLUSIVE: The Truth About ${activeQuery}`, url: 'https://tmz.com/exclusive-truth', content: `TMZ has obtained exclusive footage that completely changes the narrative.\n\nThe drama is just beginning.`, type: 'tmz'})}>EXCLUSIVE: The Truth About {activeQuery}</h3>
+components/GoogleView.tsx:                                type: 'tmz'
+components/GoogleView.tsx:                                    type: 'wikipedia',
+components/GoogleView.tsx:                                        type: 'tmz'
+components/GoogleView.tsx:                                        type: 'tmz'
+components/GoogleView.tsx:                                        type: 'popcrave'
+components/GoogleView.tsx:                                                type: 'rollingstone'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                                    type: 'news'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                        type: 'news'
+components/GoogleView.tsx:                                        type: 'tmz'
+components/GoogleView.tsx:                                    type: 'news'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                type: 'rollingstone'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                type: 'news'
+components/GoogleView.tsx:                                                                dispatch({ type: 'SIGN_BRAND_DEAL', payload: { id: deal.id, cash: deal.cash } });
+components/GoogleView.tsx:                                                                dispatch({ type: 'SIGN_VIDEO_GAME_DEAL', payload: { id: game.id, cash: game.cash } });
+components/GoogleView.tsx:                                        <h3 className="text-lg font-medium text-blue-600 line-clamp-2 hover:underline cursor-pointer" onClick={() => setReadingArticle({title: `Video: ${activeQuery}`, url:'https://www.youtube.com/watch', content: 'Watching video stream...', type: 'generic'})}>{activeQuery} - Official Video {i+1}</h3>
+components/GoogleView.tsx:                                    type: 'news'
+components/GoogleView.tsx:                                    type: 'wikipedia'
+components/GoogleView.tsx:                                    type: 'popcrave'
+components/GoogleView.tsx:                                    type: 'vogue'
+components/GoogleView.tsx:                                    type: 'reddit'
+components/GoogleView.tsx:                                    type: 'rollingstone'
+components/CountryChartView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-black/10">
+components/SpotifyAlbumCountdownView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'spotify' });
+components/SpotifyAlbumCountdownView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'spotify' })} className="p-2 -m-2">
+components/CreateOscarPerformanceView.tsx:            type: 'Live Performance',
+components/CreateOscarPerformanceView.tsx:        dispatch({ type: 'CREATE_OSCAR_PERFORMANCE', payload: { video: newVideo } });
+components/CreateOscarPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'DECLINE_OSCAR_PERFORMANCE', payload: { emailId: activeOscarPerformanceOffer.emailId }})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateFeatureView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' });
+components/CreateFeatureView.tsx:        dispatch({ type: 'CREATE_FEATURE_SONG', payload: { songTitle: songTitle.trim(), coverArt, releaseDate } });
+components/CreateFeatureView.tsx:        dispatch({ type: 'CANCEL_FEATURE_OFFER' });
+components/OnlyFansView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })}>Back</button>
+components/OnlyFansView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'createOnlyFansPost' });
+components/OnlyFansView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})}><ArrowLeftIcon className="w-6 h-6"/></button>
+components/BillboardView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-black/10">
+components/SwitchSaveView.tsx:                dispatch({ type: 'RESET_GAME' });
+components/SwitchSaveView.tsx:                        dispatch({ type: 'LOAD_GAME', payload: parsedState });
+components/SwitchSaveView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-2 bg-zinc-800 rounded-full hover:bg-zinc-700">
+components/ReleaseHubView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/ReleaseHubView.tsx:                        <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'release'})} className="flex items-center gap-1 text-red-500 hover:text-red-400 font-semibold">
+components/AmasView.tsx:                <button onClick={(e) => { e.stopPropagation(); dispatch({type: 'CHANGE_VIEW', payload: 'game'}); }} className="absolute top-4 left-4 p-2 rounded-full hover:bg-white/10 z-10">
+components/GameUI.tsx:        dispatch({ type: 'PROGRESS_WEEK' });
+components/CreateGrammyPerformanceView.tsx:            type: 'Live Performance',
+components/CreateGrammyPerformanceView.tsx:        dispatch({ type: 'CREATE_GRAMMY_PERFORMANCE', payload: { video: newVideo } });
+components/CreateGrammyPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'DECLINE_GRAMMY_PERFORMANCE', payload: { emailId: activeGrammyPerformanceOffer.emailId }})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateVogueFeatureView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' });
+components/CreateVogueFeatureView.tsx:        dispatch({ type: 'CREATE_VOGUE_FEATURE', payload: { photoshoot: newPhotoshoot }});
+components/CreateVogueFeatureView.tsx:        dispatch({ type: 'CANCEL_VOGUE_OFFER' });
+components/XChatView.tsx:        dispatch({ type: 'SEND_X_MESSAGE', payload: { chatId: chat.id, message: playerMessage }});
+components/XChatView.tsx:                    dispatch({ type: 'SEND_X_MESSAGE', payload: { chatId: chat.id, message: aiMessage }});
+components/XChatView.tsx:        return <div className="p-4">Chat not found. <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'x' })}>Back</button></div>;
+components/XChatView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'x' })} className="p-2 rounded-full hover:bg-zinc-800">
+components/CreateVmaPerformanceView.tsx:            type: 'Live Performance',
+components/CreateVmaPerformanceView.tsx:        dispatch({ type: 'CREATE_VMA_PERFORMANCE', payload: { video: newVideo } });
+components/CreateVmaPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'DECLINE_VMA_PERFORMANCE', payload: { emailId: activeVmaPerformanceOffer.emailId }})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateAmaPerformanceView.tsx:            type: 'Live Performance',
+components/CreateAmaPerformanceView.tsx:        dispatch({ type: 'CREATE_AMA_PERFORMANCE', payload: { video: newVideo } });
+components/CreateAmaPerformanceView.tsx:                <button onClick={() => dispatch({ type: 'DECLINE_AMA_PERFORMANCE', payload: { emailId: activeAmaPerformanceOffer.emailId }})} className="p-2 rounded-full hover:bg-white/10">
+components/BottomNav.tsx:        dispatch({ type: 'CHANGE_TAB', payload: tab });
+components/BottomNav.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/RedMicProDashboardView.tsx:        dispatch({ type: 'UPDATE_SONG_QUALITY', payload: { songId: song.id, newQuality: quality } });
+components/RedMicProDashboardView.tsx:                dispatch({ type: 'UPDATE_NPC_X_USER', payload: { userId: user.id, newName: newName, newUsername: newUsername } });
+components/RedMicProDashboardView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/RedMicProDashboardView.tsx:                            onClick={() => dispatch({ type: 'SET_PRO_HYPE_MODE', payload: 'locked' })}
+components/RedMicProDashboardView.tsx:                            onClick={() => dispatch({ type: 'SET_PRO_HYPE_MODE', payload: 'manual' })}
+components/RedMicProDashboardView.tsx:                                onClick={() => dispatch({ type: 'SET_HYPE', payload: newHype })}
+components/RedMicProDashboardView.tsx:                            onChange={(e) => dispatch({ type: 'SET_PUBLIC_IMAGE', payload: parseInt(e.target.value) })}
+components/RedMicProDashboardView.tsx:                            onClick={() => dispatch({ type: 'TOGGLE_GOLD_THEME', payload: { enabled: !isGoldTheme } })}
+components/RedMicProDashboardView.tsx:                        <button onClick={() => dispatch({ type: 'SET_MONEY', payload: { newAmount: newMoney }})} className="bg-zinc-600 font-bold px-4 rounded-md">Set</button>
+components/RedMicProDashboardView.tsx:                        <button onClick={() => dispatch({ type: 'SET_POPULARITY', payload: newPopularity })} className="bg-zinc-600 font-bold px-4 rounded-md">Set</button>
+components/RedMicProDashboardView.tsx:                        <button onClick={() => dispatch({ type: 'SET_SALES_BOOST', payload: { newBoost: newBoost }})} className="bg-zinc-600 font-bold px-4 rounded-md">Set</button>
+components/RedMicProDashboardView.tsx:                                                dispatch({ type: 'UPDATE_NPC_COVER', payload: { artistName, newCover: reader.result as string } });
+components/RedMicProDashboardView.tsx:                                                    dispatch({ type: 'UPDATE_NPC_AVATAR', payload: { userId: user.id, newAvatar: reader.result as string } });
+components/RedMicProDashboardView.tsx:                                onClick={() => dispatch({ type: 'PRO_SIGN_LABEL', payload: { labelId: label.id }})}
+components/CreateFallonInterviewView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'inbox' })} className="text-red-500 mt-2">Back to Inbox</button>
+components/CreateFallonInterviewView.tsx:            type: 'Interview',
+components/CreateFallonInterviewView.tsx:        dispatch({ type: 'CREATE_FALLON_VIDEO', payload: { video: newVideo } });
+components/CreateFallonInterviewView.tsx:        dispatch({ type: 'CANCEL_FALLON_OFFER' });
+components/WikipediaView.tsx:                dispatch({ type: 'UPDATE_WIKIPEDIA_SUMMARY', payload: { releaseId: release.id, summary: newSummary }});
+components/WikipediaView.tsx:                 <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'catalog'})} className="flex items-center gap-2 text-blue-700 hover:underline">
+components/GrammysView.tsx:                dispatch({ type: 'UPDATE_GRAMMY_BANNER', payload: reader.result as string });
+components/GrammysView.tsx:                <button onClick={(e) => { e.stopPropagation(); dispatch({type: 'CHANGE_VIEW', payload: 'game'}); }} className="absolute top-4 left-4 p-2 rounded-full hover:bg-white/10 z-10">
+components/SubmitForOscarsView.tsx:            dispatch({ type: 'SUBMIT_FOR_OSCARS', payload: { submissions, emailId } });
+components/SubmitForOscarsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'inbox'})} className="p-2 rounded-full hover:bg-white/10">
+components/ElectronicChartView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-black/10">
+components/RedCarpetHistoryView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-2 bg-zinc-800 rounded-full hover:bg-zinc-700">
+components/BillboardAlbumsView.tsx:                 <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-zinc-100">
+components/CreateTourView.tsx:        dispatch({ type: 'CREATE_TOUR', payload: newTour });
+components/CreateTourView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'tours' });
+components/CreateTourView.tsx:                <button onClick={() => step > 1 ? setStep(s => s - 1) : dispatch({type: 'CHANGE_VIEW', payload: 'tours'})} className="p-2 rounded-full hover:bg-white/10">
+components/YouTubeStudioView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'youtube'})} className="p-2 rounded-full hover:bg-white/10">
+components/RedMicProUnlockView.tsx:        dispatch({ type: 'UNLOCK_RED_MIC_PRO', payload: { type: 'code', cost: 0 }});
+components/RedMicProUnlockView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'redMicProDashboard' });
+components/RedMicProUnlockView.tsx:                        <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/CreateOnlyFansPostView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'game' });
+components/CreateOnlyFansPostView.tsx:        dispatch({ type: 'CREATE_ONLYFANS_POST', payload: { post: newPost } });
+components/CreateOnlyFansPostView.tsx:        dispatch({ type: 'CHANGE_VIEW', payload: 'onlyfans' });
+components/CreateOnlyFansPostView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'onlyfans'})} className="p-2 rounded-full hover:bg-white/10">
+components/BusinessTab.tsx:                onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'management' })}
+components/BusinessTab.tsx:                onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'security' })}
+components/SpotifyView.tsx:                dispatch({ type: 'UPDATE_ARTIST_IMAGE', payload: { artistId: activeArtist.id, newImage } });
+components/SpotifyView.tsx:        dispatch({ type: 'SELECT_SOUNDTRACK', payload: compilationId });
+components/SpotifyView.tsx:                    onClick={(e) => { e.stopPropagation(); dispatch({ type: 'CHANGE_VIEW', payload: 'game' }); }} 
+components/SpotifyView.tsx:                                        dispatch({ type: 'SELECT_RELEASE', payload: release.id });
+components/SpotifyView.tsx:                                        dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyAlbumCountdown' });
+components/AppleMusicView.tsx:                    <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })}><ChevronLeftIcon className="w-7 h-7" /></button>
+components/OnlyFansSetupView.tsx:        dispatch({ type: 'CREATE_ONLYFANS_PROFILE', payload: { profile: newProfile } });
+components/OnlyFansSetupView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/AlbumSalesChartView.tsx:            <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'catalog' })} className="absolute top-4 left-4 z-20 p-2 bg-black/10 rounded-full hover:bg-black/20">
+components/TikTokView.tsx:        dispatch({ type: 'CREATE_TIKTOK', payload: { content: createContent, songId: createSongId || undefined, thumbnail: createThumbnail || undefined } });
+components/TikTokView.tsx:                   <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="text-white flex items-center">
+components/PitchforkView.tsx:            dispatch({ type: 'ADD_REVIEW', payload: { releaseId: release.id, review: newReview, cost: REVIEW_COST, artistId: activeArtist.id } });
+components/PitchforkView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/VmaSubmissionSuccessView.tsx:                onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })}
+components/CatalogView.tsx:    const [takeDownTarget, setTakeDownTarget] = useState<{ type: 'song' | 'release', id: string, title: string } | null>(null);
+components/CatalogView.tsx:    const [rightsTarget, setRightsTarget] = useState<{ type: 'song' | 'release', item: Song | Release } | null>(null);
+components/CatalogView.tsx:                dispatch({ type: 'UPDATE_RELEASE_COVER_ART', payload: { releaseId, newCoverArt } });
+components/CatalogView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="p-2 rounded-full hover:bg-white/10">
+components/CatalogView.tsx:                            onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'albumSalesChart' })}
+components/CatalogView.tsx:                                                        <button onClick={() => setTakeDownTarget({ type: 'release', id: project.id, title: project.title })} className="bg-red-600/20 hover:bg-red-600/40 text-red-400 px-3 py-1 rounded-md text-xs font-bold transition-colors">
+components/CatalogView.tsx:                                                                        dispatch({ type: 'BUY_BACK_RELEASE', payload: { releaseId: project.id, cost } });
+components/CatalogView.tsx:                                                        <button onClick={() => setRightsTarget({ type: 'release', item: project })} className="bg-zinc-700/50 hover:bg-zinc-700 text-zinc-300 px-3 py-1 rounded-md text-xs font-bold transition-colors flex items-center gap-1">
+components/CatalogView.tsx:                                                            onTakeDown={() => setTakeDownTarget({ type: 'song', id: song.id, title: song.title })}
+components/CatalogView.tsx:                                                                        dispatch({ type: 'BUY_BACK_SONG', payload: { songId: song.id, cost } });
+components/CatalogView.tsx:                                                        dispatch({ type: 'SELECT_RELEASE', payload: project.id });
+components/CatalogView.tsx:                                                        dispatch({ type: 'CHANGE_VIEW', payload: 'wikipedia' });
+components/CatalogView.tsx:                                                    <button onClick={() => setTakeDownTarget({ type: 'song', id: song.id, title: song.title })} className="bg-red-600/20 hover:bg-red-600/40 text-red-400 px-3 py-1 rounded-md text-xs font-bold transition-colors">
+components/CatalogView.tsx:                                                                    dispatch({ type: 'BUY_BACK_SONG', payload: { songId: song.id, cost } });
+components/CatalogView.tsx:                                                    <button onClick={() => setRightsTarget({ type: 'song', item: song })} className="bg-zinc-700/50 hover:bg-zinc-700 text-zinc-300 px-3 py-1 rounded-md text-xs font-bold transition-colors flex items-center gap-1">
+components/CatalogView.tsx:                            dispatch({ type: 'TAKE_DOWN_SONG', payload: { songId: takeDownTarget.id } });
+components/CatalogView.tsx:                            dispatch({ type: 'TAKE_DOWN_RELEASE', payload: { releaseId: takeDownTarget.id } });
+components/CatalogView.tsx:                                                                        dispatch({ type: 'SELL_RIGHTS', payload: { itemType: rightsTarget.type, id: item.id, percent: pct, labelId: buyerLabel.id, value: Math.floor(totalRev * premium) } });
+components/CatalogView.tsx:                                                                            dispatch({ type: 'BUY_RIGHTS', payload: { itemType: rightsTarget.type, id: item.id, percentToBuy: pctToBuy, cost } });
+components/HotPopSongsView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'game'})} className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full hover:bg-black/10">
+components/AppsTab.tsx:            dispatch({ type: 'CHANGE_VIEW', payload: 'onlyfans' });
+components/AppsTab.tsx:            dispatch({ type: 'CHANGE_VIEW', payload: app.view });
+components/SubmitForGrammysView.tsx:            dispatch({ type: 'SUBMIT_FOR_GRAMMYS', payload: { submissions, emailId } });
+components/SubmitForGrammysView.tsx:                <button onClick={() => dispatch({type: 'CHANGE_VIEW', payload: 'inbox'})} className="p-2 rounded-full hover:bg-white/10">
+components/SpotifyWrappedView.tsx:    const handleClose = () => dispatch({ type: 'CHANGE_VIEW', payload: 'spotifyForArtists' });
+components/VmaRedCarpetView.tsx:            dispatch({ type: 'ACCEPT_VMA_RED_CARPET', payload: { emailId: activeVmaRedCarpetOffer.emailId, lookUrl }});
+components/VmaRedCarpetView.tsx:                <button onClick={() => dispatch({type: 'DECLINE_VMA_RED_CARPET', payload: {emailId: activeVmaRedCarpetOffer.emailId}})} className="p-2 rounded-full hover:bg-white/10">
+components/GameGuideView.tsx:                <button onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'game' })} className="p-2 rounded-full hover:bg-white/10">
+components/AwardsTab.tsx:                onClick={() => dispatch({ type: 'CHANGE_VIEW', payload: 'grammys' })}

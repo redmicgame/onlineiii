@@ -1,0 +1,10 @@
+{
+  "name": "Red Mic: Online Third Edition",
+  "description": "An advanced music artist simulation game where you manage your artist's career, record hits, climb the charts, and become a superstar in a global synchronized online multiplayer world.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

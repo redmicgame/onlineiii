@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+<input type="file" id="fileInput">
+<img id="preview">
+<script>
+    const originalReadAsDataURL = FileReader.prototype.readAsDataURL;
+    FileReader.prototype.readAsDataURL = function (blob) {
+        if (blob instanceof Blob && blob.type.startsWith('image/')) {
+            const internalReader = new FileReader();
+            internalReader.onload = (e) => {
+                const result = e.target.result;
+                if (!result) {
+                    if (typeof this.onload === 'function') this.onload({ target: this });
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 800; 
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round(height * (maxDim / width));
+                            width = maxDim;
+                        } else {
+                            width = Math.round(width * (maxDim / height));
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    if (ctx) {
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                        
+                        Object.defineProperty(this, 'result', {
+                            value: dataUrl,
+                            writable: false,
+                            configurable: true
+                        });
+                    } else {
+                        Object.defineProperty(this, 'result', {
+                            value: result,
+                            writable: false,
+                            configurable: true
+                        });
+                    }
+
+                    if (typeof this.onload === 'function') {
+                        this.onload({ target: this });
+                    }
+                };
+                img.onerror = () => {
+                    Object.defineProperty(this, 'result', {
+                        value: result,
+                        writable: false,
+                        configurable: true
+                    });
+                    if (typeof this.onload === 'function') {
+                        this.onload({ target: this });
+                    }
+                };
+                img.src = result;
+            };
+            originalReadAsDataURL.call(internalReader, blob);
+        } else {
+            originalReadAsDataURL.call(this, blob);
+        }
+    };
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('preview').src = event.target.result;
+            console.log("Original size:", file.size);
+            console.log("Compressed base64 size:", event.target.result.length);
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+</body>
+</html>

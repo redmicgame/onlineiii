@@ -1,0 +1,161 @@
+ 14800	            popularity: Math.max(0, Math.min(100, activeData.popularity + popChange))
+ 14801	          }
+ 14802	        }
+ 14803	      };
+ 14804	    }
+ 14805	    case "RESET_GAME":
+ 14806	      return initialState;
+ 14807	    case "LOAD_GAME": {
+ 14808	      const loadedPlaylists =
+ 14809	        action.payload.spotifyPlaylists || DEFAULT_SPOTIFY_PLAYLISTS;
+ 14810	      const mergedPlaylists = [...loadedPlaylists];
+ 14811	
+ 14812	      DEFAULT_SPOTIFY_PLAYLISTS.forEach((defaultPlaylist) => {
+ 14813	        if (!mergedPlaylists.find((p) => p.id === defaultPlaylist.id)) {
+ 14814	          mergedPlaylists.push(defaultPlaylist);
+ 14815	        }
+ 14816	      });
+ 14817	
+ 14818	      const loadedPodcasts = action.payload.podcasts || DEFAULT_PODCASTS;
+ 14819	      const mergedPodcasts = [...loadedPodcasts];
+ 14820	      DEFAULT_PODCASTS.forEach((defaultPodcast) => {
+ 14821	          if (!mergedPodcasts.find(p => p.id === defaultPodcast.id)) {
+ 14822	              mergedPodcasts.push(defaultPodcast);
+ 14823	          }
+ 14824	      });
+ 14825	      const newState = {
+ 14826	        podcasts: mergedPodcasts,
+ 14827	        ...action.payload,
+ 14828	        spotifyGlobal:
+ 14829	          action.payload.spotifyGlobal ||
+ 14830	          (action.payload as any).spotifyGlobal50 ||
+ 14831	          [],
+ 14832	        spotifyPlaylists: mergedPlaylists,
+ 14833	        difficultyMode: action.payload.difficultyMode || "normal",
+ 14834	      };
+ 14835	      if (newState.npcs) {
+ 14836	        newState.npcs = newState.npcs.map((npc: any) => {
+ 14837	           if (npc.coverArt && npc.coverArt.includes("ui-avatars.com")) {
+ 14838	               const newImage = NPC_ARTIST_IMAGES[npc.artist] || newState.npcImages?.[npc.artist];
+ 14839	               if (newImage) {
+ 14840	                   return { ...npc, coverArt: newImage };
+ 14841	               }
+ 14842	           }
+ 14843	           return npc;
+ 14844	        });
+ 14845	      }
+ 14846	      
+ 14847	      if (newState.npcAlbums) {
+ 14848	        newState.npcAlbums = newState.npcAlbums.map((album: any) => {
+ 14849	           if (album.coverArt && album.coverArt.includes("ui-avatars.com")) {
+ 14850	               const newImage = NPC_ARTIST_IMAGES[album.artist] || newState.npcImages?.[album.artist];
+ 14851	               if (newImage) {
+ 14852	                   return { ...album, coverArt: newImage };
+ 14853	               }
+ 14854	           }
+ 14855	           return album;
+ 14856	        });
+ 14857	      }
+ 14858	
+ 14859	      if (newState.artistsData) {
+ 14860	        for (const id in newState.artistsData) {
+ 14861	          const data = newState.artistsData[id];
+ 14862	          newState.artistsData[id] = {
+ 14863	            ...initialArtistData,
+ 14864	            ...data,
+ 14865	          };
+ 14866	          newState.artistsData[id].songs = (newState.artistsData[id].songs || []).map(song => {
+ 14867	            let updatedSong = { ...song };
+ 14868	            if (!updatedSong.traitGenerated) {
+ 14869	                updatedSong.trait = generateSongTrait(updatedSong.quality, newState.difficultyMode || "normal");
+ 14870	                updatedSong.traitGenerated = true;
+ 14871	            } else if (!updatedSong.trait && newState.difficultyMode !== "easy") {
+ 14872	                updatedSong.trait = "Normal";
+ 14873	            }
+ 14874	            return updatedSong;
+ 14875	          });
+ 14876	          newState.artistsData[id].videos =
+ 14877	            newState.artistsData[id].videos || [];
+ 14878	          newState.artistsData[id].tiktokVideos =
+ 14879	            newState.artistsData[id].tiktokVideos || [];
+ 14880	          newState.artistsData[id].merch = newState.artistsData[id].merch || [];
+ 14881	          newState.artistsData[id].tours = newState.artistsData[id].tours || [];
+ 14882	          newState.artistsData[id].contractHistory =
+ 14883	            newState.artistsData[id].contractHistory || [];
+ 14884	          newState.artistsData[id].customLabels =
+ 14885	            newState.artistsData[id].customLabels || [];
+ 14886	          newState.artistsData[id].artistImages =
+ 14887	            newState.artistsData[id].artistImages || [];
+ 14888	          newState.artistsData[id].artistVideoThumbnails =
+ 14889	            newState.artistsData[id].artistVideoThumbnails || [];
+ 14890	          newState.artistsData[id].paparazziPhotos =
+ 14891	            newState.artistsData[id].paparazziPhotos || [];
+ 14892	          newState.artistsData[id].tourPhotos =
+ 14893	            newState.artistsData[id].tourPhotos || [];
+ 14894	          newState.artistsData[id].followersHistory =
+ 14895	            newState.artistsData[id].followersHistory || [];
+ 14896	          newState.artistsData[id].promotions =
+ 14897	            newState.artistsData[id].promotions || [];
+ 14898	          newState.artistsData[id].streamsHistory =
+ 14899	            newState.artistsData[id].streamsHistory || [];
+ 14900	          newState.artistsData[id].xFollowingIds =
+ 14901	            newState.artistsData[id].xFollowingIds || [];
+ 14902	          newState.artistsData[id].xTrends =
+ 14903	            newState.artistsData[id].xTrends || [];
+ 14904	          newState.artistsData[id].xChats =
+ 14905	            newState.artistsData[id].xChats || [];
+ 14906	          newState.artistsData[id].lastFourWeeksStreams =
+ 14907	            newState.artistsData[id].lastFourWeeksStreams || [];
+ 14908	          newState.artistsData[id].lastFourWeeksViews =
+ 14909	            newState.artistsData[id].lastFourWeeksViews || [];
+ 14910	        }
+ 14911	      }
+ 14912	
+ 14913	      // Patch NPC Song Titles and Covers
+ 14914	      if (newState.npcs) {
+ 14915	        // track used names to avoid dupes across artists if needed, here just locally
+ 14916	        const trackCounts: Record<string, number> = {};
+ 14917	        newState.npcs.forEach((npc) => {
+ 14918	          const realDisco = REAL_WORLD_DISCOGRAPHIES[npc.artist];
+ 14919	          if (realDisco && realDisco.songs && realDisco.songs.length > 0) {
+ 14920	            const artistSongsList = realDisco.songs;
+ 14921	            const count = trackCounts[npc.artist] || 0;
+ 14922	            if (count < artistSongsList.length) {
+ 14923	              if (!artistSongsList.includes(npc.title)) {
+ 14924	                npc.title = artistSongsList[count];
+ 14925	              }
+ 14926	            }
+ 14927	            trackCounts[npc.artist] = count + 1;
+ 14928	          }
+ 14929	          if (NPC_ARTIST_IMAGES[npc.artist]) {
+ 14930	            npc.coverArt = NPC_ARTIST_IMAGES[npc.artist];
+ 14931	          }
+ 14932	        });
+ 14933	      }
+ 14934	      if (newState.npcAlbums) {
+ 14935	        newState.npcAlbums.forEach((album) => {
+ 14936	          if (NPC_ARTIST_IMAGES[album.artist]) {
+ 14937	            album.coverArt = NPC_ARTIST_IMAGES[album.artist];
+ 14938	          }
+ 14939	        });
+ 14940	      }
+ 14941	
+ 14942	      return newState;
+ 14943	    }
+ 14944	    case "UNLOCK_RED_MIC_PRO": {
+ 14945	      if (!state.activeArtistId) return state;
+ 14946	      const { type, cost } = action.payload;
+ 14947	      const activeData = state.artistsData[state.activeArtistId];
+ 14948	
+ 14949	      const newRedMicProState: RedMicProState = {
+ 14950	        unlocked: true,
+ 14951	        subscriptionType: type,
+ 14952	        hypeMode: "locked",
+ 14953	      };
+ 14954	
+ 14955	      if (type === "yearly") {
+ 14956	        newRedMicProState.subscriptionEndDate = {
+ 14957	          week: state.date.week,
+ 14958	          year: state.date.year + 1,
+ 14959	        };
+ 14960	      }

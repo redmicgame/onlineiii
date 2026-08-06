@@ -1,0 +1,254 @@
+1331:    case "START_SOLO_GAME": {
+1593:    case "START_GROUP_GAME": {
+1871:    case "CHANGE_VIEW":
+1876:    case "CHANGE_TAB":
+1881:    case "SUBMIT_TO_RADIO": {
+1908:    case "WITHDRAW_FROM_RADIO": {
+1931:    case "PROMOTE_RADIO": {
+1999:    case "SWITCH_YOUTUBE_CHANNEL":
+2004:    case "APPLY_YOUTUBE_PARTNER": {
+2022:    case "SUBSCRIBE_CHART_PREDICTIONS": {
+2038:    case "RELEASE_ITUNES_VERSION": {
+2077:    case "REMOVE_ITUNES_VERSION": {
+2105:    case "EDIT_ITUNES_VERSION": {
+2135:    case "CHANGE_STAGE_NAME": {
+2172:    case "CHANGE_ACTIVE_ARTIST":
+2177:    case "TRANSFER_MONEY": {
+2200:    case "PROGRESS_WEEK": {
+4273:              case "Music Video":
+4276:              case "Lyric Video":
+4279:              case "Visualizer":
+4282:              case "Genius Verified":
+4285:              case "Live Performance":
+4288:              case "Interview":
+5200:                case "Single":
+5203:                case "EP":
+5206:                case "Album":
+5275:                  case "performance":
+5279:                  case "interview":
+5283:                  case "both":
+8976:            case "Pop Album":
+8980:            case "Rap Album":
+8984:            case "R&B Album":
+8988:            case "Best Pop Song":
+8992:            case "Best Rap Song":
+8996:            case "Best R&B Song":
+9000:            case "Album of the Year":
+9003:            case "Record of the Year":
+9004:            case "Song of the Year":
+9751:    case "RECORD_SONG": {
+9789:    case "COMBINE_REMIXES": {
+9897:    case "CREATE_REMIX_PACK": {
+9917:    case "RELEASE_PROJECT": {
+9930:        case "Single":
+9933:        case "EP":
+9936:        case "Album":
+10123:          case "performance":
+10127:          case "interview":
+10131:          case "both":
+10178:    case "ADD_REVIEW": {
+10228:    case "CREATE_VIDEO": {
+10235:        case "Music Video":
+10238:        case "Lyric Video":
+10241:        case "Visualizer":
+10261:    case "ADD_MERCH": {
+10276:    case "RESTOCK_MERCH": {
+10296:    case "UPDATE_MERCH_PRICE": {
+10313:    case "REMOVE_MERCH": {
+10329:    case "UPDATE_MERCH_BANNER": {
+10343:    case "UPDATE_GRAMMY_BANNER": {
+10357:    case "UPDATE_OSCAR_BANNER": {
+10371:    case "MARK_INBOX_READ": {
+10388:    case "TAKE_DOWN_SONG": {
+10404:    case "BUY_BACK_SONG": {
+10429:    case "UPLOAD_TO_STREAMING": {
+10449:    case "BUY_BACK_RELEASE": {
+10485:    case "UPDATE_ITUNES_PRICE": {
+10503:    case "TOGGLE_APPLE_MUSIC_EXPANDED_COVER": {
+10521:    case "MARK_APPLE_MUSIC_ESSENTIAL": {
+10547:    case "TAKE_DOWN_RELEASE": {
+10572:    case "START_PROMOTION": {
+10588:    case "CANCEL_PROMOTION": {
+10604:    case "SELECT_VIDEO": {
+10607:    case "SELECT_RELEASE": {
+10610:    case "PERFORM_GIG": {
+10650:    case "SIGN_CONTRACT": {
+10715:    case "END_CONTRACT": {
+10776:    case "SIGN_NPC_TO_LABEL": {
+10835:    case "RELEASE_NPC_FROM_LABEL": {
+10867:    case "EDIT_SUBMISSION_DATE": {
+10887:    case "SUBMIT_TO_LABEL": {
+10904:    case "GO_TO_LABEL_PLAN":
+10910:    case "PLAN_LABEL_RELEASE": {
+10998:    case "CREATE_INSTAGRAM_POST": {
+11036:    case "UPLOAD_CANVAS": {
+11060:    case "UPLOAD_ALBUM_CANVAS": {
+11087:    case "CREATE_TIKTOK": {
+11145:    case "UPLOAD_BILLIONS_CLUB_IMAGE": {
+11237:    case "ACCEPT_GENIUS_OFFER": {
+11265:    case "CREATE_GENIUS_INTERVIEW": {
+11292:    case "CANCEL_GENIUS_OFFER": {
+11299:    case "ACCEPT_ONTHERADAR_OFFER": {
+11324:    case "CREATE_ONTHERADAR_PERFORMANCE": {
+11351:    case "CANCEL_ONTHERADAR_OFFER": {
+11358:    case "ACCEPT_TRSHD_OFFER": {
+11383:    case "CREATE_TRSHD_PERFORMANCE": {
+11410:    case "CANCEL_TRSHD_OFFER": {
+11417:    case "ACCEPT_FALLON_OFFER": {
+11447:    case "CREATE_FALLON_VIDEO": {
+11528:    case "CANCEL_FALLON_OFFER": {
+11535:    case "ADD_ARTIST_IMAGE": {
+11557:    case "ADD_ARTIST_VIDEO": {
+11582:    case "ADD_PAPARAZZI_PHOTO": {
+11605:    case "DELETE_ARTIST_IMAGE": {
+11619:    case "DELETE_ARTIST_VIDEO": {
+11633:    case "DELETE_PAPARAZZI_PHOTO": {
+11647:    case "ANSWER_POPBASE_QUESTION": {
+11705:    case "POST_ON_MYSPACE": {
+11793:    case "UPDATE_MYSPACE_PROFILE": {
+11820:    case "POST_ON_X": {
+12113:    case "REPLY_TO_X_POST": {
+12148:    case "SELECT_X_ACCOUNT": {
+12161:    case "REQUEST_SPOTIFY_VERIFICATION": {
+12176:    case "REVEAL_SINGLE_TRACK_COUNTDOWN": {
+12203:    case "REVEAL_TRACKLIST": {
+12259:    case "UPLOAD_COUNTDOWN_IMAGE": {
+12283:    case "BUY_X_VERIFICATION": {
+12321:    case "START_X_SPACE": {
+12356:    case "PROMOTE_SONG_ON_X_SPACE": {
+12388:    case "END_X_SPACE": {
+12425:    case "CREATE_X_ACCOUNT": {
+12455:    case "DELETE_X_ACCOUNT": {
+12481:    case "VIEW_X_PROFILE":
+12487:    case "VIEW_X_CHAT":
+12493:    case "FOLLOW_X_USER": {
+12508:    case "UNFOLLOW_X_USER": {
+12524:    case "SEND_X_MESSAGE": {
+12547:    case "APPEAL_X_SUSPENSION": {
+12573:    case "ENABLE_X_SUBSCRIPTIONS": {
+12615:    case "ENABLE_X_REVENUE_SHARING": {
+12658:    case "SET_ARTIST_PICK": {
+12672:    case "PITCH_TO_PLAYLIST": {
+12700:    case "SET_EXCLUSIVE_LICENSE": {
+12721:    case "CREATE_CUSTOM_LABEL": {
+12809:    case "RELEASE_POST_ALBUM_SINGLE": {
+12854:    case "DELETE_SONG": {
+12871:    case "TOGGLE_VAULT_SONG": {
+12890:    case "CANCEL_SCHEDULED_RELEASE": {
+12929:    case "GO_TO_ALBUM_PROMO":
+12935:    case "LAUNCH_COUNTDOWN_PAGE": {
+12962:    case "REQUEST_GENIUS_PROMO": {
+12989:    case "REQUEST_FALLON_PROMO": {
+13016:    case "REQUEST_PROMO_INTERVIEW": {
+13029:    case "ACCEPT_PROMO_INTERVIEW": {
+13051:    case "DECLINE_PROMO_INTERVIEW": {
+13070:    case "SUBMIT_PROMO_INTERVIEW": {
+13123:    case "RESET_GAME":
+13125:    case "LOAD_GAME": {
+13220:    case "UNLOCK_RED_MIC_PRO": {
+13253:    case "UPDATE_SONG_QUALITY": {
+13271:    case "UPDATE_RELEASE_REVIEW_SCORE": {
+13284:    case "SHRED_CONTRACT": {
+13295:    case "SET_CAREER_STAGE": {
+13306:    case "TOGGLE_FLOP_ERA_LOCK": {
+13317:    case "CREATE_CUSTOM_AWARD_SHOW": {
+13325:    case "SUBMIT_CUSTOM_AWARDS": {
+13331:    case "JUDGE_CUSTOM_AWARDS": {
+13337:    case "SET_MONEY": {
+13349:    case "TOGGLE_GOLD_THEME": {
+13361:    case "SET_SALES_BOOST": {
+13373:    case "PRO_SIGN_LABEL": {
+13437:    case "UPDATE_WIKIPEDIA_SUMMARY": {
+13457:    case "UPDATE_ABOUT_SONG_TEXT": {
+13495:    case "GO_TO_GRAMMY_SUBMISSIONS": {
+13516:    case "SUBMIT_FOR_GRAMMYS": {
+13549:    case "ACCEPT_GRAMMY_PERFORMANCE": {
+13557:    case "CREATE_GRAMMY_PERFORMANCE": {
+13589:    case "DECLINE_GRAMMY_PERFORMANCE": {
+13613:    case "ACCEPT_GRAMMY_RED_CARPET": {
+13669:    case "DECLINE_GRAMMY_RED_CARPET": {
+13691:    case "GO_TO_AMA_SUBMISSIONS": {
+13709:    case "SUBMIT_FOR_AMAS": {
+13742:    case "ACCEPT_AMA_PERFORMANCE": {
+13767:    case "CREATE_AMA_PERFORMANCE": {
+13800:    case "DECLINE_AMA_PERFORMANCE": {
+13825:    case "ACCEPT_AMA_RED_CARPET": {
+13881:    case "DECLINE_AMA_RED_CARPET": {
+13903:    case "ACCEPT_VMA_RED_CARPET": {
+13959:    case "DECLINE_VMA_RED_CARPET": {
+13981:    case "GO_TO_OSCAR_SUBMISSIONS": {
+14002:    case "SUBMIT_FOR_OSCARS": {
+14025:    case "TOGGLE_OFFLINE_MODE": {
+14031:    case "SELL_RIGHTS": {
+14086:    case "BUY_RIGHTS": {
+14152:    case "ACCEPT_OSCAR_PERFORMANCE": {
+14160:    case "CREATE_OSCAR_PERFORMANCE": {
+14192:    case "DECLINE_OSCAR_PERFORMANCE": {
+14217:    case "ACCEPT_OSCAR_RED_CARPET": {
+14273:    case "DECLINE_OSCAR_RED_CARPET": {
+14295:    case "RENEW_CONTRACT": {
+14320:    case "GO_INDEPENDENT": {
+14342:    case "UPDATE_ABOUT_PROFILE": {
+14357:    case "UPDATE_ARTIST_IMAGE": {
+14414:    case "CREATE_ONLYFANS_PROFILE": {
+14429:    case "UPDATE_ONLYFANS_SETTINGS": {
+14450:    case "CREATE_ONLYFANS_POST": {
+14513:    case "ACCEPT_ONLYFANS_REQUEST": {
+14557:    case "SET_PRO_HYPE_MODE": {
+14580:    case "SET_HYPE": {
+14601:    case "SET_PUBLIC_IMAGE": {
+14618:    case "SIGN_BRAND_DEAL": {
+14636:    case "SIGN_VIDEO_GAME_DEAL": {
+14654:    case "SET_POPULARITY": {
+14671:    case "UPDATE_RELEASE_COVER_ART": {
+14700:    case "ACCEPT_SOUNDTRACK_OFFER": {
+14725:    case "CREATE_SOUNDTRACK_CONTRIBUTION": {
+14813:    case "CANCEL_SOUNDTRACK_OFFER": {
+14820:    case "SUBMIT_COACHELLA": {
+14848:    case "ACCEPT_FEATURE_OFFER": {
+14873:    case "ACCEPT_FEATURE_VIDEO_OFFER": {
+14898:    case "CANCEL_FEATURE_VIDEO_OFFER": {
+14905:    case "CREATE_FEATURE_VIDEO": {
+14959:    case "CANCEL_FEATURE_OFFER": {
+14966:    case "CREATE_FEATURE_SONG": {
+15016:    case "SELECT_SOUNDTRACK": {
+15023:    case "CREATE_TOUR": {
+15037:    case "START_TOUR": {
+15060:    case "CANCEL_TOUR": {
+15094:    case "COLLECT_PRESALE": {
+15164:    case "ADD_PRESALE_ALLOCATION": {
+15190:    case "ADD_TOUR_LEG": {
+15218:    case "UPLOAD_TOUR_PHOTO": {
+15234:    case "SELECT_TOUR":
+15239:    case "HIRE_MANAGER": {
+15269:    case "TOGGLE_MANAGER_SETTING": {
+15289:    case "BUY_PLAYLIST_ENTRY": {
+15374:    case "FIRE_MANAGER": {
+15398:    case "HIRE_SECURITY": {
+15418:    case "FIRE_SECURITY": {
+15432:    case "UPDATE_NPC_X_USER": {
+15454:    case "VIEW_PAST_LABEL_CHANNEL": {
+15462:    case "UPDATE_NPC_COVER": {
+15502:    case "UPDATE_NPC_AVATAR": {
+15522:    case "ACCEPT_EVENT_INVITATION": {
+15549:    case "CONFIRM_EVENT_ATTENDANCE": {
+15593:    case "DECLINE_EVENT_INVITATION": {
+15608:    case "ACCEPT_VOGUE_OFFER": {
+15628:    case "CANCEL_VOGUE_OFFER": {
+15635:    case "CREATE_VOGUE_FEATURE": {
+15723:    case "SET_CLOUD_SAVE_ID": {
+15729:    case "START_DATING": {
+15757:    case "REVEAL_RELATIONSHIP": {
+15805:    case "ADVANCE_RELATIONSHIP": {
+15858:    case "BREAK_UP": {
+15911:    case "UPDATE_RELATIONSHIP_IMAGE": {
+15929:    case "GET_BACK_WITH_EX": {
+15983:    case "MARK_EMAIL_OFFER_ANSWERED": {
+16004:    case "RESPOND_TO_CHEATING": {
+16079:    case "START_PREGNANCY": {
+16097:    case "REVEAL_PREGNANCY": {
+16128:    case "GIVE_BIRTH": {
+16178:    case "START_KID_CAREER": {
+16278:    case "TOGGLE_ENCOUNTERS":
+16283:    case "SET_ACTIVE_TMZ_POST":
+16289:    case "RESOLVE_ENCOUNTER": {

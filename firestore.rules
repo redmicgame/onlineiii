@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} { 
+      allow read, write: if false; 
+    }
+    function isSignedIn() { return request.auth != null; }
+    
+    match /users/{userId}/saves/{saveId} {
+      allow read, write: if true;
+    }
+    
+    match /saves/{userId} {
+      allow read, write: if true;
+    }
+
+    match /online_players/{userId} {
+      allow read, write: if true;
+    }
+
+    match /global_posts/{postId} {
+      allow read, write: if true;
+    }
+
+    match /global_songs/{songId} {
+      allow read, write: if true;
+    }
+
+    match /global_contracts/{contractId} {
+      allow read, write: if true;
+    }
+
+    match /global_labels/{labelId} {
+      allow read, write: if true;
+    }
+
+    match /global_media/{articleId} {
+      allow read, write: if true;
+    }
+    
+    match /{leaderboardCollection}/{userId} {
+      allow read, write: if leaderboardCollection.matches('^leaderboards_.*');
+    }
+  }
+}
+

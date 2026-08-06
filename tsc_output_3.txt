@@ -1,0 +1,564 @@
+App.tsx(151,18): error TS2678: Type '"vogue"' is not comparable to type 'GameView'.
+App.tsx(153,18): error TS2678: Type '"rollingstone"' is not comparable to type 'GameView'.
+App.tsx(155,18): error TS2678: Type '"billboard_news"' is not comparable to type 'GameView'.
+App.tsx(158,18): error TS2678: Type '"reddit"' is not comparable to type 'GameView'.
+App.tsx(188,22): error TS2678: Type '"vevo"' is not comparable to type 'GameView'.
+App.tsx(216,22): error TS2678: Type '"spotifyVideoChart"' is not comparable to type 'GameView'.
+App.tsx(330,18): error TS2678: Type '"leaderboard"' is not comparable to type 'GameView'.
+App.tsx(340,18): error TS2678: Type '"itunesDashboard"' is not comparable to type 'GameView'.
+components/AchievementsView.tsx(104,24): error TS2339: Property 'pitchforkReview' does not exist on type 'Release'.
+components/AchievementsView.tsx(105,28): error TS2339: Property 'pitchforkReview' does not exist on type 'Release'.
+components/AchievementsView.tsx(105,62): error TS2339: Property 'pitchforkReview' does not exist on type 'Release'.
+components/AlbumPredictionsView.tsx(66,43): error TS2551: Property 'actualLastWeekSales' does not exist on type 'Song'. Did you mean 'actualLastWeekStreams'?
+components/AppleMusicBrowseView.tsx(62,38): error TS2339: Property 'artistName' does not exist on type 'ArtistData'.
+components/AppleMusicForArtistsView.tsx(260,49): error TS2339: Property 'weeksOut' does not exist on type 'Song'.
+components/AppleMusicForArtistsView.tsx(268,28): error TS2339: Property 'weeksOut' does not exist on type 'Song'.
+components/AppleMusicView.tsx(73,102): error TS2339: Property 'id' does not exist on type '{ name: string; dealWithMajor?: string; exclusiveLicenseTo?: string; }'.
+components/AppsTab.tsx(65,102): error TS2322: Type '"reddit"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(67,102): error TS2322: Type '"vogue"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(68,105): error TS2322: Type '"billboard_news"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(69,117): error TS2322: Type '"rollingstone"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(75,138): error TS2322: Type '"vevo"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(101,122): error TS2322: Type '"itunesDashboard"' is not assignable to type 'GameView'.
+components/AppsTab.tsx(105,171): error TS2353: Object literal may only specify known properties, and 'textColor' does not exist in type 'AppInfo'.
+components/AppsTab.tsx(110,126): error TS2322: Type '"goldenGlobes"' is not assignable to type 'GameView'.
+components/AscapView.tsx(96,107): error TS2339: Property 'month' does not exist on type 'GameDate'.
+components/CatalogView.tsx(84,123): error TS2353: Object literal may only specify known properties, and 'price' does not exist in type '{ songId: string; title: string; coverArt: string; }'.
+components/CatalogView.tsx(153,65): error TS2322: Type '"EDIT_ITUNES_VERSION"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CatalogView.tsx(153,122): error TS2353: Object literal may only specify known properties, and 'versionId' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/CatalogView.tsx(160,63): error TS2820: Type '"REMOVE_ITUNES_VERSION"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"RELEASE_ITUNES_VERSION"'?
+components/CatalogView.tsx(277,13): error TS2322: Type '"RELEASE_POST_ALBUM_SINGLE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CatalogView.tsx(279,17): error TS2353: Object literal may only specify known properties, and 'projectId' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/ChartPredictionsView.tsx(3,33): error TS2305: Module '"../context/GameContext"' has no exported member 'formatDuration'.
+components/ChartPredictionsView.tsx(93,46): error TS2339: Property 'weeksSincePeak' does not exist on type 'NpcSong'.
+components/ChartPredictionsView.tsx(167,67): error TS2339: Property 'customLabels' does not exist on type 'GameState'.
+components/ChartsTab.tsx(70,121): error TS2339: Property 'artistName' does not exist on type 'AlbumChartEntry'.
+components/ContractNegotiationModal.tsx(306,175): error TS2339: Property 'score' does not exist on type '{ message: string; isAccepted: boolean; }'.
+components/ContractNegotiationModal.tsx(306,224): error TS2339: Property 'baselineRequirement' does not exist on type '{ message: string; isAccepted: boolean; }'.
+components/CreateAmaPerformanceView.tsx(55,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Live Performance"; views: number; thumbnail: string; releaseDate: { week: number; year: number; }; artistId: string; description: string; mentionedNpcs: undefined[]; }' but required in type 'Video'.
+components/CreateFallonInterviewView.tsx(51,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Interview"; views: number; thumbnail: string; releaseDate: GameDate; artistId: string; description: string; mentionedNpcs: string[]; }' but required in type 'Video'.
+components/CreateFallonPerformanceView.tsx(70,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Live Performance"; views: number; thumbnail: string; releaseDate: GameDate; artistId: string; description: string; mentionedNpcs: string[]; }' but required in type 'Video'.
+components/CreateFifaWorldCupView.tsx(29,20): error TS2322: Type '"CREATE_FIFA_CONTRIBUTION"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CreateFifaWorldCupView.tsx(33,20): error TS2820: Type '"CANCEL_FIFA_OFFER"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"CANCEL_FALLON_OFFER"'?
+components/CreateGeniusInterviewView.tsx(52,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Genius Verified"; views: number; thumbnail: string; releaseDate: GameDate; artistId: string; description: string; mentionedNpcs: undefined[]; }' but required in type 'Video'.
+components/CreateGrammyPerformanceView.tsx(58,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Live Performance"; views: number; thumbnail: string; releaseDate: { week: number; year: number; }; artistId: string; description: string; mentionedNpcs: undefined[]; }' but required in type 'Video'.
+components/CreateMagazineInterviewView.tsx(18,20): error TS2322: Type '"SUBMIT_INTERVIEW"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CreateMagazineInterviewView.tsx(18,57): error TS2353: Object literal may only specify known properties, and 'answers' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/CreateMagazineInterviewView.tsx(36,50): error TS2322: Type '"CANCEL_INTERVIEW_OFFER"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CreateTourView.tsx(52,47): error TS2339: Property 'min' does not exist on type 'number'.
+components/CreateTourView.tsx(52,64): error TS2339: Property 'max' does not exist on type 'number'.
+components/CreateTourView.tsx(139,13): error TS2322: Type '{ id: `${string}-${string}-${string}-${string}-${string}`; name: string; city: string; capacity: number; ticketPrice: number; }[]' is not assignable to type 'Venue[]'.
+  Type '{ id: `${string}-${string}-${string}-${string}-${string}`; name: string; city: string; capacity: number; ticketPrice: number; }' is missing the following properties from type 'Venue': soldOut, revenue, ticketsSold
+components/CreateTvInterviewView.tsx(18,20): error TS2322: Type '"SUBMIT_INTERVIEW"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CreateTvInterviewView.tsx(18,57): error TS2353: Object literal may only specify known properties, and 'answers' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/CreateTvInterviewView.tsx(36,50): error TS2322: Type '"CANCEL_INTERVIEW_OFFER"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/CreateVmaPerformanceView.tsx(58,15): error TS2741: Property 'channelId' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Live Performance"; views: number; thumbnail: string; releaseDate: { week: number; year: number; }; artistId: string; description: string; mentionedNpcs: undefined[]; }' but required in type 'Video'.
+components/CreateVmaPerformanceView.tsx(71,20): error TS2820: Type '"CREATE_VMA_PERFORMANCE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"CREATE_AMA_PERFORMANCE"'?
+components/CreateVmaPerformanceView.tsx(77,51): error TS2820: Type '"DECLINE_VMA_PERFORMANCE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"DECLINE_AMA_PERFORMANCE"'?
+components/CustomAwardShowBuilder.tsx(3,10): error TS2305: Module '"../types"' has no exported member 'CustomAwardShowCategory'.
+components/DatingView.tsx(88,72): error TS2322: Type '"misc"' is not assignable to type 'GameView'.
+components/GameGuideView.tsx(311,33): error TS2322: Type '(el: HTMLDivElement) => HTMLDivElement' is not assignable to type 'Ref<HTMLDivElement>'.
+  Type '(el: HTMLDivElement) => HTMLDivElement' is not assignable to type '(instance: HTMLDivElement) => void | (() => VoidOrUndefinedOnly)'.
+    Type 'HTMLDivElement' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+components/GameUI.tsx(4,27): error TS2307: Cannot find module './LoadingScreen' or its corresponding type declarations.
+components/GigsView.tsx(44,17): error TS2353: Object literal may only specify known properties, and 'region' does not exist in type '{ cash: number; hype: number; }'.
+components/GigsView.tsx(111,62): error TS2345: Argument of type '{ name: string; description: string; cashRange: number[]; hype: number; isAvailable: (state: ArtistData) => boolean; requirements: string; }' is not assignable to parameter of type 'Gig'.
+  Types of property 'cashRange' are incompatible.
+    Type 'number[]' is not assignable to type '[number, number]'.
+      Target requires 2 element(s) but source may have fewer.
+components/GoldenGlobeRedCarpetView.tsx(25,24): error TS2322: Type '"ACCEPT_GOLDEN_GLOBE_RED_CARPET"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/GoldenGlobesView.tsx(69,28): error TS2322: Type '"UPDATE_GOLDEN_GLOBE_BANNER"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/GoldenGlobesView.tsx(77,88): error TS2304: Cannot find name 'handleBannerClick'.
+components/GoogleView.tsx(126,88): error TS2339: Property 'age' does not exist on type 'Artist | Group'.
+  Property 'age' does not exist on type 'Group'.
+components/GoogleView.tsx(479,87): error TS2339: Property 'startYear' does not exist on type 'GameState'.
+components/GoogleView.tsx(479,113): error TS2339: Property 'age' does not exist on type 'Artist | Group'.
+  Property 'age' does not exist on type 'Group'.
+components/GoogleView.tsx(487,88): error TS2339: Property 'age' does not exist on type 'Artist | Group'.
+  Property 'age' does not exist on type 'Group'.
+components/GoogleView.tsx(622,100): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+components/GoogleView.tsx(624,79): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+components/GoogleView.tsx(1077,22): error TS2367: This comparison appears to be unintentional because the types '"All" | "News" | "Images"' and '"Videos"' have no overlap.
+components/GoogleView.tsx(1098,22): error TS2367: This comparison appears to be unintentional because the types '"All" | "News" | "Images"' and '"Shopping"' have no overlap.
+components/ITunesView.tsx(150,42): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+components/ITunesView.tsx(160,30): error TS2345: Argument of type '{ rank: number; lastWeek: null; peak: number; weeksOnChart: number; title: string; artist: string; coverArt: string; isPlayerAlbum: true; albumId: string; uniqueId: string; weeklyActivity: number; weeklySales: number; }' is not assignable to parameter of type 'AlbumChartEntry'.
+  Property 'label' is missing in type '{ rank: number; lastWeek: null; peak: number; weeksOnChart: number; title: string; artist: string; coverArt: string; isPlayerAlbum: true; albumId: string; uniqueId: string; weeklyActivity: number; weeklySales: number; }' but required in type 'AlbumChartEntry'.
+components/ITunesView.tsx(178,30): error TS2345: Argument of type '{ rank: number; lastWeek: null; peak: number; weeksOnChart: number; title: string; artist: string; coverArt: string; isPlayerAlbum: true; albumId: string; uniqueId: string; weeklyActivity: number; weeklySales: number; }' is not assignable to parameter of type 'AlbumChartEntry'.
+  Property 'label' is missing in type '{ rank: number; lastWeek: null; peak: number; weeksOnChart: number; title: string; artist: string; coverArt: string; isPlayerAlbum: true; albumId: string; uniqueId: string; weeklyActivity: number; weeklySales: number; }' but required in type 'AlbumChartEntry'.
+components/ImdbView.tsx(90,72): error TS2322: Type '"socials"' is not assignable to type 'GameView'.
+components/InboxView.tsx(203,18): error TS2678: Type '"vmaRedCarpet"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+components/InboxView.tsx(223,18): error TS2678: Type '"goldenGlobeNominations"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+components/InboxView.tsx(224,28): error TS2322: Type '"ACCEPT_GOLDEN_GLOBE_INVITE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/InboxView.tsx(227,18): error TS2678: Type '"goldenGlobeSubmission"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+components/InboxView.tsx(228,28): error TS2322: Type '"GO_TO_GOLDEN_GLOBE_SUBMISSIONS"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/InboxView.tsx(245,28): error TS2820: Type '"ACCEPT_FIFA_OFFER"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"ACCEPT_FALLON_OFFER"'?
+components/InboxView.tsx(245,66): error TS2353: Object literal may only specify known properties, and 'emailId' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/InboxView.tsx(522,18): error TS2678: Type '"vmaRedCarpet"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "amaSubmission" | "amaNominations" | "amaRedCarpet" | "eventInvitation" | "grammySubmission" | "grammyNominations" | ... 17 more ... | "promoInterview"'.
+components/InboxView.tsx(526,44): error TS2339: Property 'isAttending' does not exist on type 'never'.
+components/InboxView.tsx(562,18): error TS2678: Type '"goldenGlobeNominations"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "amaSubmission" | "amaNominations" | "amaRedCarpet" | "eventInvitation" | "grammySubmission" | "grammyNominations" | ... 17 more ... | "promoInterview"'.
+components/InboxView.tsx(566,44): error TS2339: Property 'isAttending' does not exist on type 'never'.
+components/InboxView.tsx(568,18): error TS2678: Type '"goldenGlobeSubmission"' is not comparable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "amaSubmission" | "amaNominations" | "amaRedCarpet" | "eventInvitation" | "grammySubmission" | "grammyNominations" | ... 17 more ... | "promoInterview"'.
+components/InboxView.tsx(572,42): error TS2339: Property 'isSubmitted' does not exist on type 'never'.
+components/InboxView.tsx(625,17): error TS2304: Cannot find name 'canAfford'.
+components/InboxView.tsx(643,42): error TS2339: Property 'isAccepted' does not exist on type 'PromoInterviewOffer'.
+components/InstagramView.tsx(39,88): error TS2551: Property 'imageUrl' does not exist on type 'InstagramPost'. Did you mean 'imageUrls'?
+components/InstagramView.tsx(187,37): error TS2448: Block-scoped variable 'isVerified' used before its declaration.
+components/InstagramView.tsx(214,47): error TS2339: Property 'songId' does not exist on type 'InstagramReel'.
+components/InstagramView.tsx(217,97): error TS2339: Property 'songId' does not exist on type 'InstagramReel'.
+components/InstagramView.tsx(441,79): error TS2551: Property 'imageUrl' does not exist on type 'InstagramPost'. Did you mean 'imageUrls'?
+components/LabelReleasePlanView.tsx(219,81): error TS2322: Type 'string | ArrayBuffer' is not assignable to type 'string'.
+  Type 'ArrayBuffer' is not assignable to type 'string'.
+components/LabelReleasePlanView.tsx(290,65): error TS2322: Type 'string | ArrayBuffer' is not assignable to type 'string'.
+  Type 'ArrayBuffer' is not assignable to type 'string'.
+components/LimeWireView.tsx(56,161): error TS2339: Property 'name' does not exist on type 'ArtistData'.
+components/LimeWireView.tsx(57,64): error TS2339: Property 'name' does not exist on type 'ArtistData'.
+components/ManageLabelView.tsx(81,77): error TS2367: This comparison appears to be unintentional because the types '"active" | "negotiating" | "expired"' and '"dropped"' have no overlap.
+components/ManageLabelView.tsx(99,89): error TS2367: This comparison appears to be unintentional because the types '"active" | "negotiating" | "expired"' and '"dropped"' have no overlap.
+components/ManageLabelView.tsx(105,64): error TS2367: This comparison appears to be unintentional because the types '"active" | "negotiating" | "expired"' and '"dropped"' have no overlap.
+components/ManagementView.tsx(39,60): error TS2339: Property 'albumsTarget' does not exist on type 'Contract'.
+components/ManagementView.tsx(40,63): error TS2339: Property 'albumsDelivered' does not exist on type 'Contract'.
+components/ManagerPodcastsView.tsx(37,13): error TS2820: Type '"UPDATE_ARTIST_DATA"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"UPDATE_ARTIST_FUNDS"'?
+components/ManagerPodcastsView.tsx(39,17): error TS2353: Object literal may only specify known properties, and 'podcastPitchOffers' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/ManagerPodcastsView.tsx(65,28): error TS2322: Type '"UPDATE_GAME_STATE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/ManagerPodcastsView.tsx(65,66): error TS2353: Object literal may only specify known properties, and 'podcasts' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/ManagerPodcastsView.tsx(70,17): error TS2322: Type '"ADD_RELEASE_PROMO_BOOST"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/ManagerPodcastsView.tsx(72,21): error TS2353: Object literal may only specify known properties, and 'releaseId' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/MiscTab.tsx(33,38): error TS2339: Property 'popularity' does not exist on type 'Artist | Group'.
+  Property 'popularity' does not exist on type 'Artist'.
+components/MiscTab.tsx(41,24): error TS2322: Type '"UPDATE_MONEY"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/MiscTab.tsx(42,24): error TS2322: Type '"ADD_MESSAGE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/MiscTab.tsx(526,76): error TS2322: Type '"leaderboard"' is not assignable to type 'GameView'.
+components/MiscTab.tsx(541,117): error TS2339: Property 'country' does not exist on type 'Group'.
+components/MoviePremiereRedCarpetView.tsx(29,111): error TS2339: Property 'emailId' does not exist on type '{ roleId: string; roleTitle: string; }'.
+components/MySpaceView.tsx(34,42): error TS2339: Property 'name' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(34,66): error TS2339: Property 'id' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(34,78): error TS2339: Property 'name' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(34,93): error TS2339: Property 'image' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(38,69): error TS2339: Property 'name' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(38,105): error TS2339: Property 'id' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(38,117): error TS2339: Property 'name' does not exist on type 'NpcSong'.
+components/MySpaceView.tsx(38,132): error TS2339: Property 'image' does not exist on type 'NpcSong'.
+components/RadioDashView.tsx(84,112): error TS2353: Object literal may only specify known properties, and 'region' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/RedMicProDashboardView.tsx(148,24): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/RedMicProDashboardView.tsx(148,52): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/RedMicProDashboardView.tsx(150,32): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/RedditSiteView.tsx(188,41): error TS2339: Property 'copiesSold' does not exist on type 'Release'.
+components/RedditSiteView.tsx(576,30): error TS2304: Cannot find name 'availableFlairs'.
+components/RiaaView.tsx(6,30): error TS2307: Cannot find module '../utils/formatters' or its corresponding type declarations.
+components/RiaaView.tsx(365,71): error TS2322: Type '"apps"' is not assignable to type 'GameView'.
+components/RollingStoneSiteView.tsx(7,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/RollingStoneSiteView.tsx(27,144): error TS2339: Property 'name' does not exist on type 'ArtistData'.
+components/RollingStoneSiteView.tsx(35,50): error TS6234: This expression is not callable because it is a 'get' accessor. Did you mean to use it without '()'?
+  Type 'String' has no call signatures.
+components/RollingStoneSiteView.tsx(40,51): error TS2339: Property 'name' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(63,51): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(63,76): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(84,47): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(84,72): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(112,49): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(112,74): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(113,50): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(113,75): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(236,129): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SongDNAProfileView.tsx(236,154): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SpotifyAlbumCountdownView.tsx(109,47): error TS2339: Property 'id' does not exist on type '{ name: string; dealWithMajor?: string; exclusiveLicenseTo?: string; }'.
+components/SpotifyChartView.tsx(51,79): error TS2339: Property 'itemId' does not exist on type 'LabelSubmission'.
+components/SpotifyChartView.tsx(61,41): error TS2339: Property 'itemId' does not exist on type 'LabelSubmission'.
+components/SpotifyChartView.tsx(62,66): error TS2339: Property 'itemName' does not exist on type 'LabelSubmission'.
+components/SpotifyChartView.tsx(239,71): error TS2820: Type '"spotifyVideoChart"' is not assignable to type 'GameView'. Did you mean '"spotifyChart"'?
+components/SpotifyForCreatorsView.tsx(38,36): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+components/SpotifyForCreatorsView.tsx(45,20): error TS2322: Type '"UPDATE_GAME_STATE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/SpotifyForCreatorsView.tsx(45,58): error TS2353: Object literal may only specify known properties, and 'podcasts' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/SpotifyForCreatorsView.tsx(56,20): error TS2322: Type '"UPDATE_GAME_STATE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/SpotifyForCreatorsView.tsx(56,58): error TS2353: Object literal may only specify known properties, and 'podcasts' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/SpotifyForCreatorsView.tsx(81,20): error TS2322: Type '"UPDATE_GAME_STATE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/SpotifyForCreatorsView.tsx(81,58): error TS2353: Object literal may only specify known properties, and 'podcasts' does not exist in type '{ songId: string; format: string; amount: number; source: "label" | "personal"; }'.
+components/SpotifySongDNAView.tsx(3,21): error TS2305: Module '"../types"' has no exported member 'PlayableGroup'.
+components/SpotifySongDNAView.tsx(14,45): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SpotifySongDNAView.tsx(14,70): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SpotifySongDNAView.tsx(15,46): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SpotifySongDNAView.tsx(15,71): error TS2339: Property 'group' does not exist on type 'ArtistData'.
+components/SpotifyView.tsx(174,80): error TS2304: Cannot find name 'ArtistData'.
+components/SpotifyView.tsx(174,100): error TS2304: Cannot find name 'Artist'.
+components/SpotifyWrappedView.tsx(43,31): error TS2345: Argument of type '{ title: string; description: string; song: Song; }' is not assignable to parameter of type '{ song: Song; persona: string; description: string; }'.
+  Property 'persona' is missing in type '{ title: string; description: string; song: Song; }' but required in type '{ song: Song; persona: string; description: string; }'.
+components/StudioView.tsx(45,66): error TS2339: Property 'group' does not exist on type '{ gameState: GameState; dispatch: Dispatch<GameAction>; activeArtist: Artist | Group; activeArtistData: ArtistData; allPlayerArtists: (Artist | Group)[]; }'.
+components/StudioView.tsx(142,42): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/StudioView.tsx(144,51): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/StudioView.tsx(179,41): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+components/StudioView.tsx(372,99): error TS2339: Property 'skill' does not exist on type 'ArtistData'.
+components/StudioView.tsx(695,17): error TS2353: Object literal may only specify known properties, and 'weeksAtNumberOne' does not exist in type 'Song'.
+components/StudioView.tsx(711,54): error TS2322: Type '{ songTitle: string; coverArt: string; }[]' is not assignable to type 'Record<string, string>'.
+  Index signature for type 'string' is missing in type '{ songTitle: string; coverArt: string; }[]'.
+components/StudioView.tsx(1006,48): error TS2339: Property 'hasRedMicPro' does not exist on type 'GameState'.
+components/StudioView.tsx(1128,75): error TS2339: Property 'type' does not exist on type 'Song'.
+components/StudioView.tsx(1158,64): error TS2339: Property 'hasRedMicPro' does not exist on type 'GameState'.
+components/StudioView.tsx(1197,64): error TS2339: Property 'hasRedMicPro' does not exist on type 'GameState'.
+components/SubmitForGoldenGlobesView.tsx(21,66): error TS2339: Property 'isSoundtrack' does not exist on type 'Release'.
+components/SubmitForGoldenGlobesView.tsx(63,58): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"goldenGlobeSubmission"' have no overlap.
+components/SubmitForGoldenGlobesView.tsx(63,112): error TS2339: Property 'isSubmitted' does not exist on type 'never'.
+components/SubmitForGoldenGlobesView.tsx(65,24): error TS2322: Type '"SUBMIT_FOR_GOLDEN_GLOBES"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+components/SubmitForVMAsView.tsx(4,32): error TS2724: '"../types"' has no exported member named 'VmaAward'. Did you mean 'AmaAward'?
+components/SubmitForVMAsView.tsx(62,58): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"vmaSubmission"' have no overlap.
+components/SubmitForVMAsView.tsx(62,104): error TS2339: Property 'isSubmitted' does not exist on type 'never'.
+components/SubmitForVMAsView.tsx(64,24): error TS2820: Type '"SUBMIT_FOR_VMAS"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'. Did you mean '"SUBMIT_FOR_AMAS"'?
+components/TikTokView.tsx(174,42): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+components/UKChartView.tsx(18,72): error TS2322: Type '"apps"' is not assignable to type 'GameView'.
+components/VMAsView.tsx(12,13): error TS2339: Property 'vmaHistory' does not exist on type 'ArtistData'.
+components/XPremiumModal.tsx(15,47): error TS2339: Property 'accountType' does not exist on type 'ArtistData'.
+components/XPremiumModal.tsx(20,23): error TS2339: Property 'bankBalance' does not exist on type 'GameState'.
+components/XPremiumModal.tsx(75,45): error TS2339: Property 'bankBalance' does not exist on type 'GameState'.
+components/XPremiumModal.tsx(79,149): error TS2339: Property 'bankBalance' does not exist on type 'GameState'.
+components/XProfileView.tsx(185,55): error TS2322: Type '{ content: string; image?: string; postType: "normal" | "fanWar" | "push" | "announce" | "endorse" | "market_crypto"; targetId?: string; songId?: string; quoteOf?: XPost; announceItem?: any; poll?: { ...; }; }' is not assignable to type '{ content: string; image?: string; postType: "normal" | "fanWar" | "push" | "announce" | "endorse"; targetId?: string; songId?: string; quoteOf?: XPost; announceItem?: { type: "project" | "single"; submissionId: string; songId?: string; }; }'.
+  Types of property 'postType' are incompatible.
+    Type '"normal" | "fanWar" | "push" | "announce" | "endorse" | "market_crypto"' is not assignable to type '"normal" | "fanWar" | "push" | "announce" | "endorse"'.
+      Type '"market_crypto"' is not assignable to type '"normal" | "fanWar" | "push" | "announce" | "endorse"'.
+components/XView.tsx(317,9): error TS2353: Object literal may only specify known properties, and 'comments' does not exist in type 'XComment'.
+components/XView.tsx(2087,43): error TS2322: Type '{ content: string; image?: string; postType: "normal" | "fanWar" | "push" | "announce" | "endorse" | "market_crypto"; targetId?: string; songId?: string; quoteOf?: XPost; announceItem?: any; poll?: { ...; }; }' is not assignable to type '{ content: string; image?: string; postType: "normal" | "fanWar" | "push" | "announce" | "endorse"; targetId?: string; songId?: string; quoteOf?: XPost; announceItem?: { type: "project" | "single"; submissionId: string; songId?: string; }; }'.
+  Types of property 'postType' are incompatible.
+    Type '"normal" | "fanWar" | "push" | "announce" | "endorse" | "market_crypto"' is not assignable to type '"normal" | "fanWar" | "push" | "announce" | "endorse"'.
+      Type '"market_crypto"' is not assignable to type '"normal" | "fanWar" | "push" | "announce" | "endorse"'.
+components/YouTubeMusicView.tsx(20,99): error TS2367: This comparison appears to be unintentional because the types '"Single" | "Album (Deluxe)" | "Compilation" | "Live Album"' and '"Mixtape"' have no overlap.
+components/YouTubeView.tsx(97,70): error TS2304: Cannot find name 'date'.
+components/YouTubeView.tsx(351,44): error TS2322: Type '"UPDATE_GAME_STATE"' is not assignable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(83,26): error TS2339: Property 'type' does not exist on type 'Artist | Group'.
+  Property 'type' does not exist on type 'Artist'.
+context/GameContext.tsx(486,16): error TS2552: Cannot find name 'GameDate'. Did you mean 'GameState'?
+context/GameContext.tsx(488,4): error TS2552: Cannot find name 'GameDate'. Did you mean 'GameState'?
+context/GameContext.tsx(835,7): error TS2739: Type '{ money: number; hype: number; peakHype: number; publicImage: number; popularity: number; songs: undefined[]; releases: undefined[]; monthlyListeners: number; lastFourWeeksStreams: undefined[]; lastFourWeeksViews: undefined[]; ... 50 more ...; weeksUntilNextSoundtrackOffer: number; }' is missing the following properties from type 'ArtistData': pastRedCarpetLooks, amaHistory, hasSubmittedForAmaNewArtist
+context/GameContext.tsx(905,34): error TS2304: Cannot find name 'SpotifyPlaylist'.
+context/GameContext.tsx(1330,32): error TS2304: Cannot find name 'Podcast'.
+context/GameContext.tsx(1375,7): error TS2740: Type '{ offlineMode: true; difficultyMode: "normal"; careerMode: null; soloArtist: null; group: null; activeArtistId: null; artistsData: {}; spotifyPlaylists: SpotifyPlaylist[]; podcasts: Podcast[]; podcastCharts: Podcast[]; date: { week: number; year: number; }; ... 61 more ...; activeOscarPerformanceOffer: null; }' is missing the following properties from type 'GameState': activeFifaOffer, activeFeatureVideoOffer, amaSubmissions, amaCurrentYearNominations, and 6 more.
+context/GameContext.tsx(2281,31): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2282,39): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2285,17): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2286,22): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2287,22): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2288,22): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2291,88): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2292,87): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2300,31): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(2405,31): error TS2339: Property 'price' does not exist on type '{ songId: string; title: string; coverArt: string; }'.
+context/GameContext.tsx(2425,10): error TS2678: Type '"REMOVE_ITUNES_VERSION"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(2429,32): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(2438,34): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(2453,10): error TS2678: Type '"EDIT_ITUNES_VERSION"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(2457,32): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(2466,27): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(2467,37): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(2601,19): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(3665,25): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(3693,25): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(3721,25): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(3802,23): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(4001,36): error TS2339: Property 'uniqueId' does not exist on type 'Song'.
+context/GameContext.tsx(4284,33): error TS2304: Cannot find name 'PromoInterviewSource'.
+context/GameContext.tsx(4886,17): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+context/GameContext.tsx(5315,17): error TS2322: Type '"expired"' is not assignable to type '"active"'.
+context/GameContext.tsx(5853,31): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(5925,38): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(5927,42): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(5953,31): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(6068,34): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(6070,38): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(6095,27): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(6972,21): error TS2353: Object literal may only specify known properties, and 'displayName' does not exist in type 'XUser'.
+context/GameContext.tsx(6985,21): error TS2353: Object literal may only specify known properties, and 'displayName' does not exist in type 'XUser'.
+context/GameContext.tsx(7028,33): error TS2304: Cannot find name 'RedditPost'.
+context/GameContext.tsx(7085,38): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(7087,42): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(7115,36): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(7117,40): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(7176,38): error TS2304: Cannot find name 'RedditComment'.
+context/GameContext.tsx(7335,32): error TS2339: Property 'tier' does not exist on type 'RedMicProState'.
+context/GameContext.tsx(7360,28): error TS2304: Cannot find name 'ActingRole'.
+context/GameContext.tsx(7413,71): error TS2339: Property 'country' does not exist on type 'Artist | Group'.
+  Property 'country' does not exist on type 'Group'.
+context/GameContext.tsx(8163,38): error TS2339: Property 'releaseDate' does not exist on type '{ isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; title: string; artist: string; ... 5 more ...; genre: string; }'.
+context/GameContext.tsx(8164,41): error TS2339: Property 'isAvailableOnStreaming' does not exist on type '{ isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; title: string; artist: string; ... 5 more ...; genre: string; }'.
+context/GameContext.tsx(8461,9): error TS2741: Property 'lastRank' is missing in type '{ peak: number; weeksOnChart: number; chartRun: number[]; }' but required in type '{ peak: number; weeksOnChart: number; lastRank: number; weeksAtNo1?: number; chartRun?: number[]; firstEntered?: { year: number; week: number; }; }'.
+context/GameContext.tsx(8675,22): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(8676,22): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(8677,22): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(8678,22): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(8679,22): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(8681,24): error TS2345: Argument of type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to parameter of type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(9077,19): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+context/GameContext.tsx(9178,31): error TS2304: Cannot find name 'GoldenGlobeCategory'.
+context/GameContext.tsx(9179,27): error TS2304: Cannot find name 'GoldenGlobeAward'.
+context/GameContext.tsx(9190,29): error TS2304: Cannot find name 'GoldenGlobeContender'.
+context/GameContext.tsx(9233,71): error TS2339: Property 'name' does not exist on type 'NpcSong'.
+context/GameContext.tsx(9255,34): error TS2304: Cannot find name 'GoldenGlobeAward'.
+context/GameContext.tsx(9310,18): error TS2322: Type '"goldenGlobeNominations"' is not assignable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+context/GameContext.tsx(9340,26): error TS2322: Type '"goldenGlobeRedCarpet"' is not assignable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+context/GameContext.tsx(9490,23): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+context/GameContext.tsx(9537,34): error TS2339: Property 'preSaves' does not exist on type 'LabelSubmission'.
+context/GameContext.tsx(9631,13): error TS2353: Object literal may only specify known properties, and 'followers' does not exist in type 'XUser'.
+context/GameContext.tsx(9632,35): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+context/GameContext.tsx(9640,30): error TS2339: Property 'isReleased' does not exist on type 'Release'.
+context/GameContext.tsx(9783,77): error TS2551: Property 'weeklyStreams' does not exist on type '{ uniqueId: string; title: string; artist: string; label: string; coverArt: string; isPlayerAlbum: boolean; albumId: string; weeklyActivity: number; weeklySales: number; weeklySES: number; weeklyPureSales: number; }'. Did you mean 'weeklySES'?
+context/GameContext.tsx(9783,102): error TS2551: Property 'weeklyStreams' does not exist on type '{ uniqueId: string; title: string; artist: string; label: string; coverArt: string; isPlayerAlbum: boolean; albumId: string; weeklyActivity: number; weeklySales: number; weeklySES: number; weeklyPureSales: number; }'. Did you mean 'weeklySES'?
+context/GameContext.tsx(9786,62): error TS2551: Property 'weeklyStreams' does not exist on type '{ uniqueId: string; title: string; artist: string; label: string; coverArt: string; isPlayerAlbum: boolean; albumId: string; weeklyActivity: number; weeklySales: number; weeklySES: number; weeklyPureSales: number; }'. Did you mean 'weeklySES'?
+context/GameContext.tsx(9793,40): error TS2551: Property 'weeklyStreams' does not exist on type '{ uniqueId: string; title: string; artist: string; label: string; coverArt: string; isPlayerAlbum: boolean; albumId: string; weeklyActivity: number; weeklySales: number; weeklySES: number; weeklyPureSales: number; }'. Did you mean 'weeklySES'?
+context/GameContext.tsx(10182,19): error TS2322: Type '"goldenGlobeSubmission"' is not assignable to type '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"'.
+context/GameContext.tsx(10322,31): error TS2304: Cannot find name 'AmaCategory'.
+context/GameContext.tsx(10323,30): error TS2304: Cannot find name 'AmaCategoryName'.
+context/GameContext.tsx(10351,29): error TS2304: Cannot find name 'AmaContender'.
+context/GameContext.tsx(10642,18): error TS2322: Type '"trophy"' is not assignable to type '"spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | ... 11 more ... | "event"'.
+context/GameContext.tsx(10672,18): error TS2322: Type '"trophy"' is not assignable to type '"spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | ... 11 more ... | "event"'.
+context/GameContext.tsx(11367,28): error TS2367: This comparison appears to be unintentional because the types '"standard"' and '"major"' have no overlap.
+context/GameContext.tsx(11376,24): error TS2304: Cannot find name 'SpotifyPlaylistTrack'.
+context/GameContext.tsx(11423,37): error TS2304: Cannot find name 'SpotifyPlaylistTrack'.
+context/GameContext.tsx(11469,27): error TS2304: Cannot find name 'SpotifyPlaylistTrack'.
+context/GameContext.tsx(11487,35): error TS2304: Cannot find name 'SpotifyPlaylist'.
+context/GameContext.tsx(11535,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11536,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11537,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11538,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11539,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11540,11): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(11565,35): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(11771,21): error TS2339: Property 'contractOffer' does not exist on type 'GameState'.
+context/GameContext.tsx(11961,17): error TS2322: Type '`Official FIFA World Cup ${number} Soundtrack`' is not assignable to type '"F1 The Album" | "Wicked" | "Breaking Bad" | "Dune: Part Two" | "Deadpool & Wolverine" | "Barbie" | "Spider-Man: Beyond the Spider-Verse" | "James Bond" | "The Hunger Games" | "Pitch Perfect" | "The Great Gatsby" | "Mamma Mia" | "Twilight"'.
+context/GameContext.tsx(12012,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12013,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12014,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12015,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12016,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12017,9): error TS2322: Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }[]' is not assignable to type 'ChartEntry[]'.
+  Type '{ rank: number; lastWeek: number; isOnUkRadio: boolean; ukRadioPlays: number; ukRadioFormat: any; isOnRadio: boolean; radioPlays: number; radioImpressions: number; radioFormat: string; uniqueId: string; ... 7 more ...; genre: string; }' is missing the following properties from type 'ChartEntry': peak, weeksOnChart
+context/GameContext.tsx(12244,11): error TS2322: Type '{ [x: string]: ArtistData | { actingRoles: (ActingRole | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }; }' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { actingRoles: (ActingRole | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; })[]; ... 128 more ...; filmingGig?: ActingRole & { ...; }; }' is not assignable to type 'ArtistData'.
+      Type '{ actingRoles: (ActingRole | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }' is not assignable to type 'ArtistData'.
+        Types of property 'actingRoles' are incompatible.
+          Type '(ActingRole | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; })[]' is not assignable to type 'ActingRole[]'.
+            Type 'ActingRole | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; }' is not assignable to type 'ActingRole'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; roleName: string; year: number; status: string; coverUrl: string; rating: number; }' is not assignable to type 'ActingRole'.
+                Types of property 'type' are incompatible.
+                  Type 'string' is not assignable to type '"Movie" | "TV Show" | "Voice Acting" | "Tour Documentary"'.
+context/GameContext.tsx(12308,11): error TS2322: Type '{ [x: string]: ArtistData | { songs: any[]; releases: (Release | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; ... 5 more ...; isAvailableOnStreaming: boolean; })[]; ... 127 more ...; filmingGig?: (ActingRole & { remai...' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { songs: any[]; releases: (Release | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; ... 5 more ...; isAvailableOnStreaming: boolean; })[]; ... 127 more ...; filmingGig?: ActingRole & { ...; }; }' is not assignable to type 'ArtistData'.
+      Type '{ songs: any[]; releases: (Release | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; artistId: string; ... 4 more ...; isAvailableOnStreaming: boolean; })[]; ... 127 more ...; filmingGig?: (ActingRole & { remainingWeeks:...' is not assignable to type 'ArtistData'.
+        Types of property 'releases' are incompatible.
+          Type '(Release | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; artistId: string; firstWeekStreams: number; firstWeekSales: number; weeksOnChart: number; peakPosition: number; isAvailableOnStreaming: boolean; })[]' is not assignable to type 'Release[]'.
+            Type 'Release | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; artistId: string; firstWeekStreams: number; firstWeekSales: number; weeksOnChart: number; peakPosition: number; isAvailableOnStreaming: boolean; }' is not assignable to type 'Release'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; title: string; type: string; coverArt: string; songIds: any[]; releaseDate: GameDate; artistId: string; firstWeekStreams: number; firstWeekSales: number; weeksOnChart: number; peakPosition: number; isAvailableOnStreaming: boolean; }' is not assignable to type 'Release'.
+                Types of property 'type' are incompatible.
+                  Type 'string' is not assignable to type 'ReleaseType'.
+context/GameContext.tsx(12356,24): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(12358,28): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(12381,17): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(12414,23): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(12818,10): error TS2678: Type '"UPDATE_GOLDEN_GLOBE_BANNER"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(12826,39): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(13173,31): error TS2339: Property 'region' does not exist on type '{ cash: number; hype: number; }'.
+context/GameContext.tsx(13180,33): error TS2339: Property 'region' does not exist on type '{ cash: number; hype: number; }'.
+context/GameContext.tsx(13386,7): error TS2322: Type '(SignedNpc | { status: "dropped"; id: string; name: string; contract: { advance: number; royaltyRate: number; durationWeeks: number; startDate: { week: number; year: number; }; }; revenueGenerated: number; expenses: number; })[]' is not assignable to type 'SignedNpc[]'.
+  Type 'SignedNpc | { status: "dropped"; id: string; name: string; contract: { advance: number; royaltyRate: number; durationWeeks: number; startDate: { week: number; year: number; }; }; revenueGenerated: number; expenses: number; }' is not assignable to type 'SignedNpc'.
+    Type '{ status: "dropped"; id: string; name: string; contract: { advance: number; royaltyRate: number; durationWeeks: number; startDate: { week: number; year: number; }; }; revenueGenerated: number; expenses: number; }' is not assignable to type 'SignedNpc'.
+      Types of property 'status' are incompatible.
+        Type '"dropped"' is not assignable to type '"active" | "negotiating" | "expired"'.
+context/GameContext.tsx(13517,47): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(13532,38): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(13532,85): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(13533,43): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(13533,90): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(13761,22): error TS2304: Cannot find name 'InstagramPost'.
+context/GameContext.tsx(13797,9): error TS2353: Object literal may only specify known properties, and 'xPosts' does not exist in type 'GameState'.
+context/GameContext.tsx(13797,42): error TS2339: Property 'xPosts' does not exist on type 'GameState'.
+context/GameContext.tsx(13812,23): error TS2304: Cannot find name 'InstagramStory'.
+context/GameContext.tsx(13842,22): error TS2304: Cannot find name 'InstagramReel'.
+context/GameContext.tsx(13976,24): error TS2304: Cannot find name 'TikTokVideo'.
+context/GameContext.tsx(14353,25): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(14355,29): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(14359,25): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(14361,29): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(14365,82): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(14785,11): error TS2367: This comparison appears to be unintentional because the types '"normal" | "fanWar" | "push" | "announce" | "endorse"' and '"market_crypto"' have no overlap.
+context/GameContext.tsx(14910,21): error TS2339: Property 'url' does not exist on type 'PaparazziPhoto'.
+context/GameContext.tsx(14971,11): error TS2367: This comparison appears to be unintentional because the types '"normal" | "fanWar" | "push" | "announce" | "endorse"' and '"market_crypto"' have no overlap.
+context/GameContext.tsx(15100,25): error TS2304: Cannot find name 'XComment'.
+context/GameContext.tsx(15209,38): error TS2339: Property 'artists' does not exist on type 'GameState'.
+context/GameContext.tsx(15212,38): error TS2339: Property 'artists' does not exist on type 'GameState'.
+context/GameContext.tsx(15364,38): error TS2339: Property 'itunesSalesWeek' does not exist on type 'Song'.
+context/GameContext.tsx(15745,13): error TS2740: Type '{ labelId: string; isCustom: true; artistId: string; startDate: GameDate; albumsReleased: number; }' is missing the following properties from type 'Contract': durationWeeks, albumQuota, advance, royaltyPercent, and 30 more.
+context/GameContext.tsx(15806,17): error TS2740: Type '{ labelId: string; isCustom: true; artistId: string; startDate: GameDate; albumsReleased: number; }' is missing the following properties from type 'Contract': durationWeeks, albumQuota, advance, royaltyPercent, and 30 more.
+context/GameContext.tsx(15827,10): error TS2678: Type '"RELEASE_POST_ALBUM_SINGLE"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(15830,67): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(16008,10): error TS2678: Type '"REQUEST_MAGAZINE_PROMO"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(16010,53): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(16045,9): error TS2322: Type '{ [x: string]: ArtistData | { labelSubmissions: (LabelSubmission | { magazineInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; ... 16 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }; }' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { labelSubmissions: (LabelSubmission | { magazineInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; ... 16 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: ActingRole & { ...; }; }' is not assignable to type 'ArtistData'.
+      Type '{ labelSubmissions: (LabelSubmission | { magazineInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; submittedDate: GameDate; ... 15 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }' is not assignable to type 'ArtistData'.
+        Types of property 'inbox' are incompatible.
+          Type '(Email | { id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; };...' is not assignable to type 'Email[]'.
+            Type 'Email | { id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; }; }' is not assignable to type 'Email'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; }; }' is not assignable to type 'Email'.
+                Types of property 'senderIcon' are incompatible.
+                  Type 'string' is not assignable to type '"spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | ... 11 more ... | "event"'.
+context/GameContext.tsx(16051,10): error TS2678: Type '"REQUEST_TV_INTERVIEW_PROMO"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(16053,53): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(16097,9): error TS2322: Type '{ [x: string]: ArtistData | { labelSubmissions: (LabelSubmission | { tvInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; ... 16 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }; }' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { labelSubmissions: (LabelSubmission | { tvInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; ... 16 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: ActingRole & { ...; }; }' is not assignable to type 'ArtistData'.
+      Type '{ labelSubmissions: (LabelSubmission | { tvInterviewRequestedForSongId: any; promoBudgetSpent: any; id: string; release: Release; submittedDate: GameDate; ... 15 more ...; preorderSales?: number; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remainingWeeks: number; }) | null; }' is not assignable to type 'ArtistData'.
+        Types of property 'inbox' are incompatible.
+          Type '(Email | { id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; };...' is not assignable to type 'Email[]'.
+            Type 'Email | { id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; }; }' is not assignable to type 'Email'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; sender: string; subject: string; body: string; date: GameDate; isRead: boolean; senderIcon: string; offer: { type: string; releaseId: string; interviewType: string; outletName: string; emailId: `${string}-${string}-${string}-${string}-${string}`; }; }' is not assignable to type 'Email'.
+                Types of property 'senderIcon' are incompatible.
+                  Type 'string' is not assignable to type '"spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | ... 11 more ... | "event"'.
+context/GameContext.tsx(16103,10): error TS2678: Type '"ACCEPT_INTERVIEW_OFFER"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(16105,72): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(16108,37): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"interviewOffer"' have no overlap.
+context/GameContext.tsx(16109,39): error TS2698: Spread types may only be created from object types.
+context/GameContext.tsx(16123,10): error TS2678: Type '"CANCEL_INTERVIEW_OFFER"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(16130,10): error TS2678: Type '"SUBMIT_INTERVIEW"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(16132,36): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(16165,35): error TS2739: Type '{ id: `${string}-${string}-${string}-${string}-${string}`; type: "text"; content: string; likes: number; retweets: number; replies: number; date: GameDate; isPlayer: boolean; author: string; }' is missing the following properties from type 'XPost': authorId, views
+context/GameContext.tsx(16290,9): error TS2322: Type '{ [x: string]: ArtistData | { songs: Song[]; inbox: (Email | { isAccepted: boolean; id: string; sender: string; senderIcon?: "spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | "onther...' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { songs: Song[]; inbox: (Email | { isAccepted: boolean; id: string; sender: string; senderIcon?: "spotify" | "youtube" | "mtv" | "default" | "label" | ... 22 more ... | "event"; ... 5 more ...; offer?: GeniusOffer | ... 33 more ... | PromoInterviewOffer; })[]; ... 127 more ...; filmingGig?: ActingRole &...' is not assignable to type 'ArtistData'.
+      Type '{ songs: Song[]; inbox: (Email | { isAccepted: boolean; id: string; sender: string; senderIcon?: "spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | "ontheradar" | "trshd" | "oscars" |...' is not assignable to type 'ArtistData'.
+        Types of property 'videos' are incompatible.
+          Type '(Video | { id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Interview"; views: number; thumbnail: string; releaseDate: GameDate; })[]' is not assignable to type 'Video[]'.
+            Type 'Video | { id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Interview"; views: number; thumbnail: string; releaseDate: GameDate; }' is not assignable to type 'Video'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; songId: string; title: string; type: "Interview"; views: number; thumbnail: string; releaseDate: GameDate; }' is missing the following properties from type 'Video': artistId, channelId
+context/GameContext.tsx(16507,36): error TS2339: Property 'followersHistory' does not exist on type 'ArtistData'.
+context/GameContext.tsx(16508,38): error TS2339: Property 'followersHistory' does not exist on type 'ArtistData'.
+context/GameContext.tsx(16673,37): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+context/GameContext.tsx(16676,9): error TS2353: Object literal may only specify known properties, and 'customFeatures' does not exist in type 'GameState'.
+context/GameContext.tsx(16681,37): error TS2339: Property 'customFeatures' does not exist on type 'GameState'.
+context/GameContext.tsx(16684,9): error TS2353: Object literal may only specify known properties, and 'customFeatures' does not exist in type 'GameState'.
+context/GameContext.tsx(16849,34): error TS2339: Property 'name' does not exist on type 'ArtistData'.
+context/GameContext.tsx(16852,29): error TS2339: Property 'image' does not exist on type 'ArtistData'.
+context/GameContext.tsx(17299,39): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"vmaRedCarpet"' have no overlap.
+context/GameContext.tsx(17300,41): error TS2698: Spread types may only be created from object types.
+context/GameContext.tsx(17333,11): error TS2820: Type '"vmaRedCarpet"' is not assignable to type 'GameView'. Did you mean '"amaRedCarpet"'?
+context/GameContext.tsx(17343,11): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"vmaRedCarpet"' have no overlap.
+context/GameContext.tsx(17345,39): error TS2698: Spread types may only be created from object types.
+context/GameContext.tsx(17360,10): error TS2678: Type '"GO_TO_GOLDEN_GLOBE_SUBMISSIONS"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(17363,9): error TS2322: Type '"submit_for_golden_globes"' is not assignable to type 'GameView'.
+context/GameContext.tsx(17388,10): error TS2678: Type '"SUBMIT_FOR_GOLDEN_GLOBES"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(17390,47): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(17577,10): error TS2678: Type '"ACCEPT_GOLDEN_GLOBE_RED_CARPET_INVITE"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(17581,60): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(17585,10): error TS2678: Type '"ACCEPT_GOLDEN_GLOBE_INVITE"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(17590,31): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(17591,11): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"goldenGlobeNominations"' have no overlap.
+context/GameContext.tsx(17595,22): error TS2698: Spread types may only be created from object types.
+context/GameContext.tsx(17677,10): error TS2678: Type '"ACCEPT_GOLDEN_GLOBE_RED_CARPET"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(17679,45): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(17701,45): error TS2367: This comparison appears to be unintentional because the types '"geniusInterview" | "onTheRadarOffer" | "trshdOffer" | "fallonOffer" | "popBaseInterview" | "popBaseClarification" | "billionsClub" | "amaSubmission" | "amaNominations" | ... 26 more ... | "promoInterview"' and '"goldenGlobeRedCarpet"' have no overlap.
+context/GameContext.tsx(17702,49): error TS2698: Spread types may only be created from object types.
+context/GameContext.tsx(17888,45): error TS2339: Property 'podcasts' does not exist on type '{ artistId: string; newImage: string; }'.
+context/GameContext.tsx(18289,10): error TS2678: Type '"ACCEPT_FIFA_OFFER"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(18291,43): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(18314,10): error TS2678: Type '"CANCEL_FIFA_OFFER"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(18317,10): error TS2678: Type '"CREATE_FIFA_CONTRIBUTION"' is not comparable to type '"UPDATE_ARTIST_FUNDS" | "UPDATE_VIDEO" | "LAUNCH_CRYPTO_COIN" | "BUY_CRYPTO" | "SELL_CRYPTO" | "BURN_CRYPTO" | "MARKET_CRYPTO" | "TOGGLE_CRYPTO_UTILITY" | "RUGPULL_CRYPTO" | ... 257 more ... | "PROMOTE_RADIO"'.
+context/GameContext.tsx(18319,42): error TS2339: Property 'payload' does not exist on type 'never'.
+context/GameContext.tsx(18365,9): error TS2322: Type '{ [x: string]: ArtistData | { songs: (Song | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; ... 11 more ...; isAvailableOnStreaming: boolean; })[]; ... 128 more ...; filmingGig?: (ActingRole & { rem...' is not assignable to type '{ [artistId: string]: ArtistData; }'.
+  'string' index signatures are incompatible.
+    Type 'ArtistData | { songs: (Song | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; ... 11 more ...; isAvailableOnStreaming: boolean; })[]; ... 128 more ...; filmingGig?: ActingRole & { ...; }; }' is not assignable to type 'ArtistData'.
+      Type '{ songs: (Song | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; lastWeekStreams: number; ... 10 more ...; isAvailableOnStreaming: boolean; })[]; ... 128 more ...; filmingGig?: (ActingRole & { remain...' is not assignable to type 'ArtistData'.
+        Types of property 'songs' are incompatible.
+          Type '(Song | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; lastWeekStreams: number; prevWeekStreams: number; ... 9 more ...; isAvailableOnStreaming: boolean; })[]' is not assignable to type 'Song[]'.
+            Type 'Song | { id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; lastWeekStreams: number; prevWeekStreams: number; ... 9 more ...; isAvailableOnStreaming: boolean; }' is not assignable to type 'Song'.
+              Type '{ id: `${string}-${string}-${string}-${string}-${string}`; title: string; artistId: string; features: string[]; duration: number; explicit: boolean; streams: number; lastWeekStreams: number; prevWeekStreams: number; ... 9 more ...; isAvailableOnStreaming: boolean; }' is missing the following properties from type 'Song': genre, isReleased
+context/GameContext.tsx(18444,9): error TS2322: Type 'string' is not assignable to type '"F1 The Album" | "Wicked" | "Breaking Bad" | "Dune: Part Two" | "Deadpool & Wolverine" | "Barbie" | "Spider-Man: Beyond the Spider-Verse" | "James Bond" | "The Hunger Games" | "Pitch Perfect" | "The Great Gatsby" | "Mamma Mia" | "Twilight"'.
+context/GameContext.tsx(18604,23): error TS2304: Cannot find name 'Video'.
+context/GameContext.tsx(19046,17): error TS2339: Property 'allPlayerArtists' does not exist on type 'GameState'.
+context/GameContext.tsx(19311,37): error TS2339: Property 'profile' does not exist on type 'ArtistData'.
+context/GameContext.tsx(19448,22): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(19450,26): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(19499,30): error TS2304: Cannot find name 'Relationship'.
+context/GameContext.tsx(19904,21): error TS2304: Cannot find name 'Kid'.
+context/GameContext.tsx(19915,24): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(19917,28): error TS2339: Property 'pronouns' does not exist on type 'Artist | Group'.
+  Property 'pronouns' does not exist on type 'Group'.
+context/GameContext.tsx(19967,9): error TS2353: Object literal may only specify known properties, and 'type' does not exist in type 'Artist'.
+context/GameContext.tsx(20026,9): error TS2353: Object literal may only specify known properties, and 'id' does not exist in type 'ArtistData'.
+context/GameContext.tsx(20215,18): error TS2304: Cannot find name 'ActingOffer'.
+context/GameContext.tsx(20264,11): error TS2322: Type '"manager"' is not assignable to type '"spotify" | "youtube" | "mtv" | "default" | "label" | "genius" | "fallon" | "popbase" | "grammys" | "x" | "onlyfans" | "soundtrack" | "touringdata" | "business" | "vogue" | "feature" | ... 11 more ... | "event"'.
+context/GameContext.tsx(20876,38): error TS2345: Argument of type '{ id: string; username: string; displayName: string; followersCount: number; isVerified: boolean; bio: string; isPlayer: boolean; avatar: string; joinedDate: { year: number; week: number; }; }' is not assignable to parameter of type 'XUser'.
+  Type '{ id: string; username: string; displayName: string; followersCount: number; isVerified: boolean; bio: string; isPlayer: boolean; avatar: string; joinedDate: { year: number; week: number; }; }' is missing the following properties from type 'XUser': name, followingCount
+context/GameContext.tsx(20949,42): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20950,29): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20950,47): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20953,38): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20955,46): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20958,24): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20959,29): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20960,29): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20961,29): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20966,89): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20967,88): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(20976,38): error TS2551: Property 'weeklyStreams' does not exist on type 'Song'. Did you mean 'peakWeeklyStreams'?
+context/GameContext.tsx(21169,17): error TS2304: Cannot find name 'saveGameToCloud'.
+old_tour.tsx(4,39): error TS2307: Cannot find module '../context/GameContext' or its corresponding type declarations.
+old_tour.tsx(5,79): error TS2307: Cannot find module '../constants' or its corresponding type declarations.
+old_tour.tsx(6,35): error TS2307: Cannot find module '../types' or its corresponding type declarations.
+old_tour.tsx(7,27): error TS2307: Cannot find module './icons/ArrowLeftIcon' or its corresponding type declarations.
+old_tour.tsx(140,88): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+types.ts(913,3): error TS2300: Duplicate identifier 'projectSingleType'.
+types.ts(914,3): error TS2300: Duplicate identifier 'projectEraImages'.
+types.ts(925,3): error TS2300: Duplicate identifier 'projectSingleType'.
+types.ts(926,3): error TS2300: Duplicate identifier 'projectEraImages'.
+utils/xContentGenerator.ts(640,10): error TS2353: Object literal may only specify known properties, and 'followers' does not exist in type 'XUser'.
+utils/xContentGenerator.ts(743,26): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+utils/xContentGenerator.ts(1437,49): error TS2552: Cannot find name 'XComment'. Did you mean 'Comment'?
+utils/xContentGenerator.ts(1719,24): error TS2339: Property 'imageUrl' does not exist on type 'Artist | Group'.
+  Property 'imageUrl' does not exist on type 'Artist'.
+utils/xContentGenerator.ts(1773,38): error TS2339: Property 'isActive' does not exist on type 'Tour'.
+utils/xContentGenerator.ts(2289,43): error TS2339: Property 'popularity' does not exist on type 'Relationship'.
+utils/xContentGenerator.ts(2291,19): error TS2339: Property 'artistName' does not exist on type 'Relationship'.
+utils/xContentGenerator.ts(2293,20): error TS2339: Property 'imageUrl' does not exist on type 'Relationship'.

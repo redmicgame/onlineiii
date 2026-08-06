@@ -1,0 +1,221 @@
+                body: `Hi ${artistProfile.name},\n\nThe submission window for Best Original Song at the ${newDate.year} Academy Awards is open. Please submit your eligible soundtrack releases from last year.\n\n- The Academy of Motion Picture Arts and Sciences`,
+                date: newDate,
+                isRead: false,
+                offer: { type: "oscarSubmission", emailId, isSubmitted: false },
+              });
+            }
+          }
+        }
+      }
+
+      // Week 5: Determine Oscar Nominations
+      if (newDate.week === 5 && state.oscarSubmissions.length > 0) {
+        const categoryName = "Best Original Song";
+        const contenders: OscarContender[] = [];
+
+        // Player contenders
+        for (const sub of state.oscarSubmissions) {
+          const artistData = updatedArtistsData[sub.artistId];
+          const artistProfile = allPlayerArtistsAndGroups.find(
+            (a) => a.id === sub.artistId,
+          );
+          const song = artistData.songs.find((s) => s.id === sub.itemId);
+          if (artistData && artistProfile && song) {
+            const score = song.quality * 3 + song.streams / 1000000;
+            contenders.push({
+              id: song.id,
+              name: song.title,
+              artistName: artistProfile.name,
+              isPlayer: true,
+              score,
+              coverArt: song.coverArt,
+            });
+          }
+        }
+
+        // NPC contenders
+        const npcSongsForOscars = [...newNpcsList]
+          .sort((a, b) => b.basePopularity - a.basePopularity)
+          .slice(0, 10);
+        npcSongsForOscars.forEach((song) => {
+          contenders.push({
+            id: song.uniqueId,
+            name: song.title,
+            artistName: song.artist,
+            isPlayer: false,
+            score: (song.basePopularity / 100000) * 1.5,
+            coverArt:
+              song.coverArt ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(song.artist)}&background=random&color=fff&size=250`,
+          });
+        });
+
+        contenders.sort((a, b) => b.score - a.score);
+        const nominees = contenders.slice(0, 5);
+
+        if (nominees.length > 0) {
+          newOscarNominations = [
+            { name: categoryName, nominees, winner: nominees[0] },
+          ];
+          finalState.oscarCurrentYearNominations = newOscarNominations;
+
+          const playerNominee = nominees.find((n) => n.isPlayer);
+          if (playerNominee) {
+            const artistData =
+              updatedArtistsData[
+                playerNominee.artistName === state.soloArtist?.name
+                  ? state.soloArtist.id
+                  : state.group!.id
+              ];
+            const artistProfile = allPlayerArtistsAndGroups.find(
+              (a) => a.name === playerNominee.artistName,
+            );
+
+            if (artistData && artistProfile) {
+              artistData.popularity = Math.min(100, artistData.popularity + 5);
+              const hasPerformanceOffer = Math.random() < 0.5;
+              let body = `Dear ${artistProfile.name},\n\nCongratulations! The Academy is pleased to announce your nomination for Best Original Song for "${playerNominee.name}".`;
+              if (hasPerformanceOffer) {
+                body += `\n\nAdditionally, we would be honored to have you perform at the ceremony. Please respond to accept.`;
+              }
+              body += `\n\nSincerely,\nThe Academy`;
+              const emailId = crypto.randomUUID();
+              artistData.inbox.push({
+                id: emailId,
+                sender: "The Academy",
+                senderIcon: "oscars",
+                subject: "Congratulations! You're an Oscar Nominee!",
+                body,
+                date: newDate,
+                isRead: false,
+                offer: {
+                  type: "oscarNominations",
+                  emailId,
+                  hasPerformanceOffer,
+                },
+              });
+            }
+          }
+
+          let postContent = `The nominees for Best Original Song at the ${newDate.year} #Oscars have been announced:\n\n`;
+          postContent += nominees
+            .map(
+              (n) =>
+                `• ${n.isPlayer ? `**${n.name}**` : n.name} (${n.artistName})`,
+            )
+            .join("\n");
+          Object.values(updatedArtistsData).forEach((d) =>
+            d.xPosts.unshift({
+              id: crypto.randomUUID(),
+              authorId: "popbase",
+              content: postContent,
+              likes: Math.floor(Math.random() * 60000) + 30000,
+              retweets: Math.floor(Math.random() * 15000) + 7000,
+              views: Math.floor(Math.random() * 2000000) + 800000,
+              date: newDate,
+            }),
+          );
+        }
+
+        // Send Red Carpet invites
+        allPlayerArtistsAndGroups.forEach((artistProfile) => {
+          const artistData = updatedArtistsData[artistProfile.id];
+          if (artistData) {
+            const isNominated = newOscarNominations?.some((cat) =>
+              cat.nominees.some(
+                (n) => n.isPlayer && n.artistName === artistProfile.name,
+              ),
+            );
+            if (isNominated || artistData.popularity >= 80) {
+              const redCarpetEmailId = crypto.randomUUID();
+              const reasonText = isNominated
+                ? `Because of your nomination`
+                : `Due to your undeniable impact on pop culture this year`;
+
+              artistData.inbox.push({
+                id: redCarpetEmailId,
+                sender: "The Academy",
+                senderIcon: "oscars",
+                subject: "Invitation: Oscars Red Carpet",
+                body: `Dear ${artistProfile.name},\n\n${reasonText}, we would be honored to have you attend the ${newDate.year} Oscars and walk the red carpet.\n\nPlease accept this invitation by sharing your look for the evening.\n\nSincerely,\nThe Academy`,
+                date: newDate,
+                isRead: false,
+                offer: { type: "oscarRedCarpet", emailId: redCarpetEmailId },
+              });
+            }
+          }
+        });
+      }
+
+      // Week 10: Oscar Ceremony
+      if (newDate.week === 10 && state.oscarCurrentYearNominations) {
+        const category = state.oscarCurrentYearNominations[0];
+        if (category.winner) {
+          const winner = category.winner;
+          const content = `The Oscar for Best Original Song goes to... "${winner.name}" by ${winner.artistName}! #Oscars`;
+          Object.values(updatedArtistsData).forEach((d) =>
+            d.xPosts.unshift({
+              id: crypto.randomUUID(),
+              authorId: "popbase",
+              content,
+              image: winner.coverArt,
+              likes: Math.floor(Math.random() * 100000) + 50000,
+              retweets: Math.floor(Math.random() * 20000) + 10000,
+              views: Math.floor(Math.random() * 5000000) + 2000000,
+              date: newDate,
+            }),
+          );
+        }
+
+        for (const artistId in updatedArtistsData) {
+          const artistData = updatedArtistsData[artistId];
+          const artistProfile = allPlayerArtistsAndGroups.find(
+            (a) => a.id === artistId,
+          );
+          const nomination = category.nominees.find(
+            (n) => n.isPlayer && n.artistName === artistProfile?.name,
+          );
+          if (nomination) {
+            const isWinner = category.winner?.id === nomination.id;
+            if (isWinner)
+              artistData.popularity = Math.min(100, artistData.popularity + 10);
+            artistData.oscarHistory.push({
+              year: newDate.year,
+              category: "Best Original Song",
+              itemId: nomination.id,
+              itemName: nomination.name,
+              artistName: nomination.artistName,
+              isWinner,
+            });
+          }
+        }
+        finalState.oscarSubmissions = [];
+        finalState.oscarCurrentYearNominations = null;
+      }
+
+      // --- COACHELLA LOGIC ---
+
+      // Week 10: Coachella Invitations
+      if (newDate.week === 10) {
+        for (const artistId in updatedArtistsData) {
+          const artistData = updatedArtistsData[artistId];
+          const artistProfile = allPlayerArtistsAndGroups.find(
+            (a) => a.id === artistId,
+          );
+
+          if (
+            artistProfile &&
+            (artistData.contract || artistData.monthlyListeners >= 10000000)
+          ) {
+            const autoSubmit = !!artistData.manager?.autoSubmitCoachella;
+            artistData.coachella = {
+              year: newDate.year,
+              status: autoSubmit ? "submitted" : "invited",
+            };
+            const emailId = crypto.randomUUID();
+            artistData.inbox.push({
+              id: emailId,
+              sender: "Coachella Booking",
+              senderIcon: "coachella",
+              subject: `Coachella ${newDate.year} Lineup Submissions`,
+              body: autoSubmit

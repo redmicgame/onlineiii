@@ -1,0 +1,21 @@
+{
+  "entities": {
+    "GameStateSave": {
+      "title": "GameStateSave",
+      "description": "Stores the entire game state for a specific user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "gameState": { "type": "object" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "gameState", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/saves/{userId}": {
+      "schema": { "$ref": "#/entities/GameStateSave" },
+      "description": "Cloud save for user's game."
+    }
+  }
+}

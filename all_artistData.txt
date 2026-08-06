@@ -1,0 +1,548 @@
+80:  artistData: ArtistData,
+84:  const isMarried = artistData.relationships?.some(
+1295:const getHypeCap = (artistData: ArtistData): number => {
+1296:  if (artistData.redMicPro && artistData.redMicPro.unlocked) {
+1298:      artistData.redMicPro.hypeMode === "locked" ||
+1299:      artistData.redMicPro.hypeMode === "manual"
+2030:      const artistData = state.artistsData[state.activeArtistId];
+2036:            ...artistData,
+2317:          const artistData = state.artistsData[artistId];
+2323:          artistData.releases.forEach((release) => {
+2337:          artistData.labelSubmissions.forEach((sub) => {
+2344:                  const song = artistData.songs.find(
+2457:        const artistData = updatedArtistsData[artistId];
+2458:        const startingMoneyForWeek = artistData.money;
+2462:        const releases = artistData.releases || [];
+2470:                    const fanAccounts = artistData.xUsers.filter(u => !u.isPlayer && u.id.startsWith("fan_"));
+2485:                           likes: Math.floor(Math.random() * ((artistData.popularity || 50) * 80)) + 500,
+2486:                           retweets: Math.floor(Math.random() * ((artistData.popularity || 50) * 20)) + 100,
+2487:                           views: Math.floor(Math.random() * ((artistData.popularity || 50) * 3000)) + 10000,
+2490:                        artistData.xPosts.unshift(newPost);
+2496:        if (artistData.isHiatus && artistData.hiatusStartYear !== undefined && artistData.hiatusStartWeek !== undefined) {
+2497:             const hiatusStartAbs = artistData.hiatusStartYear * 52 + artistData.hiatusStartWeek;
+2501:                 if (artistData.popularity > 85) anticipation = 100;
+2502:                 else if (artistData.popularity > 50) anticipation = 80;
+2503:                 artistData.comebackAnticipation = anticipation;
+2514:        artistData.xChats.forEach(chat => {
+2523:          artistData.manager?.autoDistributeAscap &&
+2524:          artistData.currentLabel !== "Independent"
+2526:          artistData.songs.forEach((song) => {
+2537:        if (artistData.manager?.autoMakeOfficialAudio) {
+2539:            artistData.artistVideoThumbnails.length > 0
+2540:              ? artistData.artistVideoThumbnails[0]
+2542:          artistData.songs.forEach((song) => {
+2544:              const hasAudio = artistData.videos.some(
+2551:                const release = artistData.releases.find((r) =>
+2555:                artistData.videos.push({
+2572:          artistData.xPosts.unshift(popBaseNewMusicPost);
+2576:        if (artistData.mySpaceData) {
+2577:          artistData.mySpaceData.profileViews =
+2578:            (artistData.mySpaceData.profileViews || 0) +
+2579:            Math.floor(artistData.popularity * 10) +
+2580:            Math.floor(artistData.hype * 2);
+2584:        if (artistData.manager) {
+2585:          const manager = MANAGERS.find((m) => m.id === artistData.manager!.id);
+2587:            newDate.year > artistData.manager.contractEndDate.year ||
+2588:            (newDate.year === artistData.manager.contractEndDate.year &&
+2589:              newDate.week >= artistData.manager.contractEndDate.week);
+2592:            artistData.manager = null;
+2594:              artistData.popularity = Math.max(
+2596:                artistData.popularity - manager.popularityBoost,
+2614:              g.isAvailable(artistData),
+2636:              artistData.money += weeklyGigIncome;
+2637:              artistData.hype = Math.min(
+2638:                getHypeCap(artistData),
+2639:                artistData.hype + weeklyGigHype,
+2657:        if (artistData.securityTeamId) {
+2659:            (s) => s.id === artistData.securityTeamId,
+2662:            if (artistData.money < team.weeklyCost) {
+2663:              artistData.securityTeamId = null;
+2676:              artistData.money -= team.weeklyCost;
+2682:        let totalWeeklyPromoCost = artistData.promotions.reduce(
+2692:            artistData.contract &&
+2693:            artistData.contract.marketingBudget &&
+2694:            artistData.contract.marketingBudget > 0
+2697:              artistData.contract.marketingBudget,
+2700:            artistData.contract.marketingBudget -= amountToCover;
+2705:          if (costToArtist > 0 && artistData.money < costToArtist) {
+2707:            artistData.promotions = [];
+2722:              artistData.money -= costToArtist;
+2738:              artistData.promotions.forEach((p) => {
+2741:                    ? artistData.videos.find((v) => v.id === p.itemId)
+2742:                    : artistData.songs.find((s) => s.id === p.itemId);
+2762:        artistData.tours = artistData.tours.map((tour) => {
+2782:              artistData.money += newlyCollected;
+2807:                artistData.popularity * 800 + artistData.hype * 50;
+2829:                artistData.publicImage = Math.max(
+2831:                  artistData.publicImage - 1,
+2940:              artistData.money += revenue;
+2944:                artistData.hype = Math.min(
+2945:                  getHypeCap(artistData),
+2946:                  artistData.hype + 5,
+2953:                artistData.xPosts.unshift({
+2981:        if (artistData.weeksUntilNextSoundtrackOffer === undefined) {
+2983:          artistData.weeksUntilNextSoundtrackOffer =
+2987:        artistData.weeksUntilNextSoundtrackOffer -= 1;
+2989:        if (artistData.weeksUntilNextSoundtrackOffer <= 0) {
+2991:          artistData.weeksUntilNextSoundtrackOffer =
+2995:            artistData.offeredSoundtracks.length < 13 &&
+3014:              (title) => !artistData.offeredSoundtracks.includes(title as any),
+3052:              artistData.soundtrackOfferCount += 1;
+3053:              artistData.offeredSoundtracks.push(chosenSoundtrack);
+3065:          artistData.lastVogueOfferYear !== newDate.year
+3091:          artistData.lastVogueOfferYear = newDate.year;
+3095:        if (artistProfileForEmail && artistData.popularity > 20) {
+3240:        if (artistData.weeksUntilNextFeatureOffer === undefined) {
+3241:          artistData.weeksUntilNextFeatureOffer =
+3245:        artistData.weeksUntilNextFeatureOffer -= 1;
+3248:          artistData.weeksUntilNextFeatureOffer <= 0 &&
+3252:          artistData.weeksUntilNextFeatureOffer =
+3268:              ? artistData.popularity >= 5
+3269:              : artistData.popularity > 30;
+3277:                artistData.popularity * 2000 * (Math.random() * 1.5 + 0.5),
+3284:              40 + artistData.popularity / 2.5 + Math.random() * 10,
+3320:        const hypeMode = artistData.redMicPro.hypeMode || "locked";
+3328:        if (artistData.redMicPro.unlocked && hypeMode === "locked") {
+3331:          newHype = Math.max(0, artistData.hype - hypeDecay);
+3334:        let newPopularity = artistData.popularity;
+3335:        const lastRelease = [...artistData.releases].sort((a, b) => {
+3367:          const eligibleOldSongs = artistData.songs.filter(
+3408:        artistData.songs.forEach((song) => {
+3422:            if (artistData.securityTeamId) {
+3424:                (s) => s.id === artistData.securityTeamId,
+3472:                if (artistData.contract) {
+3474:                    LABELS.find((l) => l.id === artistData.contract!.labelId) ||
+3476:                      (l) => l.id === artistData.contract!.labelId,
+3501:        if (!artistData.xSuspensionStatus?.isSuspended) {
+3505:          if (artistData.fanWarStatus) {
+3511:            const playerAccounts = artistData.xUsers.filter((u) => u.isPlayer);
+3513:              artistData.selectedPlayerXUserId || playerAccounts[0]?.id;
+3514:            artistData.xSuspensionStatus = {
+3520:            artistData.hype = Math.max(0, artistData.hype - 50);
+3521:            artistData.popularity = Math.max(0, artistData.popularity - 10);
+3530:              artistData.xPosts.unshift({
+3539:              const fanAccount = artistData.xUsers.find((u) =>
+3543:                artistData.xPosts.unshift({
+3566:          artistData.xSuspensionStatus.isSuspended &&
+3567:          artistData.xSuspensionStatus.appealSentDate
+3572:            (artistData.xSuspensionStatus.appealSentDate.year * 52 +
+3573:              artistData.xSuspensionStatus.appealSentDate.week);
+3575:            const reason = artistData.xSuspensionStatus.reason;
+3583:              artistData.xSuspensionStatus = null;
+3588:                artistData.xPosts.unshift({
+3609:              artistData.xSuspensionStatus.appealSentDate = undefined;
+3627:          artistData.xSuspensionStatus?.isSuspended &&
+3628:          artistData.xSuspensionStatus.suspendedDate
+3633:            (artistData.xSuspensionStatus.suspendedDate.year * 52 +
+3634:              artistData.xSuspensionStatus.suspendedDate.week);
+3636:            const targetAccountId = artistData.xSuspensionStatus.accountId;
+3637:            artistData.xUsers = artistData.xUsers.filter(
+3641:            artistData.xSuspensionStatus = null;
+3644:            if (artistData.selectedPlayerXUserId === targetAccountId) {
+3645:              artistData.selectedPlayerXUserId = artistData.xUsers.find(
+3653:        const activeRelationship = (artistData.relationships || []).find(
+3678:            artistData.xPosts.unshift({
+3691:        if (artistData.requestedPromoInterview) {
+3692:          if (artistData.manager) {
+3693:            artistData.requestedPromoInterview = false; // Reset the flag
+3710:                  artistData.manager.id === "manager-1"
+3712:                    : artistData.manager.id === "manager-2"
+3728:            artistData.requestedPromoInterview = false;
+3733:        if (artistData.pregnancy) {
+3735:            artistData.pregnancy.conceptionDate.year * 52 +
+3736:            artistData.pregnancy.conceptionDate.week;
+3740:              artistData.inbox.some(
+3760:        if (artistData.contract) {
+3761:          if (artistData.contract.isCustom) {
+3763:              (l) => l.id === artistData.contract!.labelId,
+3782:              (l) => l.id === artistData.contract!.labelId,
+3785:              labelMultiplier = artistData.isBlacklistedByLabel ? 1.0 : label.promotionMultiplier;
+3801:        const updatedSongs = artistData.songs.map((song) => {
+3811:            if (difficulty !== "easy" && artistData.careerStage) {
+3814:                artistData.releases.find((r) => r.id === song.releaseId)
+3822:                  if (artistData.careerStage === "flop")
+3824:                  else if (artistData.careerStage === "smash")
+3878:              artistData.tours &&
+3879:              artistData.tours.some(
+3892:              const release = artistData.releases.find(
+3951:            const isSingle = artistData.releases.some(
+4005:                if (!artistData.playlistPlacements)
+4006:                  artistData.playlistPlacements = [];
+4007:                let placement = artistData.playlistPlacements.find(
+4018:                  artistData.playlistPlacements.push(placement);
+4042:            const songPromo = artistData.promotions.find(
+4083:            const release = artistData.releases.find(
+4182:        artistData.songs = updatedSongs;
+4184:        artistData.releases = artistData.releases.map((release) => {
+4203:        let newCareerStage = artistData.careerStage || "neutral";
+4205:          const newlyEvaluatedRelease = artistData.releases.find(
+4218:              const pastSingles = artistData.releases
+4261:              const pastAlbums = artistData.releases
+4295:            } else if (isFlop && !artistData.flopEraLock) {
+4304:          ...artistData.lastFourWeeksStreams,
+4312:        artistData.monthlyListeners = Math.min(
+4316:        artistData.careerStage = newCareerStage;
+4317:        artistData.peakMonthlyListeners = Math.max(
+4318:          artistData.monthlyListeners,
+4319:          artistData.peakMonthlyListeners || 0,
+4322:        artistData.listeningNow = Math.floor(
+4323:          artistData.monthlyListeners * (Math.random() * 0.001),
+4325:        artistData.saves = Math.floor(
+4326:          (artistData.saves || 0) +
+4330:        artistData.followers = (artistData.followers || 0) + newFollowers;
+4333:          ...(artistData.streamsHistory || []),
+4339:        artistData.streamsHistory = updatedStreamsHistory;
+4342:        const updatedVideos = artistData.videos.map((video) => {
+4346:          const videoPromo = artistData.promotions.find(
+4418:        artistData.videos = updatedVideos;
+4422:          ...artistData.lastFourWeeksViews,
+4427:            (450 - Math.min(350, artistData.youtubeSubscribers / 4000)),
+4430:          artistData.youtubeSubscribers + newSubscribersGained;
+4436:        if (artistData.youtubeStoreUnlocked) {
+4437:          artistData.merch = artistData.merch.map((item) => {
+4439:              (artistData.youtubeSubscribers / 50000) *
+4455:                artistData.hype *
+4465:            if (artistData.redMicPro.unlocked && artistData.salesBoost > 0) {
+4467:                weeklySales * (1 + artistData.salesBoost / 100),
+4475:              const sub = artistData.labelSubmissions.find(
+4496:        const ofProfile = artistData.onlyfans;
+4505:            (artistData.hype / (subPrice * 0.5)) * (Math.random() * 20 + 10);
+4514:                (artistData.hype / 2000) *
+4594:        if (artistData.customLabels && artistData.customLabels.length > 0) {
+4595:          artistData.customLabels = artistData.customLabels.map((label) => {
+4653:          artistData.xUsers.forEach((u) => {
+4661:            artistData.inbox.unshift({
+4681:          artistData.streamsThisMonth + totalWeeklyStreams;
+4683:          artistData.viewsThisQuarter + totalWeeklyViews;
+4685:          artistData.subsThisQuarter + newSubscribersGained;
+4688:        if (newDate.week % 4 === 0 && artistData.promotions.length > 0) {
+4690:          const newSongs = [...artistData.songs];
+4692:          const songPromotions = artistData.promotions.filter(
+4749:          artistData.songs = newSongs;
+4762:              artistData.streamsRemovedThisWeek = totalRemovedStreams;
+4775:            artistData.selectedPlayerXUserId ||
+4776:            artistData.xUsers?.find((u) => u.isPlayer)?.id;
+4777:          if (playerUserId && artistData.xUsers) {
+4778:            artistData.xUsers = artistData.xUsers.map((u) => {
+4794:                  const eligiblePosts = (artistData.xPosts || []).filter(
+4852:            artistData.money += totalXMonetizationEarnings;
+4893:          if (artistData.youtubePartnerProgram?.isActive) {
+4898:              artistData.money += yppEarnings;
+4899:              artistData.youtubePartnerProgram.lifetimeEarnings += yppEarnings;
+4916:        if (artistData.contract) {
+4917:          const contract = artistData.contract;
+4932:              artistData.contractHistory.push(contract);
+4933:              artistData.contract = null;
+4949:          artistData.labelSubmissions = artistData.labelSubmissions.map(
+4961:                        (artistData.songs.find((s) => s.id === id)?.quality ||
+5014:            ...artistData.labelSubmissions.filter(
+5022:            LABELS.find((l) => l.id === artistData.contract!.labelId) ||
+5023:            artistData.customLabels.find(
+5024:              (l) => l.id === artistData.contract!.labelId,
+5055:          if (artistData.contract) {
+5056:            rightsOwnerLabelId = artistData.contract.labelId;
+5057:            if (artistData.contract.mastersOwnership === "Label") {
+5059:            } else if (artistData.contract.mastersOwnership === "Split") {
+5060:              rightsSoldPercent = 100 - artistData.contract.mastersSplitPercent;
+5079:                const songToRelease = artistData.songs.find(
+5088:                    artistData.publicImage = Math.max(
+5090:                      (artistData.publicImage || 80) - 20,
+5098:                        artistData.paparazziPhotos.length > 0
+5099:                          ? artistData.paparazziPhotos[
+5102:                                  artistData.paparazziPhotos.length,
+5129:                    artistData.xPosts = [
+5133:                      ...artistData.xPosts,
+5150:                  artistData.releases.push(singleRelease);
+5151:                  artistData.songs = artistData.songs.map((s) =>
+5167:                  artistData.hype = Math.min(
+5168:                    getHypeCap(artistData),
+5169:                    artistData.hype + 15,
+5189:                    artistData.xPosts.unshift(popBasePost);
+5196:                        artistData.paparazziPhotos.length > 0
+5197:                          ? artistData.paparazziPhotos[
+5200:                                  artistData.paparazziPhotos.length,
+5209:                    artistData.xPosts.unshift(tmzPost);
+5250:              artistData.releases.push({
+5260:              artistData.merch = artistData.merch.map((m) =>
+5264:              artistData.songs = artistData.songs.map((s) => {
+5296:              artistData.hype = Math.min(
+5297:                getHypeCap(artistData),
+5298:                artistData.hype + hypeIncrease,
+5302:                artistData.contract &&
+5305:                artistData.contract.albumsReleased += 1;
+5325:                artistData.xPosts.unshift(popBasePost);
+5332:                    artistData.paparazziPhotos.length > 0
+5333:                      ? artistData.paparazziPhotos[
+5335:                            Math.random() * artistData.paparazziPhotos.length,
+5344:                artistData.xPosts.unshift(tmzPost);
+5403:            artistData.labelSubmissions = artistData.labelSubmissions.map(
+5410:            artistData.labelSubmissions = artistData.labelSubmissions.filter(
+5422:          const controversialPaparazzi = artistData.paparazziPhotos.find(
+5425:          const recentLowScoreRelease = artistData.releases.find(
+5456:            artistData.paparazziPhotos = artistData.paparazziPhotos.filter(
+5512:        const hasGrammyEmailThisYear = artistData.inbox.some(
+5523:          const autoSubmit = !!artistData.manager?.autoSubmitAwards;
+5543:            const thisYearReleases = artistData.releases.filter(
+5550:            const eligibleSongs = artistData.songs.filter((s) =>
+5573:                  .map((id) => artistData.songs.find((s) => s.id === id))
+5596:                  .map((id) => artistData.songs.find((s) => s.id === id))
+5619:                  .map((id) => artistData.songs.find((s) => s.id === id))
+5640:              ...artistData.releases.map((r) => r.releaseDate.year),
+5644:              !artistData.hasSubmittedForBestNewArtist &&
+5724:            artistData.hasSubmittedForBestNewArtist = isBnaEligible
+5726:              : artistData.hasSubmittedForBestNewArtist;
+5730:        const hasAmaEmailThisYear = artistData.inbox.some(
+5740:          const autoSubmit = !!artistData.manager?.autoSubmitAwards;
+5760:            const thisYearReleases = artistData.releases.filter(
+5767:            const eligibleSongs = artistData.songs.filter((s) =>
+5779:              ...artistData.releases.map((r) => r.releaseDate.year),
+5783:              !artistData.hasSubmittedForAmaNewArtist &&
+5820:            artistData.hasSubmittedForAmaNewArtist = isNewArtistEligible
+5822:              : artistData.hasSubmittedForAmaNewArtist;
+5826:        if (artistData.fanWarStatus) {
+5827:          artistData.fanWarStatus.weeksRemaining -= 1;
+5828:          if (artistData.fanWarStatus.weeksRemaining <= 0) {
+5829:            artistData.fanWarStatus = null;
+5839:          artistData.songs = artistData.songs.map((song) => {
+5897:          artistData.releases = artistData.releases.map((release) => {
+5901:              const song = artistData.songs.find((s) => s.id === songId);
+5939:            artistData.xPosts.unshift(...newCertificationPosts);
+5944:                  const release = artistData.releases.find(r => r.id === releaseId);
+5946:                      const albumTracks = artistData.songs.filter(s => s.releaseId === releaseId).sort((a, b) => b.streams - a.streams);
+5968:                      artistData.xPosts.unshift({
+5983:          const playerChartSongs = artistData.songs.map((s) => {
+5999:            artistData,
+6014:            artistData.xUsers.map((u) => u.username),
+6020:          artistData.xUsers.push(...uniqueNewUsers);
+6023:          const validImages = (artistData.artistImages || []).map(img => typeof img === 'string' ? {url: img, year: 0} : img);
+6027:          const weeklyXPop = artistData.popularity / 100; // 0 to 1
+6028:          artistData.xUsers.forEach((u) => {
+6065:          const tikTokPopMult = 1 + artistData.popularity / 100;
+6069:          artistData.tiktokFollowers =
+6070:            (artistData.tiktokFollowers || 0) + tiktokPassiveGain;
+6076:          artistData.instagramFollowers =
+6077:            (artistData.instagramFollowers || 0) + instagramPassiveGain;
+6083:          artistData.spotifyFollowers = 
+6084:            (artistData.spotifyFollowers || 0) + spotifyPassiveGain;
+6086:          artistData.xPosts.unshift(...newPosts);
+6090:              const pIndex = artistData.xPosts.findIndex(
+6094:                artistData.xPosts[pIndex] = {
+6095:                  ...artistData.xPosts[pIndex],
+6097:                    ...(artistData.xPosts[pIndex].comments || []),
+6106:          const billionsClubSongs = artistData.songs.filter(
+6120:                const fanAccount = artistData.xUsers.find(
+6129:                  !artistData.xUsers.some((u) => u.id === "hater")
+6131:                  artistData.xUsers.push({
+6142:                  !artistData.xUsers.some((u) => u.id === "fan")
+6144:                  artistData.xUsers.push({
+6153:                artistData.xPosts.unshift({
+6166:          artistData.xTrends = newTrends;
+6170:            artistData.xChats.push(...newChats);
+6174:              const chat = artistData.xChats.find((c) => c.id === chatId);
+6183:          if (artistData.xPosts.length > 250) {
+6184:            artistData.xPosts = artistData.xPosts.slice(0, 250);
+6188:          if (!artistData.redditPosts) artistData.redditPosts = [];
+6192:          const recentSongs = [...artistData.songs]
+6200:          const topSong = [...artistData.songs]
+6208:          const recentVideos = [...artistData.videos]
+6307:              artistData.artistImages.length > 0
+6310:                artistData.artistImages[
+6311:                  Math.floor(Math.random() * artistData.artistImages.length)
+6335:              Math.floor(Math.random() * (artistData.popularity * 10)) + 50;
+6398:          artistData.redditPosts = [
+6400:            ...artistData.redditPosts,
+6407:          const userAlbums = artistData.releases
+6418:                const song = artistData.songs.find((s) => s.id === songId);
+6476:            artistData.xPosts.unshift({
+6489:        artistData.popularity = Math.max(0, Math.min(100, newPopularity));
+6491:        if (artistData.chartPredictionsSubscription) {
+6495:          artistData.redMicPro &&
+6496:          typeof artistData.redMicPro === "object" &&
+6497:          artistData.redMicPro.tier !== "free"
+6501:        artistData.money = Math.floor(artistData.money + finalIncome);
+6502:        artistData.hype = newHype;
+6503:        artistData.peakHype = Math.max(artistData.peakHype || 0, newHype);
+6504:        artistData.lastFourWeeksStreams = updatedLastFourWeeksStreams;
+6505:        artistData.lastFourWeeksViews = updatedLastFourWeeksViews;
+6506:        artistData.youtubeSubscribers = newYoutubeSubscribers;
+6507:        artistData.youtubeStoreUnlocked =
+6508:          artistData.youtubeStoreUnlocked ||
+6510:        artistData.streamsThisMonth =
+6512:        artistData.viewsThisQuarter =
+6514:        artistData.subsThisQuarter =
+6516:        artistData.performedGigThisWeek = false;
+6518:        if (artistData.filmingGig) {
+6519:          artistData.filmingGig.remainingWeeks -= 1;
+6520:          if (artistData.filmingGig.remainingWeeks <= 0) {
+6521:            const gig = artistData.filmingGig;
+6532:            artistData.actingRoles = [...(artistData.actingRoles || []), newRole];
+6533:            artistData.filmingGig = null;
+6562:            artistData.popularity = Math.min(100, artistData.popularity + (gig.type === 'Movie' ? 3 : 1));
+6566:        artistData.inbox.push(...newEmails);
+6568:        const netEarned = artistData.money - startingMoneyForWeek;
+6570:            artistData.yearlyIncome = (artistData.yearlyIncome || 0) + netEarned;
+6575:            const loc = artistData.location || artistProfileForEmail?.country || "US";
+6577:            const taxable = artistData.yearlyIncome || 0;
+6581:               artistData.money -= taxAmount;
+6582:               artistData.yearlyIncome = 0;
+6583:               artistData.inbox.push({
+6602:               artistData.yearlyIncome = 0;
+6678:        const artistData = updatedArtistsData[artistId];
+6683:        artistData.songs = artistData.songs.map((song) => {
+6693:            artistData.releases.push({
+6720:              artistData.inbox.push(releaseEmail);
+6751:                  artistData.inbox.push(offerEmail);
+6944:                    labelBoost = artistData.isBlacklistedByLabel ? 1.0 : majorLabel.promotionMultiplier;
+7344:            const artistData = updatedArtistsData[song.artistId];
+7345:            if (artistData && !artistData.firstChartEntry) {
+7347:                artistData.firstChartEntry = {
+7560:          const artistData = updatedArtistsData[release.artistId];
+7563:            const song = artistData.songs.find((s) => s.id === songId);
+7566:              const remixes = artistData.songs.filter(
+7598:          const artistData = updatedArtistsData[release.artistId];
+7605:            const song = artistData.songs.find((s) => s.id === songId);
+7610:              const remixes = artistData.songs.filter(
+7668:          const albumMerch = artistData.merch.filter(
+7918:            const artistData = updatedArtistsData[song.artistId];
+7919:            artistData.numberOneDebuts = (artistData.numberOneDebuts || 0) + 1;
+7920:            debutCount = artistData.numberOneDebuts;
+8030:        const artistData = updatedArtistsData[artistId];
+8036:        artistData.songs.forEach((song) => {
+8090:        artistData.releases
+8100:              .map((id) => artistData.songs.find((s) => s.id === id))
+8154:        artistData.labelSubmissions.forEach((sub) => {
+8198:                .map((s) => artistData.songs.find((xs) => xs.id === s.songId))
+8245:          !artistData.xUsers.some((u) => u.id === spotifyDataId)
+8247:          artistData.xUsers.push({
+8258:        if (artistData.releases.length > 0) {
+8259:          const topRelease = [...artistData.releases]
+8265:                  (artistData.songs.find((s) => s.id === id)?.lastWeekStreams ||
+8272:                  (artistData.songs.find((s) => s.id === id)?.lastWeekStreams ||
+8281:              .map((id) => artistData.songs.find((s) => s.id === id))
+8357:          const popularTracks = [...artistData.songs]
+8421:          const artistData = updatedArtistsData[artistId];
+8423:            !artistData.xUsers.some((u) => u.id === "popcrave") &&
+8426:            artistData.xUsers.push({
+8441:          const artistData = updatedArtistsData[artistId];
+8445:          const hasOscarEmailThisYear = artistData.inbox.some(
+8452:            const eligibleSongs = artistData.songs.filter((s) => {
+8453:              const release = artistData.releases.find(
+8465:              artistData.inbox.push({
+8487:          const artistData = updatedArtistsData[sub.artistId];
+8491:          const song = artistData.songs.find((s) => s.id === sub.itemId);
+8492:          if (artistData && artistProfile && song) {
+8533:            const artistData =
+8543:            if (artistData && artistProfile) {
+8544:              artistData.popularity = Math.min(100, artistData.popularity + 5);
+8552:              artistData.inbox.push({
+8591:          const artistData = updatedArtistsData[artistProfile.id];
+8592:          if (artistData) {
+8598:            if (isNominated || artistData.popularity >= 80) {
+8604:              artistData.inbox.push({
+8640:          const artistData = updatedArtistsData[artistId];
+8650:              artistData.popularity = Math.min(100, artistData.popularity + 10);
+8651:            artistData.oscarHistory.push({
+8670:          const artistData = updatedArtistsData[artistId];
+8677:            (artistData.contract || artistData.monthlyListeners >= 10000000)
+8679:            const autoSubmit = !!artistData.manager?.autoSubmitCoachella;
+8680:            artistData.coachella = {
+8685:            artistData.inbox.push({
+8708:          const artistData = updatedArtistsData[artistId];
+8714:            artistData.coachella &&
+8715:            artistData.coachella.status === "submitted"
+8721:            if (artistData.popularity >= 70) {
+8725:            } else if (artistData.popularity >= 50) {
+8729:            } else if (artistData.popularity >= 25) {
+8749:            artistData.coachella.status = status;
+8750:            artistData.coachella.payoutSize = payoutSize;
+8751:            artistData.coachella.openingFor = openingFor;
+8761:            artistData.inbox.push({
+8780:          const artistData = updatedArtistsData[artistId];
+8786:            artistData.coachella &&
+8787:            artistData.coachella.year === newDate.year &&
+8789:              artistData.coachella.status,
+8793:            if (artistData.coachella.payoutSize) {
+8794:              artistData.money += artistData.coachella.payoutSize;
+8798:            if (artistData.coachella.status === "headliner")
+8800:            else if (artistData.coachella.status === "opener")
+8801:              titleStr = `is OPENING for ${artistData.coachella.openingFor} at`;
+8804:            artistData.xPosts.unshift({
+8809:                artistData.artistImages.length > 0
+8810:                  ? artistData.artistImages[
+8811:                      Math.floor(Math.random() * artistData.artistImages.length)
+8901:            const artistData = updatedArtistsData[sub.artistId];
+8905:            if (!artistData || !artistProfile) continue;
+8911:              const release = artistData.releases.find(
+8919:              score = artistData.popularity + artistData.hype;
+8922:              const song = artistData.songs.find((s) => s.id === sub.itemId);
+9000:          const artistData = updatedArtistsData[artistId];
+9009:            artistData.popularity = Math.min(
+9011:              artistData.popularity + artistNominations.length * 3,
+9025:            artistData.inbox.push({
+9037:            artistData.inbox.push({
+9072:          const artistData = updatedArtistsData[artistId];
+9085:                artistData.popularity = Math.min(
+9087:                  artistData.popularity + 5,
+9090:              artistData.amaHistory = artistData.amaHistory || [];
+9091:              artistData.amaHistory.push({
+9279:            const artistData = updatedArtistsData[sub.artistId];
+9283:            if (!artistData || !artistProfile) continue;
+9290:              const release = artistData.releases.find(
+9295:                  .map((id) => artistData.songs.find((s) => s.id === id))
+9324:              const totalStreamsThisYear = artistData.songs.reduce((sum, s) => {
+9325:                const release = artistData.releases.find(
+9332:              score = artistData.hype + totalStreamsThisYear / 1000000;
+9337:              const song = artistData.songs.find((s) => s.id === sub.itemId);
+9349:              if (artistData.isBlacklistedByLabel) {
+9497:          const artistData = updatedArtistsData[artistId];
+9508:            artistData.popularity = Math.min(
+9510:              artistData.popularity + artistNominations.length * 3,
+9524:            artistData.inbox.push({
+9540:            artistData.inbox.push({
+9576:          const artistData = updatedArtistsData[artistId];
+9590:                artistData.popularity = Math.min(
+9592:                  artistData.popularity + 5,
+9595:              artistData.grammyHistory.push({
+9614:        const artistData = updatedArtistsData[artistId];
+9695:        artistData.inbox.push(...newChartEmails);
+9734:              const artistDataForBoost = Object.values(updatedArtistsData).find(
+9737:              const actualSong = artistDataForBoost?.songs.find(
+9750:                if (!artistDataForBoost?.contract) {
+9752:                } else if (!artistDataForBoost.contract.isCustom) {
+9754:                    (l) => l.id === artistDataForBoost.contract?.labelId,
+9789:          const artistData = updatedArtistsData[playerSong.artistId];
+9790:          if (artistData) {
+9791:            const songWithData = artistData.songs.find(
+9839:        const artistData = updatedArtistsData[artist.id];
+9840:        if (artistData) {
+9841:          const releasedSongs = artistData.songs.filter(
+9884:                : artistData.spotifyFollowers || 0,
+10456:      const artistData = state.artistsData[artistId];
+10457:      if (!artistData) return state;
+10459:      let songsWithBoost = [...artistData.songs];
+10470:        const release = artistData.releases.find((r) => r.id === releaseId);
+10473:          songsWithBoost = artistData.songs.map((song) =>
+10486:            ...artistData,
+10487:            money: artistData.money - cost,
+10489:            releases: artistData.releases.map((r) =>
+10493:              getHypeCap(artistData),
+10494:              artistData.hype + hypeIncrease,
+10498:              artistData.popularity + popularityIncrease,
+14984:      const artistData = state.artistsData[artistId];
+14985:      if (!artistData) return state;
+14997:      const updatedData = { ...artistData, contract: newContract, isBlacklistedByLabel: false };
+15009:      const artistData = state.artistsData[artistId];
+15010:      if (!artistData || !artistData.contract) return state;
+15013:        ...artistData,
+15015:          ...(artistData.contractHistory || []),
+15016:          artistData.contract,
+15084:      const artistDataToUpdate = newState.artistsData[artistId];
+15085:      if (artistDataToUpdate) {
+15086:        const updatedXUsers = artistDataToUpdate.xUsers.map((user) =>
+15092:            ...artistDataToUpdate,
+16129:        const artistData = updatedArtistsData[artistId];
+16130:        const updatedXUsers = artistData.xUsers.map((user) =>
+16136:          ...artistData,
+16222:        const artistData = updatedArtistsData[artistId];
+16223:        const updatedXUsers = artistData.xUsers.map((user) =>
+16227:          ...artistData,
