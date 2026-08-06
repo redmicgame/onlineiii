@@ -22265,23 +22265,34 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   const [loadingMessage, setLoadingMessage] = useState("Loading Game...");
   const { user, isLoading: isAuthLoading } = useFirebase();
 
-  // Effect for loading game state - enforced auto-logout on boot so all players land on StartScreen
+  // Effect for loading game state
   useEffect(() => {
     if (isAuthLoading) return; // Wait until auth is resolved
 
     const loadGame = async () => {
       try {
-        // Enforce auto-logout requirement: clear active local save session on start so users must sign up/log in
-        await db.saves.clear().catch(() => {});
+        const localSave = await db.saves.get(getActiveSaveId());
+        if (
+          localSave &&
+          localSave.state &&
+          localSave.state.careerMode &&
+          localSave.state.artistsData
+        ) {
+          const fullyLoadedState = await injectMediaIntoState(localSave.state, (prog, msg) => {
+            setLoadingProgress(prog);
+            if (msg) setLoadingMessage(msg);
+          });
+          dispatch({ type: "LOAD_GAME", payload: fullyLoadedState });
+        }
       } catch (err) {
-        console.error("Could not reset local session", err);
+        console.error("Could not load game state", err);
       } finally {
         setIsLoading(false);
       }
     };
 
     loadGame();
-  }, [isAuthLoading]); // Now we only depend on local DB on mount
+  }, [isAuthLoading]);
 
   // Real-time Global Server Time Synchronization across all connected players
   useEffect(() => {
