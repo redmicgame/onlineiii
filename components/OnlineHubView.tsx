@@ -479,47 +479,50 @@ const OnlineHubView: React.FC = () => {
 
                         {/* TAB 1.5: ONLINE CHAT & DIRECT MESSAGING (DMs) */}
                         {activeSubTab === 'chat' && (
-                            <div className="flex flex-col md:flex-row gap-4 h-[600px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
+                            <div className="flex flex-col md:flex-row gap-4 h-[620px] bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
                                 {/* Left Side: Conversations List */}
-                                <div className="w-full md:w-72 bg-zinc-950/80 border-r border-zinc-800/80 flex flex-col shrink-0">
-                                    <div className="p-3 border-b border-zinc-800/80 flex items-center justify-between">
+                                <div className="w-full md:w-80 bg-zinc-900/90 border-r border-zinc-800 flex flex-col shrink-0">
+                                    <div className="p-3.5 border-b border-zinc-800 flex items-center justify-between">
                                         <div>
-                                            <h3 className="font-extrabold text-white text-sm">💬 Messages & DMs</h3>
-                                            <p className="text-[11px] text-zinc-400">Live online network</p>
+                                            <h3 className="font-extrabold text-white text-sm flex items-center gap-1.5">
+                                                <span>💬</span> Direct Messages
+                                            </h3>
+                                            <p className="text-[11px] text-zinc-400">Single Global Server Chat</p>
                                         </div>
                                         <button
                                             onClick={() => setShowNewMsgModal(true)}
-                                            className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1 shadow"
+                                            className="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 shadow-md shadow-blue-900/20"
                                         >
-                                            + New DM
+                                            <span>+ New DM</span>
                                         </button>
                                     </div>
 
-                                    <div className="flex-1 overflow-y-auto divide-y divide-zinc-800/50">
-                                        {/* Global Chat Room */}
+                                    <div className="flex-1 overflow-y-auto divide-y divide-zinc-800/40 no-scrollbar">
+                                        {/* Global Community Chat Room */}
                                         <button
                                             onClick={() => setSelectedChatRecipient('global')}
                                             className={`w-full p-3 text-left flex items-center gap-3 transition-all ${
-                                                selectedChatRecipient === 'global' ? 'bg-red-950/40 border-l-4 border-red-500' : 'hover:bg-zinc-900/60'
+                                                selectedChatRecipient === 'global' ? 'bg-blue-950/40 border-l-4 border-blue-500' : 'hover:bg-zinc-800/50'
                                             }`}
                                         >
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-white font-bold text-lg shrink-0 shadow">
+                                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shrink-0 shadow-md">
                                                 🌐
                                             </div>
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex justify-between items-center">
-                                                    <h4 className="font-extrabold text-white text-xs truncate">Global Community Chat</h4>
-                                                    <span className="text-[9px] text-emerald-400 font-bold">LIVE</span>
+                                                    <h4 className="font-extrabold text-white text-xs truncate">Global Server Chatroom</h4>
+                                                    <span className="text-[9px] text-emerald-400 font-bold bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/60">LIVE</span>
                                                 </div>
                                                 <p className="text-[11px] text-zinc-400 truncate mt-0.5">
-                                                    {chatMessages.filter(m => m.recipientId === 'global').slice(-1)[0]?.message || 'Public room for all players'}
+                                                    {chatMessages.filter(m => m.recipientId === 'global').slice(-1)[0]?.message || 'Broadcast to all players in server'}
                                                 </p>
                                             </div>
                                         </button>
 
-                                        {/* Online Players DM List */}
-                                        <div className="px-3 py-2 bg-zinc-900/40 text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">
-                                            Direct Messages ({onlinePlayers.length})
+                                        {/* Online Players DM List Header */}
+                                        <div className="px-3 py-2 bg-zinc-950/60 text-[10px] font-extrabold text-zinc-400 uppercase tracking-wider flex justify-between items-center">
+                                            <span>Online Players DMs</span>
+                                            <span className="text-blue-400">{onlinePlayers.length} online</span>
                                         </div>
 
                                         {onlinePlayers.map(player => {
@@ -535,16 +538,16 @@ const OnlineHubView: React.FC = () => {
                                                     key={player.id}
                                                     onClick={() => setSelectedChatRecipient({ id: player.id, name: player.name, avatar: player.avatar })}
                                                     className={`w-full p-3 text-left flex items-center gap-3 transition-all ${
-                                                        isSelected ? 'bg-red-950/40 border-l-4 border-red-500' : 'hover:bg-zinc-900/60'
+                                                        isSelected ? 'bg-blue-950/40 border-l-4 border-blue-500' : 'hover:bg-zinc-800/50'
                                                     }`}
                                                 >
                                                     <div className="relative shrink-0">
                                                         <img
-                                                            src={player.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(player.name)}`}
+                                                            src={player.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(player.name)}&background=3f3f46&color=fff`}
                                                             alt=""
-                                                            className="w-10 h-10 rounded-full object-cover border border-zinc-700"
+                                                            className="w-10 h-10 rounded-full object-cover border border-zinc-700 shadow"
                                                         />
-                                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-zinc-950 rounded-full"></span>
+                                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-zinc-900 rounded-full"></span>
                                                     </div>
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex justify-between items-center">
@@ -552,7 +555,7 @@ const OnlineHubView: React.FC = () => {
                                                             <span className="text-[10px] text-zinc-500">{player.country || 'US'}</span>
                                                         </div>
                                                         <p className="text-[11px] text-zinc-400 truncate mt-0.5">
-                                                            {lastMsg ? lastMsg.message : 'Tap to start direct messaging...'}
+                                                            {lastMsg ? lastMsg.message : 'Tap to open chat...'}
                                                         </p>
                                                     </div>
                                                 </button>
@@ -564,30 +567,33 @@ const OnlineHubView: React.FC = () => {
                                 {/* Right Side: Chat Conversation Box */}
                                 <div className="flex-1 flex flex-col bg-zinc-900 h-full min-w-0">
                                     {/* Chat Box Header */}
-                                    <div className="p-3 bg-zinc-950/90 border-b border-zinc-800 flex justify-between items-center shrink-0">
+                                    <div className="p-3.5 bg-zinc-950 border-b border-zinc-800 flex justify-between items-center shrink-0">
                                         <div className="flex items-center gap-3 min-w-0">
                                             {selectedChatRecipient === 'global' ? (
-                                                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-white text-base font-bold shrink-0">
+                                                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white text-lg font-bold shrink-0 shadow-md">
                                                     🌐
                                                 </div>
                                             ) : (
-                                                <img
-                                                    src={selectedChatRecipient.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedChatRecipient.name)}`}
-                                                    alt=""
-                                                    className="w-9 h-9 rounded-full object-cover border border-zinc-700 shrink-0"
-                                                />
+                                                <div className="relative shrink-0">
+                                                    <img
+                                                        src={selectedChatRecipient.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedChatRecipient.name)}&background=3f3f46&color=fff`}
+                                                        alt=""
+                                                        className="w-10 h-10 rounded-full object-cover border border-zinc-700 shadow"
+                                                    />
+                                                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-zinc-950 rounded-full"></span>
+                                                </div>
                                             )}
                                             <div className="min-w-0">
                                                 <h3 className="font-extrabold text-white text-sm truncate flex items-center gap-2">
-                                                    {selectedChatRecipient === 'global' ? 'Global Community Chatroom' : selectedChatRecipient.name}
+                                                    {selectedChatRecipient === 'global' ? 'Global Server Chatroom' : selectedChatRecipient.name}
                                                     <span className="inline-flex items-center gap-1 text-[10px] bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 px-1.5 py-0.5 rounded-md font-bold">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Online
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Active
                                                     </span>
                                                 </h3>
                                                 <p className="text-[11px] text-zinc-400 truncate">
                                                     {selectedChatRecipient === 'global' 
-                                                        ? 'Broadcast messages visible to all players in the shared server' 
-                                                        : `Private direct message thread with ${selectedChatRecipient.name}`
+                                                        ? 'All connected online players are chatting here on the same server' 
+                                                        : `Direct Message thread with ${selectedChatRecipient.name}`
                                                     }
                                                 </p>
                                             </div>
@@ -602,18 +608,19 @@ const OnlineHubView: React.FC = () => {
                                                         setShowNewOfferModal(true);
                                                     }
                                                 }}
-                                                className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all shadow shrink-0"
+                                                className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition-all shadow shrink-0"
                                             >
-                                                📜 Send Contract
+                                                📜 Contract Offer
                                             </button>
                                         )}
                                     </div>
 
                                     {/* Chat Message Stream */}
-                                    <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-zinc-950/40">
+                                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950/60">
                                         {(() => {
                                             const currentUid = user?.uid || gameState.activeArtistId || 'local-player';
                                             const currentName = activeArtist?.name || 'Online Player';
+                                            const myAvatar = activeArtist?.image || activeArtistData?.paparazziPhotos?.[0]?.url || user?.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentName)}&background=2563eb&color=fff`;
 
                                             const visibleMessages = chatMessages.filter(msg => {
                                                 if (selectedChatRecipient === 'global') {
@@ -632,34 +639,44 @@ const OnlineHubView: React.FC = () => {
 
                                             if (visibleMessages.length === 0) {
                                                 return (
-                                                    <div className="text-center py-16 text-zinc-500 space-y-2">
-                                                        <p className="text-2xl">💬</p>
-                                                        <p className="text-xs font-medium">No messages in this chat yet.</p>
-                                                        <p className="text-[11px] text-zinc-600">Send a greeting message below to kick off the conversation!</p>
+                                                    <div className="text-center py-20 text-zinc-500 space-y-2">
+                                                        <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 mx-auto flex items-center justify-center text-2xl">
+                                                            💬
+                                                        </div>
+                                                        <p className="text-xs font-bold text-zinc-300">No messages in this chat yet.</p>
+                                                        <p className="text-[11px] text-zinc-500">Send a message below to start chatting on the global server!</p>
                                                     </div>
                                                 );
                                             }
 
                                             return visibleMessages.map((msg, idx) => {
                                                 const isMe = msg.senderName === currentName || msg.senderId === currentUid;
+                                                const senderPhoto = isMe ? myAvatar : (msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}&background=3f3f46&color=fff`);
+
                                                 return (
-                                                    <div key={msg.id || idx} className={`flex items-start gap-2.5 ${isMe ? 'flex-row-reverse' : ''}`}>
+                                                    <div key={msg.id || idx} className={`flex items-end gap-2.5 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
+                                                        {/* Avatar */}
                                                         <img
-                                                            src={msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}`}
+                                                            src={senderPhoto}
                                                             alt=""
-                                                            className="w-7 h-7 rounded-full object-cover border border-zinc-700 shrink-0 mt-0.5"
+                                                            className={`w-8 h-8 rounded-full object-cover shrink-0 border shadow-md ${
+                                                                isMe ? 'border-blue-500' : 'border-zinc-700'
+                                                            }`}
                                                         />
-                                                        <div className={`max-w-[75%] space-y-0.5 ${isMe ? 'items-end text-right' : 'items-start'}`}>
+
+                                                        {/* Bubble Container */}
+                                                        <div className={`max-w-[70%] space-y-1 ${isMe ? 'items-end text-right' : 'items-start text-left'}`}>
                                                             <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 px-1">
-                                                                <span className="font-extrabold text-zinc-200">{msg.senderName}</span>
+                                                                <span className="font-extrabold text-zinc-300">{msg.senderName}</span>
                                                                 {msg.timestamp && (
-                                                                    <span>• {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                                    <span className="text-zinc-500">• {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                                 )}
                                                             </div>
-                                                            <div className={`p-3 rounded-2xl text-xs leading-relaxed shadow-md ${
+                                                            {/* Bubble: Blue for User, Grey for Others */}
+                                                            <div className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-lg ${
                                                                 isMe 
-                                                                    ? 'bg-red-600 text-white rounded-tr-none' 
-                                                                    : 'bg-zinc-800 text-zinc-100 border border-zinc-700/80 rounded-tl-none'
+                                                                    ? 'bg-blue-600 text-white rounded-br-none border border-blue-500/40 font-medium' 
+                                                                    : 'bg-zinc-800 text-zinc-100 rounded-bl-none border border-zinc-700/80 font-medium'
                                                             }`}>
                                                                 {msg.message}
                                                             </div>
@@ -682,15 +699,15 @@ const OnlineHubView: React.FC = () => {
                                             }}
                                             placeholder={
                                                 selectedChatRecipient === 'global'
-                                                    ? "Type a message to the Global Chatroom..."
+                                                    ? "Type a message in Global Server Chat..."
                                                     : `Direct Message to ${selectedChatRecipient.name}...`
                                             }
-                                            className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 placeholder-zinc-500"
+                                            className="flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3 text-xs text-white focus:outline-none focus:border-blue-500 placeholder-zinc-500 transition-all"
                                         />
                                         <button
                                             onClick={handleSendMessage}
                                             disabled={!chatInputText.trim()}
-                                            className="bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-lg shrink-0 flex items-center gap-1.5"
+                                            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white font-bold text-xs px-5 py-3 rounded-2xl transition-all shadow-lg shadow-blue-900/30 shrink-0 flex items-center gap-1.5"
                                         >
                                             <span>Send</span> ➔
                                         </button>
