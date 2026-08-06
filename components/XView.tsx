@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useGame } from "../context/GameContext";
-import { getGlobalPosts, publishGlobalPost } from "../firebase";
+import { getGlobalPosts, publishGlobalPost, subscribeToGlobalPosts } from "../firebase";
 import { ARTIST_GIFS } from "../data/artistGifs";
 import XIcon from "./icons/XIcon";
 import HomeIcon from "./icons/HomeIcon";

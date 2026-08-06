@@ -7815,9 +7815,44 @@ It is now available on your Spotify profile.
         };
       });
 
+      const playerSongIds = new Set(playerChartContenders.map((p) => p.uniqueId));
+
+      const onlineChartContenders = (state.globalSongs || [])
+        .filter((gs) => {
+          const sId = gs.songId || gs.id;
+          return sId && !playerSongIds.has(sId);
+        })
+        .map((gs) => {
+          const sId = gs.songId || gs.id;
+          const weeklyStreams = gs.weeklyStreams || gs.streams || 10000;
+          const wUS = Math.floor(weeklyStreams * 0.45);
+          const regStreams = {
+            "US": wUS,
+            "Canada": Math.floor(weeklyStreams * 0.10),
+            "UK": Math.floor(weeklyStreams * 0.15),
+            "Latin America": Math.floor(weeklyStreams * 0.15),
+            "Asia": Math.floor(weeklyStreams * 0.10),
+            "Africa": Math.floor(weeklyStreams * 0.05),
+          };
+          return {
+            uniqueId: sId,
+            title: gs.title,
+            artist: gs.artistName,
+            weeklyStreams,
+            regionalStreams: regStreams,
+            isPlayerSong: false,
+            isOnlinePlayer: true,
+            coverArt:
+              gs.coverUrl ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(gs.artistName || "Artist")}&background=random&color=fff&size=250`,
+            songId: sId,
+            genre: gs.genre || "Pop",
+          };
+        });
+
       const allContendersRaw = [
         ...playerChartContenders,
-        ...npcChartContenders,
+        ...onlineChartContenders,
       ];
       allContendersRaw.sort((a, b) => b.weeklyStreams - a.weeklyStreams);
 
@@ -9027,9 +9062,49 @@ It is now available on your Spotify profile.
         };
       });
 
+      const playerAlbumIds = new Set(playerAlbumContenders.map((pa) => pa.uniqueId));
+
+      const onlineAlbumMap = new Map<string, any>();
+      (state.globalSongs || []).forEach((gs) => {
+        if (gs.albumTitle) {
+          const key = `${gs.artistId || gs.artistName}_${gs.albumTitle}`;
+          const sStreams = gs.weeklyStreams || gs.streams || 10000;
+          const sSES = Math.floor(sStreams / 1500);
+          const sSales = Math.floor(sStreams / 3000);
+          if (!onlineAlbumMap.has(key)) {
+            onlineAlbumMap.set(key, {
+              uniqueId: `album_${key}`,
+              title: gs.albumTitle,
+              artist: gs.artistName,
+              label: "Independent",
+              coverArt:
+                gs.coverUrl ||
+                `https://ui-avatars.com/api/?name=${encodeURIComponent(gs.albumTitle)}&background=random&color=fff&size=250`,
+              isPlayerAlbum: false,
+              isOnlinePlayer: true,
+              albumId: `album_${key}`,
+              weeklyActivity: sSES + sSales + 8000,
+              weeklySales: sSales + 2000,
+              weeklySES: sSES,
+              weeklyPureSales: sSales + 2000,
+            });
+          } else {
+            const existing = onlineAlbumMap.get(key)!;
+            existing.weeklySES += sSES;
+            existing.weeklySales += sSales;
+            existing.weeklyPureSales += sSales;
+            existing.weeklyActivity += sSES + sSales;
+          }
+        }
+      });
+
+      const onlineAlbumContenders = Array.from(onlineAlbumMap.values()).filter(
+        (oa) => !playerAlbumIds.has(oa.uniqueId) && !playerAlbumIds.has(oa.albumId)
+      );
+
       const allAlbumContenders = [
         ...playerAlbumContenders,
-        ...npcAlbumContenders,
+        ...onlineAlbumContenders,
       ];
       allAlbumContenders.sort((a, b) => b.weeklyActivity - a.weeklyActivity);
 
