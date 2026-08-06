@@ -9,6 +9,7 @@ import React, {
 import { db, getActiveSaveId, separateMediaFromState, injectMediaIntoState } from "../db/db";
 import { useFirebase } from "./FirebaseContext";
 import { subscribeToGlobalServerStatus, advanceGlobalServerTick, subscribeToGlobalSongs, subscribeToGlobalPosts, publishGlobalSong, publishGlobalPost } from "../firebase";
+import { getGlobalGameTime } from "../utils/globalClock";
 
 import type {
   GameState,
@@ -1119,7 +1120,7 @@ const initialState: GameState = {
   spotifyPlaylists: DEFAULT_SPOTIFY_PLAYLISTS,
   podcasts: DEFAULT_PODCASTS,
   podcastCharts: DEFAULT_PODCASTS,
-  date: { week: 1, year: 2024 },
+  date: { week: getGlobalGameTime().week, year: getGlobalGameTime().year, day: getGlobalGameTime().day },
   currentView: "game",
   activeTab: "Home",
   activeYoutubeChannel: "artist",
@@ -1356,8 +1357,13 @@ const gameReducerInternal = (
       };
     }
     case "START_SOLO_GAME": {
-      const { artist, startYear } = action.payload;
-      const startDate = { week: 1, year: startYear };
+      const { artist, startYear, startWeek } = action.payload;
+      const currentClock = getGlobalGameTime();
+      const startDate = { 
+        week: startWeek || currentClock.week || 1, 
+        year: startYear || currentClock.year || 2026,
+        day: currentClock.day || 1
+      };
       const welcomeEmail: Email = {
         id: crypto.randomUUID(),
         sender: "Red Mic",
@@ -1632,8 +1638,13 @@ The Red Mic Team`,
       };
     }
     case "START_GROUP_GAME": {
-      const { group, startYear } = action.payload;
-      const startDate = { week: 1, year: startYear };
+      const { group, startYear, startWeek } = action.payload;
+      const currentClock = getGlobalGameTime();
+      const startDate = { 
+        week: startWeek || currentClock.week || 1, 
+        year: startYear || currentClock.year || 2026,
+        day: currentClock.day || 1
+      };
 
       const newArtistsData: { [artistId: string]: ArtistData } = {};
 

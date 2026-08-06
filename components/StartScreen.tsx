@@ -91,7 +91,8 @@ export const StartScreen: React.FC = () => {
                         country: 'US',
                         email: loggedUser.email || email
                     });
-                    dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: 2018, difficultyMode: 'normal' } });
+                    const currentClock = getGlobalGameTime();
+                    dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: currentClock.year, startWeek: currentClock.week, difficultyMode: 'normal' } });
                 }
             } else {
                 // SIGN UP
@@ -133,7 +134,8 @@ export const StartScreen: React.FC = () => {
                     email
                 });
 
-                dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: 2018, difficultyMode: 'normal' } });
+                const currentClock = getGlobalGameTime();
+                dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: currentClock.year, startWeek: currentClock.week, difficultyMode: 'normal' } });
             }
         } catch (err: any) {
             console.error("Auth error:", err);
@@ -171,7 +173,8 @@ export const StartScreen: React.FC = () => {
                     email: gUser.email || undefined
                 });
 
-                dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: 2018, difficultyMode: 'normal' } });
+                const currentClock = getGlobalGameTime();
+                dispatch({ type: 'START_SOLO_GAME', payload: { artist: newArtist, startYear: currentClock.year, startWeek: currentClock.week, difficultyMode: 'normal' } });
             }
         } catch (err: any) {
             console.error("Google login failed:", err);
