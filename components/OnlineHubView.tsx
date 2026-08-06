@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGame, formatNumber } from '../context/GameContext';
 import { useFirebase } from '../context/FirebaseContext';
 import { 
     getOnlinePlayers, 
+    subscribeToOnlinePlayers,
     registerOnlinePlayer, 
     publishGlobalSong, 
     getGlobalSongs, 
@@ -14,12 +15,16 @@ import {
     updateContractOffer, 
     publishMediaArticle, 
     getMediaArticles,
-    resetAllGameAccountsAndData
+    resetAllGameAccountsAndData,
+    getServerDataStats,
+    sendDirectMessage,
+    subscribeToDirectMessages,
+    ChatMessage
 } from '../firebase';
 import ChevronLeftIcon from './icons/ChevronLeftIcon';
 import GlobeAltIcon from './icons/GlobeAltIcon';
 
-type SubTab = 'players' | 'releases' | 'marketplace' | 'media';
+type SubTab = 'players' | 'chat' | 'releases' | 'marketplace' | 'media';
 
 const OnlineHubView: React.FC = () => {
     const { gameState, activeArtist, activeArtistData, dispatch } = useGame();
@@ -32,6 +37,105 @@ const OnlineHubView: React.FC = () => {
     const [onlinePlayers, setOnlinePlayers] = useState<any[]>([]);
     const [roleFilter, setRoleFilter] = useState('All');
     const [selectedPlayer, setSelectedPlayer] = useState<any | null>(null);
+
+    // Real-time online players subscription
+    useEffect(() => {
+        const unsub = subscribeToOnlinePlayers((players) => {
+            if (players && players.length > 0) {
+                setOnlinePlayers(players);
+            }
+        });
+        return () => unsub();
+    }, []);
+
+    // Server data stats
+    const [serverStats, setServerStats] = useState<{
+        totalDocs: number;
+        isAlmostFull: boolean;
+        capacityPercentage: number;
+        details: Record<string, number>;
+    }>({
+        totalDocs: 0,
+        isAlmostFull: false,
+        capacityPercentage: 0,
+        details: {}
+    });
+
+    const checkServerStats = async () => {
+        const stats = await getServerDataStats();
+        setServerStats(stats);
+    };
+
+    useEffect(() => {
+        checkServerStats();
+    }, [activeSubTab]);
+
+    // Password Protected Server Reset Modal
+    const [showResetModal, setShowResetModal] = useState(false);
+    const [resetPasswordInput, setResetPasswordInput] = useState('');
+    const [resetErrorMsg, setResetErrorMsg] = useState('');
+    const [isResetting, setIsResetting] = useState(false);
+
+    const handleConfirmReset = async () => {
+        const validPasswords = ['redmic2026', 'admin123', 'admin', 'redmic'];
+        if (!validPasswords.includes(resetPasswordInput.trim())) {
+            setResetErrorMsg('❌ Incorrect admin password! Server data reset denied.');
+            return;
+        }
+        setIsResetting(true);
+        setResetErrorMsg('');
+        try {
+            await resetAllGameAccountsAndData();
+            alert('Server data and online accounts reset successfully!');
+            window.location.reload();
+        } catch (err: any) {
+            setResetErrorMsg(`Error: ${err?.message || 'Failed to reset'}`);
+            setIsResetting(false);
+        }
+    };
+
+    // Direct Messages & Live Chat state
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+    const [selectedChatRecipient, setSelectedChatRecipient] = useState<{ id: string; name: string; avatar?: string } | 'global'>('global');
+    const [chatInputText, setChatInputText] = useState('');
+    const [showNewMsgModal, setShowNewMsgModal] = useState(false);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const unsub = subscribeToDirectMessages((msgs) => {
+            if (msgs) setChatMessages(msgs);
+        });
+        return () => unsub();
+    }, []);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [chatMessages, selectedChatRecipient, activeSubTab]);
+
+    const handleSendMessage = async () => {
+        if (!chatInputText.trim()) return;
+        const currentName = activeArtist?.name || 'Online Player';
+        const currentUid = user?.uid || gameState.activeArtistId || 'local-player';
+        
+        let targetId = 'global';
+        let targetName = 'Global Chat';
+        if (selectedChatRecipient !== 'global') {
+            targetId = selectedChatRecipient.id;
+            targetName = selectedChatRecipient.name;
+        }
+
+        const msgText = chatInputText.trim();
+        setChatInputText('');
+
+        await sendDirectMessage({
+            senderId: currentUid,
+            senderName: currentName,
+            senderAvatar: activeArtist?.image || activeArtistData?.paparazziPhotos?.[0]?.url,
+            recipientId: targetId,
+            recipientName: targetName,
+            message: msgText
+        });
+    };
 
     // 1b. Global Releases
     const [globalReleases, setGlobalReleases] = useState<any[]>([]);
@@ -65,14 +169,14 @@ const OnlineHubView: React.FC = () => {
 
     // Register / Update online player on load
     useEffect(() => {
-        if (user && activeArtist) {
-            registerOnlinePlayer(user.uid, {
+        if (activeArtist) {
+            registerOnlinePlayer(user?.uid, {
                 name: activeArtist.name,
                 roles: ['Musician', 'Producer'],
                 country: activeArtist.country || 'US',
                 fandomName: activeArtist.fandomName,
                 avatar: activeArtist.image,
-                email: user.email || ''
+                email: user?.email || undefined
             });
         }
     }, [user, activeArtist]);
@@ -82,7 +186,9 @@ const OnlineHubView: React.FC = () => {
         setLoading(true);
         if (activeSubTab === 'players') {
             const players = await getOnlinePlayers();
-            setOnlinePlayers(players);
+            if (players && players.length > 0) {
+                setOnlinePlayers(players);
+            }
         } else if (activeSubTab === 'marketplace') {
             if (user) {
                 const contracts = await getContractOffers(user.uid);
@@ -210,15 +316,14 @@ const OnlineHubView: React.FC = () => {
 
                 <div className="flex items-center gap-2">
                     <button
-                        onClick={async () => {
-                            if (window.confirm("Are you sure you want to reset all accounts and server data to start fresh?")) {
-                                await resetAllGameAccountsAndData();
-                                window.location.reload();
-                            }
+                        onClick={() => {
+                            setResetPasswordInput('');
+                            setResetErrorMsg('');
+                            setShowResetModal(true);
                         }}
-                        className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-zinc-700 transition-all"
+                        className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-zinc-700 transition-all flex items-center gap-1.5"
                     >
-                        🔄 Reset Server Data
+                        🔒 Reset Server Data
                     </button>
                     {!user && (
                         <button 
@@ -231,10 +336,36 @@ const OnlineHubView: React.FC = () => {
                 </div>
             </div>
 
+            {/* Server Data Capacity & Status Indicator */}
+            <div className="bg-zinc-900/90 border-b border-zinc-800 px-4 py-2 flex flex-wrap items-center justify-between text-xs gap-2">
+                <div className="flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                    <span className="font-bold text-zinc-300">Global Server Status:</span>
+                    <span className="text-zinc-400">Single Shared Cloud Server</span>
+                </div>
+                <div className="flex items-center gap-4 text-zinc-400">
+                    <div>
+                        <span className="text-zinc-500">Online Players:</span> <strong className="text-white">{onlinePlayers.length}</strong>
+                    </div>
+                    <div>
+                        <span className="text-zinc-500">Server Data Usage:</span>{' '}
+                        <strong className={serverStats.isAlmostFull ? 'text-amber-400' : 'text-emerald-400'}>
+                            {serverStats.totalDocs} / 10,000 documents ({serverStats.capacityPercentage}% capacity)
+                        </strong>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        serverStats.isAlmostFull ? 'bg-amber-950/60 text-amber-300 border border-amber-800' : 'bg-emerald-950/60 text-emerald-300 border border-emerald-800'
+                    }`}>
+                        {serverStats.isAlmostFull ? '⚠️ SERVER ALMOST FULL' : '✅ SERVER HEALTHY (NOT FULL)'}
+                    </span>
+                </div>
+            </div>
+
             {/* Sub-Tab Selector */}
             <div className="flex border-b border-zinc-800 bg-zinc-900/60 overflow-x-auto no-scrollbar">
                 {[
                     { id: 'players', label: '🌐 Directory', desc: 'Online Players' },
+                    { id: 'chat', label: '💬 Chat & DMs', desc: 'Live Direct Messaging' },
                     { id: 'releases', label: '🎵 Global Releases', desc: 'Online Music Drops' },
                     { id: 'marketplace', label: '📜 Marketplace', desc: 'Contracts & Deals' },
                     { id: 'media', label: '📰 Media Press', desc: 'Reviews & News' },
@@ -319,19 +450,252 @@ const OnlineHubView: React.FC = () => {
                                                     </div>
                                                 </div>
 
-                                                <button
-                                                    onClick={() => {
-                                                        setOfferTargetPlayer(player);
-                                                        setShowNewOfferModal(true);
-                                                    }}
-                                                    className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition-all shadow-lg shrink-0"
-                                                >
-                                                    Send Offer
-                                                </button>
+                                                <div className="flex flex-col gap-1.5 shrink-0">
+                                                    <button
+                                                        onClick={() => {
+                                                            setSelectedChatRecipient({ id: player.id, name: player.name, avatar: player.avatar });
+                                                            setActiveSubTab('chat');
+                                                        }}
+                                                        className="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold text-xs px-3 py-1.5 rounded-xl transition-all border border-zinc-700 flex items-center justify-center gap-1"
+                                                    >
+                                                        💬 DM
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setOfferTargetPlayer(player);
+                                                            setShowNewOfferModal(true);
+                                                        }}
+                                                        className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all shadow-lg"
+                                                    >
+                                                        Offer
+                                                    </button>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
                                 )}
+                            </div>
+                        )}
+
+                        {/* TAB 1.5: ONLINE CHAT & DIRECT MESSAGING (DMs) */}
+                        {activeSubTab === 'chat' && (
+                            <div className="flex flex-col md:flex-row gap-4 h-[600px] bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
+                                {/* Left Side: Conversations List */}
+                                <div className="w-full md:w-72 bg-zinc-950/80 border-r border-zinc-800/80 flex flex-col shrink-0">
+                                    <div className="p-3 border-b border-zinc-800/80 flex items-center justify-between">
+                                        <div>
+                                            <h3 className="font-extrabold text-white text-sm">💬 Messages & DMs</h3>
+                                            <p className="text-[11px] text-zinc-400">Live online network</p>
+                                        </div>
+                                        <button
+                                            onClick={() => setShowNewMsgModal(true)}
+                                            className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1 shadow"
+                                        >
+                                            + New DM
+                                        </button>
+                                    </div>
+
+                                    <div className="flex-1 overflow-y-auto divide-y divide-zinc-800/50">
+                                        {/* Global Chat Room */}
+                                        <button
+                                            onClick={() => setSelectedChatRecipient('global')}
+                                            className={`w-full p-3 text-left flex items-center gap-3 transition-all ${
+                                                selectedChatRecipient === 'global' ? 'bg-red-950/40 border-l-4 border-red-500' : 'hover:bg-zinc-900/60'
+                                            }`}
+                                        >
+                                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-white font-bold text-lg shrink-0 shadow">
+                                                🌐
+                                            </div>
+                                            <div className="min-w-0 flex-1">
+                                                <div className="flex justify-between items-center">
+                                                    <h4 className="font-extrabold text-white text-xs truncate">Global Community Chat</h4>
+                                                    <span className="text-[9px] text-emerald-400 font-bold">LIVE</span>
+                                                </div>
+                                                <p className="text-[11px] text-zinc-400 truncate mt-0.5">
+                                                    {chatMessages.filter(m => m.recipientId === 'global').slice(-1)[0]?.message || 'Public room for all players'}
+                                                </p>
+                                            </div>
+                                        </button>
+
+                                        {/* Online Players DM List */}
+                                        <div className="px-3 py-2 bg-zinc-900/40 text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">
+                                            Direct Messages ({onlinePlayers.length})
+                                        </div>
+
+                                        {onlinePlayers.map(player => {
+                                            const isSelected = typeof selectedChatRecipient === 'object' && selectedChatRecipient?.id === player.id;
+                                            const playerDMs = chatMessages.filter(m => 
+                                                (m.senderId === player.id || m.senderName === player.name) ||
+                                                (m.recipientId === player.id || m.recipientName === player.name)
+                                            );
+                                            const lastMsg = playerDMs.slice(-1)[0];
+
+                                            return (
+                                                <button
+                                                    key={player.id}
+                                                    onClick={() => setSelectedChatRecipient({ id: player.id, name: player.name, avatar: player.avatar })}
+                                                    className={`w-full p-3 text-left flex items-center gap-3 transition-all ${
+                                                        isSelected ? 'bg-red-950/40 border-l-4 border-red-500' : 'hover:bg-zinc-900/60'
+                                                    }`}
+                                                >
+                                                    <div className="relative shrink-0">
+                                                        <img
+                                                            src={player.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(player.name)}`}
+                                                            alt=""
+                                                            className="w-10 h-10 rounded-full object-cover border border-zinc-700"
+                                                        />
+                                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-zinc-950 rounded-full"></span>
+                                                    </div>
+                                                    <div className="min-w-0 flex-1">
+                                                        <div className="flex justify-between items-center">
+                                                            <h4 className="font-extrabold text-white text-xs truncate">{player.name}</h4>
+                                                            <span className="text-[10px] text-zinc-500">{player.country || 'US'}</span>
+                                                        </div>
+                                                        <p className="text-[11px] text-zinc-400 truncate mt-0.5">
+                                                            {lastMsg ? lastMsg.message : 'Tap to start direct messaging...'}
+                                                        </p>
+                                                    </div>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Right Side: Chat Conversation Box */}
+                                <div className="flex-1 flex flex-col bg-zinc-900 h-full min-w-0">
+                                    {/* Chat Box Header */}
+                                    <div className="p-3 bg-zinc-950/90 border-b border-zinc-800 flex justify-between items-center shrink-0">
+                                        <div className="flex items-center gap-3 min-w-0">
+                                            {selectedChatRecipient === 'global' ? (
+                                                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-white text-base font-bold shrink-0">
+                                                    🌐
+                                                </div>
+                                            ) : (
+                                                <img
+                                                    src={selectedChatRecipient.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedChatRecipient.name)}`}
+                                                    alt=""
+                                                    className="w-9 h-9 rounded-full object-cover border border-zinc-700 shrink-0"
+                                                />
+                                            )}
+                                            <div className="min-w-0">
+                                                <h3 className="font-extrabold text-white text-sm truncate flex items-center gap-2">
+                                                    {selectedChatRecipient === 'global' ? 'Global Community Chatroom' : selectedChatRecipient.name}
+                                                    <span className="inline-flex items-center gap-1 text-[10px] bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 px-1.5 py-0.5 rounded-md font-bold">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Online
+                                                    </span>
+                                                </h3>
+                                                <p className="text-[11px] text-zinc-400 truncate">
+                                                    {selectedChatRecipient === 'global' 
+                                                        ? 'Broadcast messages visible to all players in the shared server' 
+                                                        : `Private direct message thread with ${selectedChatRecipient.name}`
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {selectedChatRecipient !== 'global' && (
+                                            <button
+                                                onClick={() => {
+                                                    const p = onlinePlayers.find(op => op.id === selectedChatRecipient.id || op.name === selectedChatRecipient.name);
+                                                    if (p) {
+                                                        setOfferTargetPlayer(p);
+                                                        setShowNewOfferModal(true);
+                                                    }
+                                                }}
+                                                className="bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all shadow shrink-0"
+                                            >
+                                                📜 Send Contract
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Chat Message Stream */}
+                                    <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-zinc-950/40">
+                                        {(() => {
+                                            const currentUid = user?.uid || gameState.activeArtistId || 'local-player';
+                                            const currentName = activeArtist?.name || 'Online Player';
+
+                                            const visibleMessages = chatMessages.filter(msg => {
+                                                if (selectedChatRecipient === 'global') {
+                                                    return msg.recipientId === 'global' || !msg.recipientId;
+                                                } else {
+                                                    const targetId = selectedChatRecipient.id;
+                                                    const targetName = selectedChatRecipient.name;
+                                                    return (
+                                                        (msg.senderId === currentUid && msg.recipientId === targetId) ||
+                                                        (msg.senderId === targetId && msg.recipientId === currentUid) ||
+                                                        (msg.senderName === currentName && msg.recipientName === targetName) ||
+                                                        (msg.senderName === targetName && msg.recipientName === currentName)
+                                                    );
+                                                }
+                                            });
+
+                                            if (visibleMessages.length === 0) {
+                                                return (
+                                                    <div className="text-center py-16 text-zinc-500 space-y-2">
+                                                        <p className="text-2xl">💬</p>
+                                                        <p className="text-xs font-medium">No messages in this chat yet.</p>
+                                                        <p className="text-[11px] text-zinc-600">Send a greeting message below to kick off the conversation!</p>
+                                                    </div>
+                                                );
+                                            }
+
+                                            return visibleMessages.map((msg, idx) => {
+                                                const isMe = msg.senderName === currentName || msg.senderId === currentUid;
+                                                return (
+                                                    <div key={msg.id || idx} className={`flex items-start gap-2.5 ${isMe ? 'flex-row-reverse' : ''}`}>
+                                                        <img
+                                                            src={msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}`}
+                                                            alt=""
+                                                            className="w-7 h-7 rounded-full object-cover border border-zinc-700 shrink-0 mt-0.5"
+                                                        />
+                                                        <div className={`max-w-[75%] space-y-0.5 ${isMe ? 'items-end text-right' : 'items-start'}`}>
+                                                            <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 px-1">
+                                                                <span className="font-extrabold text-zinc-200">{msg.senderName}</span>
+                                                                {msg.timestamp && (
+                                                                    <span>• {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                                )}
+                                                            </div>
+                                                            <div className={`p-3 rounded-2xl text-xs leading-relaxed shadow-md ${
+                                                                isMe 
+                                                                    ? 'bg-red-600 text-white rounded-tr-none' 
+                                                                    : 'bg-zinc-800 text-zinc-100 border border-zinc-700/80 rounded-tl-none'
+                                                            }`}>
+                                                                {msg.message}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            });
+                                        })()}
+                                        <div ref={messagesEndRef} />
+                                    </div>
+
+                                    {/* Chat Input Bar */}
+                                    <div className="p-3 bg-zinc-950 border-t border-zinc-800 flex items-center gap-2 shrink-0">
+                                        <input
+                                            type="text"
+                                            value={chatInputText}
+                                            onChange={e => setChatInputText(e.target.value)}
+                                            onKeyDown={e => {
+                                                if (e.key === 'Enter') handleSendMessage();
+                                            }}
+                                            placeholder={
+                                                selectedChatRecipient === 'global'
+                                                    ? "Type a message to the Global Chatroom..."
+                                                    : `Direct Message to ${selectedChatRecipient.name}...`
+                                            }
+                                            className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 placeholder-zinc-500"
+                                        />
+                                        <button
+                                            onClick={handleSendMessage}
+                                            disabled={!chatInputText.trim()}
+                                            className="bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-lg shrink-0 flex items-center gap-1.5"
+                                        >
+                                            <span>Send</span> ➔
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )}
 
@@ -724,6 +1088,119 @@ const OnlineHubView: React.FC = () => {
                                 className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-xs px-4 py-2.5 rounded-xl transition-all"
                             >
                                 Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Password Verification Modal for Reset Server Data */}
+            {showResetModal && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-red-950/80 border border-red-800/80 flex items-center justify-center text-red-400 text-xl font-bold">
+                                🔒
+                            </div>
+                            <div>
+                                <h3 className="text-base font-bold text-white">Security Check: Reset Server Data</h3>
+                                <p className="text-xs text-zinc-400">Password required to clear online database</p>
+                            </div>
+                        </div>
+
+                        <p className="text-xs text-zinc-300 bg-zinc-950 p-3 rounded-xl border border-zinc-800 leading-relaxed">
+                            Warning: This operation will wipe all online player accounts, global releases, media posts, and server clock state across the entire network.
+                        </p>
+
+                        <div>
+                            <label className="text-xs text-zinc-400 font-bold block mb-1">Enter Admin Password</label>
+                            <input 
+                                type="password" 
+                                value={resetPasswordInput} 
+                                onChange={e => {
+                                    setResetPasswordInput(e.target.value);
+                                    setResetErrorMsg('');
+                                }}
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter') handleConfirmReset();
+                                }}
+                                placeholder="Enter admin password (e.g. redmic2026)"
+                                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-red-500"
+                                autoFocus
+                            />
+                            {resetErrorMsg && (
+                                <p className="text-xs font-semibold text-red-400 mt-1.5">{resetErrorMsg}</p>
+                            )}
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
+                            <button 
+                                onClick={handleConfirmReset}
+                                disabled={isResetting}
+                                className="flex-1 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-lg"
+                            >
+                                {isResetting ? 'Resetting Data...' : 'Confirm Reset Server Data'}
+                            </button>
+                            <button 
+                                onClick={() => {
+                                    setShowResetModal(false);
+                                    setResetPasswordInput('');
+                                    setResetErrorMsg('');
+                                }}
+                                disabled={isResetting}
+                                className="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-xs px-4 py-3 rounded-xl transition-all"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* New DM Target Selection Modal */}
+            {showNewMsgModal && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-md p-5 space-y-4 shadow-2xl">
+                        <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
+                            <h3 className="font-extrabold text-white text-base">💬 Start New Direct Message</h3>
+                            <button onClick={() => setShowNewMsgModal(false)} className="text-zinc-400 hover:text-white font-bold text-lg">✕</button>
+                        </div>
+
+                        <p className="text-xs text-zinc-400">Select an online player from the global server network to start messaging:</p>
+
+                        <div className="max-h-60 overflow-y-auto space-y-2 divide-y divide-zinc-800/60">
+                            {onlinePlayers.map(p => (
+                                <button
+                                    key={p.id}
+                                    onClick={() => {
+                                        setSelectedChatRecipient({ id: p.id, name: p.name, avatar: p.avatar });
+                                        setShowNewMsgModal(false);
+                                        setActiveSubTab('chat');
+                                    }}
+                                    className="w-full pt-2 flex items-center justify-between hover:bg-zinc-800/50 p-2 rounded-xl transition-all text-left"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <img
+                                            src={p.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}`}
+                                            alt=""
+                                            className="w-9 h-9 rounded-full object-cover border border-zinc-700"
+                                        />
+                                        <div>
+                                            <h4 className="font-extrabold text-white text-xs">{p.name}</h4>
+                                            <p className="text-[10px] text-zinc-400">{p.roles?.join(', ') || 'Musician'} • {p.country || 'US'}</p>
+                                        </div>
+                                    </div>
+                                    <span className="text-xs font-bold text-red-400">Message ➔</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="pt-2">
+                            <button
+                                onClick={() => setShowNewMsgModal(false)}
+                                className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-xs py-2.5 rounded-xl transition-all"
+                            >
+                                Close
                             </button>
                         </div>
                     </div>

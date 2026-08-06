@@ -86,28 +86,52 @@ export const loginWithEmail = async (email: string, pass: string) => {
 };
 
 export const registerOnlinePlayer = async (
-    userId: string, 
-    profileData: {
+    userId?: string | null, 
+    profileData?: {
         name: string;
-        roles: string[];
-        country: string;
+        roles?: string[];
+        country?: string;
         fandomName?: string;
         avatar?: string;
         email?: string;
+        totalStreams?: number;
     }
 ) => {
     try {
-        await setDoc(doc(db, "online_players", userId), {
-            userId,
-            ...profileData,
+        const guest = getOrCreateGuestUser();
+        const uidToUse = userId || auth.currentUser?.uid || guest.uid;
+        if (!uidToUse || !profileData || !profileData.name) return;
+
+        await setDoc(doc(db, "online_players", uidToUse), {
+            userId: uidToUse,
+            name: profileData.name,
+            roles: profileData.roles || ['Musician', 'Producer'],
+            country: profileData.country || 'US',
+            fandomName: profileData.fandomName || '',
+            avatar: profileData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.name)}&background=random`,
+            email: profileData.email || `${uidToUse}@redmic.online`,
             createdAt: serverTimestamp(),
             lastOnlineAt: serverTimestamp(),
-            totalStreams: 0,
-            chartPoints: 0,
+            totalStreams: profileData.totalStreams || 0,
             isOnline: true
         }, { merge: true });
     } catch (err) {
         console.error("Failed to register online player:", err);
+    }
+};
+
+export const subscribeToOnlinePlayers = (callback: (players: any[]) => void) => {
+    try {
+        const q = query(collection(db, "online_players"), limit(100));
+        return onSnapshot(q, (snap) => {
+            const players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            callback(players);
+        }, (err) => {
+            console.error("Error subscribing to online players:", err);
+        });
+    } catch (err) {
+        console.error("Error setting listener for online players:", err);
+        return () => {};
     }
 };
 
@@ -120,6 +144,91 @@ export const getOnlinePlayers = async () => {
         console.error("Error fetching online players:", err);
         return [];
     }
+};
+
+export interface ChatMessage {
+    id?: string;
+    senderId: string;
+    senderName: string;
+    senderAvatar?: string;
+    recipientId: string; // 'global' or player's userId/id
+    recipientName?: string;
+    message: string;
+    createdAt?: any;
+    timestamp?: number;
+}
+
+export const sendDirectMessage = async (msg: ChatMessage) => {
+    try {
+        const msgRef = doc(collection(db, "global_chats"));
+        await setDoc(msgRef, {
+            id: msgRef.id,
+            senderId: msg.senderId,
+            senderName: msg.senderName,
+            senderAvatar: msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}&background=random`,
+            recipientId: msg.recipientId,
+            recipientName: msg.recipientName || 'Global Chat',
+            message: msg.message,
+            timestamp: Date.now(),
+            createdAt: serverTimestamp()
+        });
+        return true;
+    } catch (err) {
+        console.error("Error sending chat message:", err);
+        return false;
+    }
+};
+
+export const subscribeToDirectMessages = (callback: (messages: ChatMessage[]) => void) => {
+    try {
+        const q = query(collection(db, "global_chats"), orderBy("timestamp", "asc"), limit(200));
+        return onSnapshot(q, (snap) => {
+            const msgs = snap.docs.map(d => ({ id: d.id, ...d.data() } as ChatMessage));
+            callback(msgs);
+        }, (err) => {
+            console.error("Error subscribing to global chats:", err);
+        });
+    } catch (err) {
+        console.error("Error setting chat listener:", err);
+        return () => {};
+    }
+};
+
+export const getServerDataStats = async () => {
+    const collectionsToCheck = [
+        "online_players",
+        "global_songs",
+        "global_posts",
+        "global_contracts",
+        "global_media",
+        "global_labels",
+        "global_server",
+        "global_chats"
+    ];
+    let totalDocs = 0;
+    const details: Record<string, number> = {};
+
+    for (const colName of collectionsToCheck) {
+        try {
+            const snap = await getDocs(collection(db, colName));
+            details[colName] = snap.docs.length;
+            totalDocs += snap.docs.length;
+        } catch (err) {
+            console.error(`Error counting ${colName}:`, err);
+            details[colName] = 0;
+        }
+    }
+
+    const maxRecommendedDocs = 10000;
+    const isAlmostFull = totalDocs > 8000;
+    const capacityPercentage = Math.min(100, Math.round((totalDocs / maxRecommendedDocs) * 100));
+
+    return {
+        totalDocs,
+        details,
+        isAlmostFull,
+        capacityPercentage
+    };
 };
 
 export const logout = async () => {
@@ -488,6 +597,7 @@ export const resetAllGameAccountsAndData = async () => {
         "global_media",
         "global_labels",
         "global_server",
+        "global_chats",
         "users",
         "saves"
     ];

@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { db, getActiveSaveId, separateMediaFromState, injectMediaIntoState } from "../db/db";
 import { useFirebase } from "./FirebaseContext";
-import { subscribeToGlobalServerStatus, advanceGlobalServerTick, subscribeToGlobalSongs, subscribeToGlobalPosts, publishGlobalSong, publishGlobalPost } from "../firebase";
+import { subscribeToGlobalServerStatus, advanceGlobalServerTick, subscribeToGlobalSongs, subscribeToGlobalPosts, publishGlobalSong, publishGlobalPost, registerOnlinePlayer } from "../firebase";
 import { getGlobalGameTime } from "../utils/globalClock";
 
 import type {
@@ -22350,7 +22350,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     if (!gameState.activeArtistId || !gameState.artistsData) return;
     const activeData = gameState.artistsData[gameState.activeArtistId];
-    if (!activeData || !activeData.songs) return;
+    if (!activeData) return;
 
     const artistProfile = [
       gameState.soloArtist,
@@ -22361,26 +22361,39 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
 
     const artistName = artistProfile?.name || "Online Player";
 
-    const releasedSongs = activeData.songs.filter((s) => s.isReleased);
-    if (releasedSongs.length > 0) {
-      releasedSongs.forEach((song) => {
-        publishGlobalSong({
-          id: song.id,
-          songId: song.id,
-          title: song.title,
-          artistName: artistName,
-          artistId: gameState.activeArtistId!,
-          coverUrl: song.coverArt || activeData.paparazziPhotos?.[0]?.url,
-          genre: song.genre || "Pop",
-          streams: song.streams || 0,
-          weeklyStreams: song.lastWeekStreams || song.weeklyStreams || 10000,
-          releaseYear: gameState.date.year,
-          releaseWeek: gameState.date.week,
-          isOnlinePlayer: true,
+    // Auto-register player on single shared online server
+    registerOnlinePlayer(user?.uid, {
+      name: artistName,
+      roles: ["Musician", "Producer"],
+      country: artistProfile && "country" in artistProfile ? (artistProfile as any).country : "US",
+      fandomName: artistProfile && "fandomName" in artistProfile ? (artistProfile as any).fandomName : undefined,
+      avatar: artistProfile?.image || activeData.paparazziPhotos?.[0]?.url,
+      email: user?.email || undefined,
+      totalStreams: activeData.songs?.reduce((sum, s) => sum + (s.streams || 0), 0) || 0
+    });
+
+    if (activeData.songs) {
+      const releasedSongs = activeData.songs.filter((s) => s.isReleased);
+      if (releasedSongs.length > 0) {
+        releasedSongs.forEach((song) => {
+          publishGlobalSong({
+            id: song.id,
+            songId: song.id,
+            title: song.title,
+            artistName: artistName,
+            artistId: gameState.activeArtistId!,
+            coverUrl: song.coverArt || activeData.paparazziPhotos?.[0]?.url,
+            genre: song.genre || "Pop",
+            streams: song.streams || 0,
+            weeklyStreams: song.lastWeekStreams || song.weeklyStreams || 10000,
+            releaseYear: gameState.date.year,
+            releaseWeek: gameState.date.week,
+            isOnlinePlayer: true,
+          });
         });
-      });
+      }
     }
-  }, [gameState.date.week, gameState.date.year, gameState.activeArtistId]);
+  }, [gameState.date.week, gameState.date.year, gameState.activeArtistId, user]);
 
   // Effect for saving game state to IndexedDB on change
   useEffect(() => {
