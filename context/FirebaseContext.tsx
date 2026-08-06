@@ -5,6 +5,7 @@ import { auth, loginWithGoogle, logout, loginWithEmail, registerWithEmail, getOr
 interface FirebaseContextType {
     user: User | null;
     isLoading: boolean;
+    login: () => Promise<User | undefined>;
     loginWithGoogle: () => Promise<User | undefined>;
     loginWithEmail: (email: string, pass: string) => Promise<User>;
     registerWithEmail: (email: string, pass: string, name: string) => Promise<User>;
@@ -14,6 +15,7 @@ interface FirebaseContextType {
 const FirebaseContext = createContext<FirebaseContextType>({
     user: null,
     isLoading: true,
+    login: async () => undefined,
     loginWithGoogle: async () => undefined,
     loginWithEmail: async () => { throw new Error('Not initialized'); },
     registerWithEmail: async () => { throw new Error('Not initialized'); },
@@ -75,6 +77,7 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         <FirebaseContext.Provider value={{ 
             user: user || (getOrCreateGuestUser() as any), 
             isLoading, 
+            login: handleGoogleLogin,
             loginWithGoogle: handleGoogleLogin, 
             loginWithEmail: handleEmailLogin, 
             registerWithEmail: handleEmailRegister, 

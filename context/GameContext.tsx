@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { db, getActiveSaveId, separateMediaFromState, injectMediaIntoState } from "../db/db";
 import { useFirebase } from "./FirebaseContext";
+import { subscribeToGlobalServerStatus, advanceGlobalServerTick } from "../firebase";
 
 import type {
   GameState,
@@ -1313,6 +1314,21 @@ const gameReducerInternal = (
   };
 
   switch (action.type) {
+    case "SYNC_SERVER_DATE": {
+      const { year, week, day } = action.payload;
+      const targetDay = day || state.date.day || 1;
+      if (
+        state.date.year === year &&
+        state.date.week === week &&
+        state.date.day === targetDay
+      ) {
+        return state;
+      }
+      return {
+        ...state,
+        date: { year, week, day: targetDay },
+      };
+    }
     case "START_SOLO_GAME": {
       const { artist, startYear } = action.payload;
       const startDate = { week: 1, year: startYear };
@@ -22121,6 +22137,37 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({
 
     loadGame();
   }, [isAuthLoading]); // Now we only depend on local DB on mount
+
+  // Real-time Global Server Time Synchronization across all connected players
+  useEffect(() => {
+    let lastTickTime = 0;
+    const unsubscribe = subscribeToGlobalServerStatus((serverStatus) => {
+      if (serverStatus) {
+        dispatch({
+          type: "SYNC_SERVER_DATE",
+          payload: {
+            year: serverStatus.year,
+            week: serverStatus.week,
+            day: serverStatus.day,
+          },
+        });
+        lastTickTime = serverStatus.lastTickTimestamp || Date.now();
+      }
+    });
+
+    // Auto-tick check: advance server time tick every 30 seconds globally
+    const interval = setInterval(() => {
+      if (lastTickTime > 0 && Date.now() - lastTickTime >= 30000) {
+        lastTickTime = Date.now();
+        advanceGlobalServerTick();
+      }
+    }, 5000);
+
+    return () => {
+      unsubscribe();
+      clearInterval(interval);
+    };
+  }, []);
 
   // Effect for saving game state to IndexedDB on change
   useEffect(() => {

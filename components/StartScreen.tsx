@@ -6,6 +6,8 @@ import type { Artist } from '../types';
 
 type AuthTab = 'signup' | 'login';
 
+import { getGlobalGameTime } from '../utils/globalClock';
+
 export const StartScreen: React.FC = () => {
     const { dispatch } = useGame();
     const { loginWithGoogle, loginWithEmail, registerWithEmail } = useFirebase();
@@ -30,19 +32,12 @@ export const StartScreen: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const fetchClock = async () => {
-            try {
-                const res = await fetch('/api/global-clock');
-                if (res.ok) {
-                    const data = await res.json();
-                    setGlobalClock(data);
-                }
-            } catch (e) {
-                console.error("Failed to fetch global clock", e);
-            }
+        const fetchClock = () => {
+            const data = getGlobalGameTime();
+            setGlobalClock(data);
         };
         fetchClock();
-        const interval = setInterval(fetchClock, 5000);
+        const interval = setInterval(fetchClock, 1000);
         return () => clearInterval(interval);
     }, []);
 

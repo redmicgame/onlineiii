@@ -8,54 +8,34 @@ import AppsTab from './AppsTab';
 import MiscTab from './MiscTab';
 import BusinessTab from './BusinessTab';
 import BottomNav from './BottomNav';
+import { getGlobalGameTime } from '../utils/globalClock';
 
 const GameUI: React.FC = () => {
     const { gameState, dispatch } = useGame();
     const { activeTab } = gameState;
 
-    const [globalClock, setGlobalClock] = useState<{ year: number; week: number; nextTickInSeconds: number } | null>(null);
     const [secondsLeft, setSecondsLeft] = useState<number>(900);
     const [showInfoToast, setShowInfoToast] = useState(false);
 
     useEffect(() => {
-        let lastWeek = -1;
-        const fetchClock = async () => {
-            try {
-                const res = await fetch('/api/global-clock');
-                if (res.ok) {
-                    const data = await res.json();
-                    setGlobalClock(data);
-                    setSecondsLeft(data.nextTickInSeconds);
+        const updateTimeAndSync = () => {
+            const timeData = getGlobalGameTime();
+            setSecondsLeft(timeData.nextTickInSeconds);
 
-                    // Auto-advance if global week shifted on server
-                    if (lastWeek !== -1 && data.week !== lastWeek) {
-                        dispatch({ type: 'PROGRESS_WEEK' });
-                    }
-                    lastWeek = data.week;
+            dispatch({
+                type: 'SYNC_SERVER_DATE',
+                payload: {
+                    year: timeData.year,
+                    week: timeData.week,
+                    day: timeData.day
                 }
-            } catch (e) {
-                console.error("Failed to sync clock", e);
-            }
-        };
-
-        fetchClock();
-        const syncInterval = setInterval(fetchClock, 5000);
-
-        // Local 1s countdown tick for smooth UI timer
-        const timerInterval = setInterval(() => {
-            setSecondsLeft(prev => {
-                if (prev <= 1) {
-                    fetchClock();
-                    return 900;
-                }
-                return prev - 1;
             });
-        }, 1000);
-
-        return () => {
-            clearInterval(syncInterval);
-            clearInterval(timerInterval);
         };
+
+        updateTimeAndSync();
+        const interval = setInterval(updateTimeAndSync, 1000);
+
+        return () => clearInterval(interval);
     }, [dispatch]);
 
     const renderActiveTab = () => {

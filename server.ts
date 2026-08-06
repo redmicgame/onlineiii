@@ -1,34 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
-
-// Global Ticking Engine Configuration
-// 15 minutes real-time = 1 in-game week
-// Starting at Year 2018, Week 1
-const START_EPOCH_MS = new Date('2018-01-01T00:00:00Z').getTime();
-const MS_PER_WEEK = 15 * 60 * 1000; // 15 minutes in ms
-
-export function calculateGlobalGameTime(nowMs: number = Date.now()) {
-  const elapsedMs = Math.max(0, nowMs - START_EPOCH_MS);
-  const elapsedWeeks = Math.floor(elapsedMs / MS_PER_WEEK);
-  const nextTickMs = MS_PER_WEEK - (elapsedMs % MS_PER_WEEK);
-
-  const startYear = 2018;
-  const startWeek = 1;
-
-  const totalWeeks = (startWeek - 1) + elapsedWeeks;
-  const year = startYear + Math.floor(totalWeeks / 52);
-  const week = (totalWeeks % 52) + 1;
-
-  return {
-    year,
-    week,
-    elapsedWeeks,
-    nextTickInSeconds: Math.ceil(nextTickMs / 1000),
-    minutesPerWeek: 15,
-    epochStartedAt: new Date(START_EPOCH_MS).toISOString()
-  };
-}
+import { getGlobalGameTime } from './utils/globalClock';
 
 async function startServer() {
   const app = express();
@@ -40,7 +13,7 @@ async function startServer() {
 
   // Global Online Time Engine
   app.get('/api/global-clock', (req, res) => {
-    const timeData = calculateGlobalGameTime();
+    const timeData = getGlobalGameTime();
     res.json(timeData);
   });
 

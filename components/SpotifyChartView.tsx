@@ -72,31 +72,8 @@ const SpotifyChartView: React.FC = () => {
             });
         }
 
-        // Add some fake NPC countdowns if we don't have enough
-        const fakeNpcCountdowns = 10 - countdowns.length;
-        if (fakeNpcCountdowns > 0 && gameState.npcAlbums) {
-            const upcomingNpcs = gameState.npcAlbums.slice(0, fakeNpcCountdowns);
-            upcomingNpcs.forEach((album, index) => {
-                const w = (gameState.date.week + 1 + index) % 52 || 52;
-                const y = gameState.date.year + (gameState.date.week + 1 + index > 52 ? 1 : 0);
-                const releaseDate = { year: y, week: w };
-                const albumSongs = album.songIds.map(id => gameState.npcs.find(s => s.uniqueId === id)).filter(Boolean);
-                const avgPop = albumSongs.length > 0 ? albumSongs.reduce((sum, s) => sum + (s?.basePopularity || 0), 0) / albumSongs.length : 500000;
-                
-                countdowns.push({
-                    id: `fake_${album.uniqueId}`,
-                    title: album.title,
-                    artistName: album.artist,
-                    coverArt: album.coverArt || `https://ui-avatars.com/api/?name=${encodeURIComponent(album.artist)}`,
-                    releaseDate: releaseDate,
-                    preSaves: (avgPop * 0.05) * (1 - (index * 0.05)), 
-                    isExplicit: Math.random() > 0.5
-                });
-            });
-        }
-
         return countdowns.sort((a, b) => b.preSaves - a.preSaves).slice(0, 10);
-    }, [gameState.artistsData, gameState.npcAlbums, allPlayerArtists, gameState.date]);
+    }, [gameState.artistsData, allPlayerArtists, gameState.date]);
 
     const slides = useMemo(() => {
         const facts = [];
@@ -104,7 +81,7 @@ const SpotifyChartView: React.FC = () => {
         // Fact 1: Longest Charting Album
         const longestAlbum = Object.entries(albumChartHistory).reduce((longest, [id, history]) => {
             if (!longest || history.weeksOnChart > longest.history.weeksOnChart) {
-                const album = billboardTopAlbums.find(a => a.uniqueId === id) || gameState.npcAlbums.find(a => a.uniqueId === id);
+                const album = billboardTopAlbums.find(a => a.uniqueId === id);
                 if (album) return { album, history };
             }
             return longest;

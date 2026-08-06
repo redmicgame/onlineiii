@@ -11,7 +11,7 @@ import {
     updateProfile,
     onAuthStateChanged 
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, serverTimestamp, query, where, orderBy, limit } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, serverTimestamp, query, where, orderBy, limit, onSnapshot, runTransaction } from 'firebase/firestore';
 import firebaseConfig from './firebase-applet-config.json';
 import type { GameState } from './types';
 
@@ -367,6 +367,76 @@ export const getLeaderboard = async (mode: string, category: string) => {
     }
 };
 
+export interface GlobalServerStatus {
+    year: number;
+    week: number;
+    day: number;
+    tickCount: number;
+    lastTickTimestamp: number;
+}
+
+const SERVER_STATUS_DOC = doc(db, "global_server", "status");
+
+export const subscribeToGlobalServerStatus = (callback: (status: GlobalServerStatus) => void) => {
+    return onSnapshot(SERVER_STATUS_DOC, (docSnap) => {
+        if (docSnap.exists()) {
+            callback(docSnap.data() as GlobalServerStatus);
+        } else {
+            const initialStatus: GlobalServerStatus = {
+                year: 2026,
+                week: 1,
+                day: 1,
+                tickCount: 1,
+                lastTickTimestamp: Date.now()
+            };
+            setDoc(SERVER_STATUS_DOC, initialStatus, { merge: true }).catch(err => console.error("Error initializing global server status:", err));
+            callback(initialStatus);
+        }
+    }, (err) => console.error("Global server status snapshot error:", err));
+};
+
+export const advanceGlobalServerTick = async () => {
+    try {
+        await runTransaction(db, async (transaction) => {
+            const sfDoc = await transaction.get(SERVER_STATUS_DOC);
+            let year = 2026;
+            let week = 1;
+            let day = 1;
+            let tickCount = 1;
+            let lastTick = Date.now();
+
+            if (sfDoc.exists()) {
+                const data = sfDoc.data() as GlobalServerStatus;
+                year = data.year || 2026;
+                week = data.week || 1;
+                day = data.day || 1;
+                tickCount = (data.tickCount || 0) + 1;
+                lastTick = data.lastTickTimestamp || Date.now();
+
+                day++;
+                if (day > 7) {
+                    day = 1;
+                    week++;
+                    if (week > 52) {
+                        week = 1;
+                        year++;
+                    }
+                }
+            }
+
+            transaction.set(SERVER_STATUS_DOC, {
+                year,
+                week,
+                day,
+                tickCount,
+                lastTickTimestamp: Date.now()
+            });
+        });
+    } catch (e) {
+        console.error("Error advancing global tick:", e);
+    }
+};
+
 export const resetAllGameAccountsAndData = async () => {
     const collectionsToClear = [
         "online_players",
@@ -375,6 +445,7 @@ export const resetAllGameAccountsAndData = async () => {
         "global_contracts",
         "global_media",
         "global_labels",
+        "global_server",
         "users",
         "saves"
     ];

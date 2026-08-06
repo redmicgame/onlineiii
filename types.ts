@@ -2032,6 +2032,7 @@ export interface ActiveEncounter {
 }
 
 export type GameAction =
+  | { type: "SYNC_SERVER_DATE"; payload: { year: number; week: number; day?: number } }
   | { type: "UPDATE_ARTIST_FUNDS"; payload: number }
   | { type: "UPDATE_VIDEO"; payload: { id: string; updates: Partial<Video> } }
   | { type: "LAUNCH_CRYPTO_COIN"; payload: { name: string; ticker: string; logo: string; launchPrice: number; totalSupply: number; cost: number; playerPercent?: number } }

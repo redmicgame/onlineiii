@@ -193,17 +193,17 @@ const YouTubeMusicView: React.FC = () => {
             </div>
             <h2 className="text-2xl font-bold mb-4">Trending</h2>
             <div className="space-y-4">
-                {topNpcSongs.map((npcSong, idx) => (
-                    <div key={npcSong.uniqueId} className="flex items-center gap-4 p-2 rounded-lg bg-zinc-900">
+                {topSongs.map((song, idx) => (
+                    <div key={song.id} className="flex items-center gap-4 p-2 rounded-lg bg-zinc-900">
                         <span className="text-zinc-500 font-bold w-4 text-center">{idx + 1}</span>
-                        {npcSong.coverArt ? (
-                            <img src={npcSong.coverArt} className="w-12 h-12 rounded-sm object-cover" />
+                        {song.coverArt ? (
+                            <img src={song.coverArt} className="w-12 h-12 rounded-sm object-cover" />
                         ) : (
                             <div className="w-12 h-12 bg-zinc-800 rounded-sm"></div>
                         )}
                         <div>
-                            <p className="font-bold text-white">{npcSong.title}</p>
-                            <p className="text-sm text-zinc-400">{npcSong.artist}</p>
+                            <p className="font-bold text-white">{song.title}</p>
+                            <p className="text-sm text-zinc-400">{activeArtist.name}</p>
                         </div>
                     </div>
                 ))}

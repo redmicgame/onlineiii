@@ -37,6 +37,10 @@ service cloud.firestore {
     match /global_media/{articleId} {
       allow read, write: if true;
     }
+
+    match /global_server/{docId} {
+      allow read, write: if true;
+    }
     
     match /{leaderboardCollection}/{userId} {
       allow read, write: if leaderboardCollection.matches('^leaderboards_.*');

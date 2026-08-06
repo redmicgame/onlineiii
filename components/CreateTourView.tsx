@@ -96,13 +96,17 @@ const CreateTourView: React.FC = () => {
     const chosenVenuesList = venuesForSelection.filter(v => chosenVenueIds.has(v.id));
     const venueBookingCost = chosenVenuesList.reduce((sum, v) => sum + (v.capacity * 4), 0); // $4 per capacity
     
-    const opener = gameState.npcs?.find(n => n.uniqueId === openerId);
-    const openerCost = opener ? Math.floor(opener.basePopularity / 50) * chosenVenuesList.length : 0;
+    const otherArtistsList = Object.values(gameState.artistsData || {})
+        .map(a => a.profile)
+        .filter(p => p && p.id !== activeArtist.id);
+
+    const opener = otherArtistsList.find(n => n.id === openerId);
+    const openerCost = opener ? 1000 * chosenVenuesList.length : 0;
     
     let guestsCost = 0;
     guestIds.forEach(gid => {
-        const guest = gameState.npcs?.find(n => n.uniqueId === gid);
-        if (guest) guestsCost += Math.floor(guest.basePopularity / 100) * chosenVenuesList.length;
+        const guest = otherArtistsList.find(n => n.id === gid);
+        if (guest) guestsCost += 500 * chosenVenuesList.length;
     });
 
     const totalUpfrontCost = venueBookingCost + openerCost + guestsCost;
@@ -233,7 +237,6 @@ const CreateTourView: React.FC = () => {
                     </div>
                 );
             case 3: // Merch and Support Acts
-                const npcList = gameState.npcs ? [...gameState.npcs].sort((a,b) => b.basePopularity - a.basePopularity).slice(0, 50) : [];
                 return (
                     <div className="space-y-4">
                         <h2 className="text-xl font-bold">Merch & Support Acts</h2>
@@ -266,9 +269,9 @@ const CreateTourView: React.FC = () => {
                                 className="w-full bg-zinc-700 p-2 rounded-md focus:outline-none text-sm"
                             >
                                 <option value="">No Opener</option>
-                                {npcList.map(npc => (
-                                    <option key={npc.uniqueId} value={npc.uniqueId}>
-                                        {npc.artist} (${formatNumber(Math.floor(npc.basePopularity / 50) * chosenVenuesList.length)} total cost)
+                                {otherArtistsList.map(artist => (
+                                    <option key={artist.id} value={artist.id}>
+                                        {artist.name} (${formatNumber(1000 * chosenVenuesList.length)} total cost)
                                     </option>
                                 ))}
                             </select>
@@ -277,14 +280,14 @@ const CreateTourView: React.FC = () => {
                         <div className="space-y-2">
                             <h3 className="font-bold text-zinc-300 border-b border-zinc-800 pb-1">Special Guests (Max 3)</h3>
                             <div className="max-h-40 overflow-y-auto space-y-1">
-                                {npcList.map(npc => {
-                                    if (npc.uniqueId === openerId) return null;
+                                {otherArtistsList.map(artist => {
+                                    if (artist.id === openerId) return null;
                                     return (
-                                        <label key={npc.uniqueId} className="flex items-center gap-3 p-2 bg-zinc-800 rounded-lg cursor-pointer">
-                                            <input type="checkbox" checked={guestIds.has(npc.uniqueId)} onChange={() => handleToggleGuest(npc.uniqueId)} className="form-checkbox h-4 w-4 rounded bg-zinc-700 border-zinc-600 text-red-600 focus:ring-red-500"/>
+                                        <label key={artist.id} className="flex items-center gap-3 p-2 bg-zinc-800 rounded-lg cursor-pointer">
+                                            <input type="checkbox" checked={guestIds.has(artist.id)} onChange={() => handleToggleGuest(artist.id)} className="form-checkbox h-4 w-4 rounded bg-zinc-700 border-zinc-600 text-red-600 focus:ring-red-500"/>
                                             <div className="flex-1 flex justify-between items-center text-sm">
-                                                <span>{npc.artist}</span>
-                                                <span className="text-xs text-zinc-400">Cost: ${formatNumber(Math.floor(npc.basePopularity / 100) * chosenVenuesList.length)}</span>
+                                                <span>{artist.name}</span>
+                                                <span className="text-xs text-zinc-400">Cost: ${formatNumber(500 * chosenVenuesList.length)}</span>
                                             </div>
                                         </label>
                                     );
