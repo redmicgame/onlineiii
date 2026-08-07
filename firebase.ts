@@ -99,6 +99,77 @@ export const loginWithEmail = async (email: string, pass: string) => {
     }
 };
 
+const saveCache = (key: string, data: any) => {
+    try {
+        localStorage.setItem(`rm_cache_${key}`, JSON.stringify(data));
+    } catch (e) {}
+};
+
+const getCache = <T>(key: string, fallback: T): T => {
+    try {
+        const item = localStorage.getItem(`rm_cache_${key}`);
+        if (item) return JSON.parse(item) as T;
+    } catch (e) {}
+    return fallback;
+};
+
+export const isQuotaError = (err: any): boolean => {
+    if (!err) return false;
+    const msg = String(err.message || err.code || err.reason || err).toLowerCase();
+    return (
+        msg.includes('quota') ||
+        msg.includes('resource-exhausted') ||
+        msg.includes('free daily read units') ||
+        msg.includes('quota limit exceeded') ||
+        msg.includes('free tier database') ||
+        err.code === 'resource-exhausted'
+    );
+};
+
+let quotaExceededState = localStorage.getItem('rm_quota_exceeded') === 'true';
+const quotaSubscribers = new Set<(isExceeded: boolean) => void>();
+
+export const triggerQuotaExceeded = () => {
+    if (!quotaExceededState) {
+        quotaExceededState = true;
+        try {
+            localStorage.setItem('rm_quota_exceeded', 'true');
+        } catch (e) {}
+        quotaSubscribers.forEach(cb => cb(true));
+    }
+};
+
+export const subscribeToQuotaExceeded = (callback: (isExceeded: boolean) => void) => {
+    quotaSubscribers.add(callback);
+    callback(quotaExceededState);
+    return () => {
+        quotaSubscribers.delete(callback);
+    };
+};
+
+export const getQuotaExceededState = () => quotaExceededState;
+
+export const checkQuotaError = (err: any) => {
+    if (isQuotaError(err)) {
+        triggerQuotaExceeded();
+        return true;
+    }
+    return false;
+};
+
+if (typeof window !== 'undefined') {
+    window.addEventListener('unhandledrejection', (event) => {
+        if (event.reason && isQuotaError(event.reason)) {
+            triggerQuotaExceeded();
+        }
+    });
+    window.addEventListener('error', (event) => {
+        if (event.error && isQuotaError(event.error)) {
+            triggerQuotaExceeded();
+        }
+    });
+}
+
 export const registerOnlinePlayer = async (
     userId?: string | null, 
     profileData?: {
@@ -111,12 +182,14 @@ export const registerOnlinePlayer = async (
         totalStreams?: number;
     }
 ) => {
+    if (getQuotaExceededState()) return;
     try {
         const guest = getOrCreateGuestUser();
         const uidToUse = userId || auth.currentUser?.uid || guest.uid;
         if (!uidToUse || !profileData || !profileData.name) return;
 
-        const setTask = setDoc(doc(db, "online_players", uidToUse), {
+        const playerObj = {
+            id: uidToUse,
             userId: uidToUse,
             name: profileData.name,
             roles: profileData.roles || ['Musician', 'Producer'],
@@ -124,43 +197,69 @@ export const registerOnlinePlayer = async (
             fandomName: profileData.fandomName || '',
             avatar: profileData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.name)}&background=random`,
             email: profileData.email || `${uidToUse}@redmic.online`,
-            createdAt: serverTimestamp(),
-            lastOnlineAt: serverTimestamp(),
             totalStreams: profileData.totalStreams || 0,
             isOnline: true
+        };
+
+        const cachedPlayers = getCache<any[]>('online_players', []);
+        const idx = cachedPlayers.findIndex(p => p.id === uidToUse || p.userId === uidToUse);
+        if (idx >= 0) {
+            cachedPlayers[idx] = { ...cachedPlayers[idx], ...playerObj };
+        } else {
+            cachedPlayers.push(playerObj);
+        }
+        saveCache('online_players', cachedPlayers);
+
+        const setTask = setDoc(doc(db, "online_players", uidToUse), {
+            ...playerObj,
+            createdAt: serverTimestamp(),
+            lastOnlineAt: serverTimestamp()
         }, { merge: true });
 
         await timeoutPromise(setTask, 2000, null);
-    } catch (err) {
-        console.error("Failed to register online player:", err);
+    } catch (err: any) {
+        if (checkQuotaError(err)) return;
+        console.warn("Warning registering online player (fallback cache used):", err?.message || err);
     }
 };
 
 export const subscribeToOnlinePlayers = (callback: (players: any[]) => void) => {
+    const cached = getCache<any[]>('online_players', []);
+    if (cached.length > 0) callback(cached);
+
+    if (getQuotaExceededState()) return () => {};
+
     try {
         const q = query(collection(db, "online_players"), limit(100));
         return onSnapshot(q, (snap) => {
             const dbPlayers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            saveCache('online_players', dbPlayers);
             callback(dbPlayers);
         }, (err) => {
-            console.error("Error subscribing to online players:", err);
-            callback([]);
+            if (checkQuotaError(err)) return;
+            console.warn("Online players subscription fallback (quota or offline):", err?.message || err);
+            callback(getCache<any[]>('online_players', []));
         });
-    } catch (err) {
-        console.error("Error setting listener for online players:", err);
-        callback([]);
+    } catch (err: any) {
+        if (checkQuotaError(err)) return () => {};
+        console.warn("Error setting listener for online players:", err?.message || err);
+        callback(getCache<any[]>('online_players', []));
         return () => {};
     }
 };
 
 export const getOnlinePlayers = async () => {
+    if (getQuotaExceededState()) return getCache<any[]>('online_players', []);
     try {
         const q = query(collection(db, "online_players"), limit(100));
         const snap = await getDocs(q);
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    } catch (err) {
-        console.error("Error fetching online players:", err);
-        return [];
+        const players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (players.length > 0) saveCache('online_players', players);
+        return players;
+    } catch (err: any) {
+        if (checkQuotaError(err)) return getCache<any[]>('online_players', []);
+        console.warn("Warning fetching online players:", err?.message || err);
+        return getCache<any[]>('online_players', []);
     }
 };
 
@@ -177,37 +276,53 @@ export interface ChatMessage {
 }
 
 export const sendDirectMessage = async (msg: ChatMessage) => {
+    const msgId = crypto.randomUUID();
+    const newMsgObj: ChatMessage = {
+        id: msgId,
+        senderId: msg.senderId,
+        senderName: msg.senderName,
+        senderAvatar: msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}&background=random`,
+        recipientId: msg.recipientId,
+        recipientName: msg.recipientName || 'Global Chat',
+        message: msg.message,
+        timestamp: Date.now()
+    };
+
+    const cachedMsgs = getCache<ChatMessage[]>('global_chats', []);
+    cachedMsgs.push(newMsgObj);
+    saveCache('global_chats', cachedMsgs);
+
     try {
         const msgRef = doc(collection(db, "global_chats"));
         await setDoc(msgRef, {
+            ...newMsgObj,
             id: msgRef.id,
-            senderId: msg.senderId,
-            senderName: msg.senderName,
-            senderAvatar: msg.senderAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(msg.senderName)}&background=random`,
-            recipientId: msg.recipientId,
-            recipientName: msg.recipientName || 'Global Chat',
-            message: msg.message,
-            timestamp: Date.now(),
             createdAt: serverTimestamp()
         });
         return true;
-    } catch (err) {
-        console.error("Error sending chat message:", err);
-        return false;
+    } catch (err: any) {
+        console.warn("Warning sending chat message (saved locally):", err?.message || err);
+        return true;
     }
 };
 
 export const subscribeToDirectMessages = (callback: (messages: ChatMessage[]) => void) => {
+    const cached = getCache<ChatMessage[]>('global_chats', []);
+    if (cached.length > 0) callback(cached);
+
     try {
         const q = query(collection(db, "global_chats"), orderBy("timestamp", "asc"), limit(200));
         return onSnapshot(q, (snap) => {
             const msgs = snap.docs.map(d => ({ id: d.id, ...d.data() } as ChatMessage));
+            saveCache('global_chats', msgs);
             callback(msgs);
         }, (err) => {
-            console.error("Error subscribing to global chats:", err);
+            console.warn("Global chats subscription fallback (quota or offline):", err?.message || err);
+            callback(getCache<ChatMessage[]>('global_chats', []));
         });
-    } catch (err) {
-        console.error("Error setting chat listener:", err);
+    } catch (err: any) {
+        console.warn("Error setting chat listener:", err?.message || err);
+        callback(getCache<ChatMessage[]>('global_chats', []));
         return () => {};
     }
 };
@@ -278,19 +393,34 @@ export const publishGlobalSong = async (songData: {
     type?: string;
     albumTitle?: string;
 }) => {
+    const idToUse = songData.songId || songData.id || `${songData.artistId}_${songData.title.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const newSongObj = {
+        id: idToUse,
+        songId: idToUse,
+        ...songData,
+        isOnlinePlayer: songData.isOnlinePlayer ?? true,
+        updatedAt: Date.now()
+    };
+
+    const cachedSongs = getCache<any[]>('global_songs', []);
+    const existingIdx = cachedSongs.findIndex(s => s.id === idToUse || s.songId === idToUse);
+    if (existingIdx >= 0) {
+        cachedSongs[existingIdx] = { ...cachedSongs[existingIdx], ...newSongObj };
+    } else {
+        cachedSongs.unshift(newSongObj);
+    }
+    saveCache('global_songs', cachedSongs);
+
     try {
-        const idToUse = songData.songId || songData.id || `${songData.artistId}_${songData.title.replace(/[^a-zA-Z0-9]/g, '_')}`;
         const songRef = doc(db, "global_songs", idToUse);
         await setDoc(songRef, {
-            id: idToUse,
-            songId: idToUse,
-            ...songData,
-            isOnlinePlayer: songData.isOnlinePlayer ?? true,
+            ...newSongObj,
             updatedAt: serverTimestamp()
         }, { merge: true });
         return idToUse;
-    } catch (err) {
-        console.error("Error publishing global song:", err);
+    } catch (err: any) {
+        console.warn("Warning publishing global song (saved locally):", err?.message || err);
+        return idToUse;
     }
 };
 
@@ -298,24 +428,32 @@ export const getGlobalSongs = async (limitCount = 100) => {
     try {
         const q = query(collection(db, "global_songs"), orderBy("weeklyStreams", "desc"), limit(limitCount));
         const snap = await getDocs(q);
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    } catch (err) {
-        console.error("Error fetching global songs:", err);
-        return [];
+        const songs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (songs.length > 0) saveCache('global_songs', songs);
+        return songs;
+    } catch (err: any) {
+        console.warn("Warning fetching global songs:", err?.message || err);
+        return getCache<any[]>('global_songs', []);
     }
 };
 
 export const subscribeToGlobalSongs = (callback: (songs: any[]) => void) => {
+    const cached = getCache<any[]>('global_songs', []);
+    if (cached.length > 0) callback(cached);
+
     try {
         const q = query(collection(db, "global_songs"), orderBy("weeklyStreams", "desc"), limit(200));
         return onSnapshot(q, (snap) => {
             const songs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            saveCache('global_songs', songs);
             callback(songs);
         }, (err) => {
-            console.error("Error subscribing to global songs:", err);
+            console.warn("Global songs subscription fallback (quota or offline):", err?.message || err);
+            callback(getCache<any[]>('global_songs', []));
         });
-    } catch (err) {
-        console.error("Error setting listener for global songs:", err);
+    } catch (err: any) {
+        console.warn("Error setting listener for global songs:", err?.message || err);
+        callback(getCache<any[]>('global_songs', []));
         return () => {};
     }
 };
@@ -333,21 +471,31 @@ export const publishGlobalPost = async (postData: {
     mediaUrl?: string;
     isOnlinePlayer?: boolean;
 }) => {
+    const docId = postData.id || crypto.randomUUID();
+    const newPostObj = {
+        id: docId,
+        ...postData,
+        platform: postData.platform || 'X',
+        likesCount: postData.likesCount || 0,
+        repostsCount: postData.repostsCount || 0,
+        isOnlinePlayer: postData.isOnlinePlayer ?? true,
+        createdAt: Date.now()
+    };
+
+    const cachedPosts = getCache<any[]>('global_posts', []);
+    cachedPosts.unshift(newPostObj);
+    saveCache('global_posts', cachedPosts);
+
     try {
-        const docId = postData.id || crypto.randomUUID();
         const postRef = doc(db, "global_posts", docId);
         await setDoc(postRef, {
-            id: docId,
-            ...postData,
-            platform: postData.platform || 'X',
-            likesCount: postData.likesCount || 0,
-            repostsCount: postData.repostsCount || 0,
-            isOnlinePlayer: postData.isOnlinePlayer ?? true,
+            ...newPostObj,
             createdAt: serverTimestamp()
         }, { merge: true });
         return docId;
-    } catch (err) {
-        console.error("Error publishing global post:", err);
+    } catch (err: any) {
+        console.warn("Warning publishing global post (saved locally):", err?.message || err);
+        return docId;
     }
 };
 
@@ -355,24 +503,32 @@ export const getGlobalPosts = async (limitCount = 50) => {
     try {
         const q = query(collection(db, "global_posts"), orderBy("createdAt", "desc"), limit(limitCount));
         const snap = await getDocs(q);
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    } catch (err) {
-        console.error("Error fetching global posts:", err);
-        return [];
+        const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        if (posts.length > 0) saveCache('global_posts', posts);
+        return posts;
+    } catch (err: any) {
+        console.warn("Warning fetching global posts:", err?.message || err);
+        return getCache<any[]>('global_posts', []);
     }
 };
 
 export const subscribeToGlobalPosts = (callback: (posts: any[]) => void) => {
+    const cached = getCache<any[]>('global_posts', []);
+    if (cached.length > 0) callback(cached);
+
     try {
         const q = query(collection(db, "global_posts"), orderBy("createdAt", "desc"), limit(100));
         return onSnapshot(q, (snap) => {
             const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            saveCache('global_posts', posts);
             callback(posts);
         }, (err) => {
-            console.error("Error subscribing to global posts:", err);
+            console.warn("Global posts subscription fallback (quota or offline):", err?.message || err);
+            callback(getCache<any[]>('global_posts', []));
         });
-    } catch (err) {
-        console.error("Error setting listener for global posts:", err);
+    } catch (err: any) {
+        console.warn("Error setting listener for global posts:", err?.message || err);
+        callback(getCache<any[]>('global_posts', []));
         return () => {};
     }
 };
@@ -547,21 +703,36 @@ export interface GlobalServerStatus {
 const SERVER_STATUS_DOC = doc(db, "global_server", "status");
 
 export const subscribeToGlobalServerStatus = (callback: (status: GlobalServerStatus) => void) => {
-    return onSnapshot(SERVER_STATUS_DOC, (docSnap) => {
-        if (docSnap.exists()) {
-            callback(docSnap.data() as GlobalServerStatus);
-        } else {
-            const initialStatus: GlobalServerStatus = {
-                year: 2026,
-                week: 1,
-                day: 1,
-                tickCount: 1,
-                lastTickTimestamp: Date.now()
-            };
-            setDoc(SERVER_STATUS_DOC, initialStatus, { merge: true }).catch(err => console.error("Error initializing global server status:", err));
-            callback(initialStatus);
-        }
-    }, (err) => console.error("Global server status snapshot error:", err));
+    const defaultStatus: GlobalServerStatus = {
+        year: 2026,
+        week: 1,
+        day: 1,
+        tickCount: 1,
+        lastTickTimestamp: Date.now()
+    };
+    const cached = getCache<GlobalServerStatus>('global_server', defaultStatus);
+    callback(cached);
+
+    try {
+        return onSnapshot(SERVER_STATUS_DOC, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data() as GlobalServerStatus;
+                saveCache('global_server', data);
+                callback(data);
+            } else {
+                setDoc(SERVER_STATUS_DOC, defaultStatus, { merge: true }).catch(() => {});
+                saveCache('global_server', defaultStatus);
+                callback(defaultStatus);
+            }
+        }, (err) => {
+            console.warn("Global server status subscription fallback (quota or offline):", err?.message || err);
+            callback(getCache<GlobalServerStatus>('global_server', defaultStatus));
+        });
+    } catch (err: any) {
+        console.warn("Global server status listener error:", err?.message || err);
+        callback(getCache<GlobalServerStatus>('global_server', defaultStatus));
+        return () => {};
+    }
 };
 
 export const advanceGlobalServerTick = async () => {
@@ -572,7 +743,6 @@ export const advanceGlobalServerTick = async () => {
             let week = 1;
             let day = 1;
             let tickCount = 1;
-            let lastTick = Date.now();
 
             if (sfDoc.exists()) {
                 const data = sfDoc.data() as GlobalServerStatus;
@@ -580,7 +750,6 @@ export const advanceGlobalServerTick = async () => {
                 week = data.week || 1;
                 day = data.day || 1;
                 tickCount = (data.tickCount || 0) + 1;
-                lastTick = data.lastTickTimestamp || Date.now();
 
                 day++;
                 if (day > 7) {
@@ -593,16 +762,18 @@ export const advanceGlobalServerTick = async () => {
                 }
             }
 
-            transaction.set(SERVER_STATUS_DOC, {
+            const newStatus = {
                 year,
                 week,
                 day,
                 tickCount,
                 lastTickTimestamp: Date.now()
-            });
+            };
+            transaction.set(SERVER_STATUS_DOC, newStatus);
+            saveCache('global_server', newStatus);
         });
-    } catch (e) {
-        console.error("Error advancing global tick:", e);
+    } catch (e: any) {
+        console.warn("Warning advancing global tick:", e?.message || e);
     }
 };
 

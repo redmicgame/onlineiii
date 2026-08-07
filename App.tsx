@@ -129,9 +129,37 @@ import AlbumPredictionsView from './components/AlbumPredictionsView';
 import { getEraConfiguration } from './utils/eraUtils';
 import UKChartView from './components/UKChartView';
 import OnlineHubView from './components/OnlineHubView';
+import { subscribeToQuotaExceeded } from './firebase';
 
 const AppContent: React.FC = () => {
     const { gameState, activeArtistData, dispatch } = useGame();
+    const [isQuotaExceeded, setIsQuotaExceeded] = React.useState(false);
+
+    React.useEffect(() => {
+        const unsub = subscribeToQuotaExceeded((exceeded) => {
+            setIsQuotaExceeded(exceeded);
+        });
+        return () => unsub();
+    }, []);
+
+    if (isQuotaExceeded) {
+        return (
+            <div className="fixed inset-0 z-[999999] bg-black flex flex-col items-center justify-center p-6 text-center select-none backdrop-blur-xl">
+                <div className="bg-zinc-900 border border-red-500/50 rounded-2xl p-8 sm:p-10 max-w-lg w-full shadow-2xl flex flex-col items-center gap-6">
+                    <div className="w-20 h-20 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-500 text-4xl font-extrabold animate-pulse">
+                        ⚠️
+                    </div>
+                    <h1 className="text-xl sm:text-2xl font-black text-white tracking-wide uppercase leading-tight">
+                        TESTING IS CURRENTLY UNAVAILABLE, PLEASE TRY AGAIN IN 24 HOURS
+                    </h1>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                        The global server free daily data quota has been reached. Network activity has been completely paused to safeguard game stability.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     const { careerMode, currentView } = gameState;
     const isGoldTheme = activeArtistData?.isGoldTheme ?? false;
     
